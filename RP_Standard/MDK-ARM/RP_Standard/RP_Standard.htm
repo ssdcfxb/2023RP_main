@@ -3,7 +3,7 @@
 <title>Static Call Graph - [RP_Standard\RP_Standard.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image RP_Standard\RP_Standard.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Sep 26 22:55:38 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Mon Sep 26 23:03:16 2022
 <BR><P>
 <H3>Maximum Stack Usage =        344 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -1062,7 +1062,6 @@ Global Symbols
 
 <P><STRONG><a name="[10b]"></a>HAL_GPIO_WritePin</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_WritePin))
 <BR><BR>[Called By]<UL><LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MX_GPIO_Init
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_imu_task
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Start_CAN_task
 </UL>
 
@@ -1590,11 +1589,10 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
 </UL>
-<P><STRONG><a name="[79]"></a>Start_imu_task</STRONG> (Thumb, 102 bytes, Stack size 16 bytes, imu_task.o(i.Start_imu_task))
+<P><STRONG><a name="[79]"></a>Start_imu_task</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, imu_task.o(i.Start_imu_task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 128<LI>Call Chain = Start_imu_task &rArr; BMI_Get_RawData &rArr; MPU_Read_all &rArr; IIC_Read_Byte &rArr; IIC_NAck &rArr; delay_us
 </UL>
 <BR>[Calls]<UL><LI><a href="#[116]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;osDelay
-<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GPIO_WritePin
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BMI_Get_RawData
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> freertos.o(.constdata)
