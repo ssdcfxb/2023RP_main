@@ -90,6 +90,12 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+	int8_t rslt;
+	rslt = BMI_Init();
+	while(rslt) 
+	{
+     rslt = BMI_Init();
+  }
   MX_DMA_Init();
   MX_CAN1_Init();
   MX_CAN2_Init();
@@ -103,7 +109,12 @@ int main(void)
 	HAL_CAN_MspInit(&hcan1);
 	HAL_CAN_MspInit(&hcan2);
 	
-	
+//	int8_t rslt;
+//	rslt = BMI_Init();
+//	while(rslt) 
+//	{
+//     rslt = BMI_Init();
+//  }
   /* USER CODE END 2 */
 
   /* Call init function for freertos objects (in freertos.c) */
