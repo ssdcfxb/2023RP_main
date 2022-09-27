@@ -14,5 +14,30 @@ void CAN_Tx_cmd(CAN_HandleTypeDef *hcan, uint32_t identifier, int16_t data_1,
 								int16_t data_2, int16_t data_3, int16_t data_4);
 
 
+typedef struct __pack_t
+{
+	char age;
+	float height;
+} pack_t;
+
+typedef struct __info_pack_t
+{
+	pack_t *get_info;
+	pack_t *my_info;
+} info_pack_t;
+
+pack_t get_info_t;
+pack_t my_info_t = {
+	.age = 1,
+	.height = 123.1f,
+};
+
+info_pack_t info_pack = {
+	.get_info = &get_info_t,
+	.my_info = &my_info_t,
+};
+
+extern void CAN_ManualTx(drv_can_t *drv, uint8_t *data);
+
 #endif
 

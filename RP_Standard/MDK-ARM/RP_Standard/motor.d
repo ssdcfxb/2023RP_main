@@ -1,6 +1,6 @@
-rp_standard\motor.o: ..\Application\DeviceLayer\motor.c
-rp_standard\motor.o: ..\Application\DeviceLayer\motor.h
-rp_standard\motor.o: ../Core/Inc/main.h
+rp_standard\motor.o: ..\Application\DeviceLayer\Motor\motor.c
+rp_standard\motor.o: ..\Application\DeviceLayer\Motor\motor.h
+rp_standard\motor.o: ../Application/ConfigLayer/rp_config.h
 rp_standard\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h
 rp_standard\motor.o: ../Core/Inc/stm32f4xx_hal_conf.h
 rp_standard\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h
@@ -34,6 +34,14 @@ rp_standard\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h
 rp_standard\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 rp_standard\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 rp_standard\motor.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+rp_standard\motor.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+rp_standard\motor.o: ../Application/ConfigLayer/rp_driver_config.h
+rp_standard\motor.o: ../Application/ConfigLayer/rp_device_config.h
+rp_standard\motor.o: ../Application/ConfigLayer/rp_user_config.h
+rp_standard\motor.o: ../Application/ProtocolLayer/can_protocol.h
+rp_standard\motor.o: ../Application/ProtocolLayer/rm_protocol.h
+rp_standard\motor.o: ..\Application\AlgorithmLayer\pid.h
+rp_standard\motor.o: ../Core/Inc/main.h
 rp_standard\motor.o: ../Application/DeviceLayer/Imu/bmi.h
 rp_standard\motor.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\arm_math.h
 rp_standard\motor.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\arm_math_types.h
@@ -61,11 +69,3 @@ rp_standard\motor.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Includ
 rp_standard\motor.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\dsp/quaternion_math_functions.h
 rp_standard\motor.o: ../Application/DriverLayer/drv_io.h
 rp_standard\motor.o: ../Core/Inc/main.h
-rp_standard\motor.o: ../Application/AlgorithmLayer/pid.h
-rp_standard\motor.o: ../Application/ConfigLayer/rp_config.h
-rp_standard\motor.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
-rp_standard\motor.o: ../Application/ConfigLayer/rp_driver_config.h
-rp_standard\motor.o: ../Application/ConfigLayer/rp_device_config.h
-rp_standard\motor.o: ../Application/ConfigLayer/rp_user_config.h
-rp_standard\motor.o: ../Application/ProtocolLayer/can_protocol.h
-rp_standard\motor.o: ../Application/ProtocolLayer/rm_protocol.h

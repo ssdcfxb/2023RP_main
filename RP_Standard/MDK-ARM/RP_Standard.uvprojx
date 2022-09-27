@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,__CC_ARM,ARM_MATH_CM4,__TARGET_FPU_VFP,__FPU_PRESENT=1U</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Application/DriverLayer;../Application/Task;../Application/AlgorithmLayer;../Application/DeviceLayer;../Application/DeviceLayer/Imu;../Application/ConfigLayer;../Application/ProtocolLayer</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Application/DriverLayer;../Application/Task;../Application/DeviceLayer/Imu;..\Application\DeviceLayer\Motor;..\Application\DeviceLayer\Sensor;../Application/DeviceLayer;../Application/ConfigLayer;../Application/ProtocolLayer;..\Application\AlgorithmLayer</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -550,20 +550,35 @@
               <FileType>1</FileType>
               <FilePath>..\Application\ProtocolLayer\rm_protocol.c</FilePath>
             </File>
+            <File>
+              <FileName>imu_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ProtocolLayer\imu_protocol.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>Application/Device</GroupName>
           <Files>
             <File>
-              <FileName>motor.c</FileName>
+              <FileName>imu_sensor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\motor.c</FilePath>
+              <FilePath>..\Application\DeviceLayer\Sensor\imu_sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>device.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\device.c</FilePath>
             </File>
             <File>
               <FileName>6020_motor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\6020_motor.c</FilePath>
+              <FilePath>..\Application\DeviceLayer\Motor\6020_motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Motor\motor.c</FilePath>
             </File>
           </Files>
         </Group>

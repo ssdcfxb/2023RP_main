@@ -1,6 +1,5 @@
 #include "motor.h"
 
-
 extern void CAN_Tx_cmd(CAN_HandleTypeDef *hcan, uint32_t identifier, int16_t data_1, //ÁÙÊ±º¯Êý
 								       int16_t data_2, int16_t data_3, int16_t data_4);
 
@@ -49,9 +48,9 @@ static void Motor_Init(chassis_motor_t *motor)
 		motor->info->offline_cnt = 0;
 		motor->errno = NONE_ERR;
 		motor->work_state = DEV_OFFLINE;
-		PID_Init(&motor_data.hpid_speed, PID_Speed, MAX_OUT, MAX_I_OUT);
-		
-		PID_Init(&motor_data.hpid_angle, PID_Angle, MAX_OUT, MAX_I_OUT);
+//		PID_Init(&motor_data.hpid_speed, PID_Speed, MAX_OUT, MAX_I_OUT);
+//		
+//		PID_Init(&motor_data.hpid_angle, PID_Angle, MAX_OUT, MAX_I_OUT);
 		
 }
 

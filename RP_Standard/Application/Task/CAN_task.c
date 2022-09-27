@@ -4,6 +4,34 @@ int16_t speed = 1000;
 float current_out = 0.0f;
 float speed_out = 0.0f;
 
+uint8_t tx_info[8] = {0};
+
+void trans(uint8_t *data)
+{
+	CAN_TxHeaderTypeDef tx_header;
+	uint32_t tx_mail_box;
+	
+	data[0] = (uint8_t)info_pack.my_info->age;
+	data[1] = ((uint32_t)info_pack.my_info->height >> 24);
+	data[2] = ((uint32_t)info_pack.my_info->height >> 16);
+	data[3] = ((uint32_t)info_pack.my_info->height >> 8);
+	data[4] = ((uint32_t)info_pack.my_info->height >> 0);
+	
+	tx_header.StdId = 0x123;
+	tx_header.IDE = CAN_ID_STD;
+	tx_header.RTR = CAN_RTR_DATA;
+	tx_header.DLC = 0x08;
+	
+	HAL_CAN_AddTxMessage(&hcan1, &tx_header, data, &tx_mail_box);
+}
+
+void reserve(uint8_t *data)
+{
+	info_pack.get_info->age = (char)data[0];
+	info_pack.get_info->height = (float)((data[1] << 24) | (data[2] << 16)
+		                                   | (data[3] << 8) | data[4]);
+}
+
 void Start_CAN_task(void const * argument)
 {
 	CAN_filter_init();
@@ -31,8 +59,10 @@ void Start_CAN_task(void const * argument)
 //			motor_data.Speed_out = PID_Inc_Calc(&motor_data.hpid_speed, motor_data.info->speed_rpm, speed_out);
 //			current_out = motor_data.Speed_out;
 //			motor_data.driver->can_tx_cmd(&hcan1, 0x200, (int16_t)motor_data.Speed_out, 0, 0, 0);
+			
 			motor_6020.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), speed, 0, 0, 0);
 		}
+		trans(tx_info);
 		
 		osDelay(1);
 	}
@@ -58,6 +88,11 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 			motor_6020.Update(&motor_6020, rx_data);
 	    motor_6020.Check(&motor_6020);
 		  break;
+		}
+		case 0x123:
+		{
+			reserve(rx_data);
+			break;
 		}
 		default :
 		{

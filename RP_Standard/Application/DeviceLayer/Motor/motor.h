@@ -1,11 +1,10 @@
 #ifndef __MOTOR_H
 #define __MOTOR_H
 
-#include "main.h"
-#include "pid.h"
+
 #include "rp_config.h"
 #include "can_protocol.h"
-
+#include "pid.h"
 
 #define ECD_TO_ANGLE 0.001220703125
 #define HALF_ECD_RANGE 4096
@@ -37,6 +36,7 @@ typedef struct __chassis_motor_t
 	  volatile dev_errno_t errno;
 	  const    dev_id_t		      	id;
 	
+
 		PID_Type_Def hpid_angle;
 		PID_Type_Def hpid_speed;
 	
