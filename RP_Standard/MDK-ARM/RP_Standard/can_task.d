@@ -85,3 +85,4 @@ rp_standard\can_task.o: ../Application/ConfigLayer/rp_device_config.h
 rp_standard\can_task.o: ../Application/ConfigLayer/rp_user_config.h
 rp_standard\can_task.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\can_task.o: ../Application/ProtocolLayer/rm_protocol.h
+rp_standard\can_task.o: ../Application/DeviceLayer/6020_motor.h

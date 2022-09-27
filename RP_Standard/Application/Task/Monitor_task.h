@@ -4,6 +4,7 @@
 #include "cmsis_os.h"
 #include "main.h"
 #include "motor.h"
+#include "6020_motor.h"
 #include "iwdg.h"
 
 

@@ -546,9 +546,9 @@
               <FilePath>..\Application\ProtocolLayer\can_protocol.c</FilePath>
             </File>
             <File>
-              <FileName>rm_protocol.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\ProtocolLayer\rm_protocol.h</FilePath>
+              <FileName>rm_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ProtocolLayer\rm_protocol.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -561,14 +561,9 @@
               <FilePath>..\Application\DeviceLayer\motor.c</FilePath>
             </File>
             <File>
-              <FileName>rp_device_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\DeviceLayer\rp_device_config.h</FilePath>
-            </File>
-            <File>
-              <FileName>rp_driver_config.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Application\DeviceLayer\rp_driver_config.h</FilePath>
+              <FileName>6020_motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\6020_motor.c</FilePath>
             </File>
           </Files>
         </Group>

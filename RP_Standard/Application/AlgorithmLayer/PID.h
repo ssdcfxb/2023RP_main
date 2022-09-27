@@ -28,13 +28,13 @@ typedef struct __PID_Type_Def
 } PID_Type_Def;
 
 
-extern const float PID_Speed[3];
-extern const float PID_Angle[3];
+extern float PID_Speed[3];
+extern float PID_Angle[3];
 
 
 float PID_Inc_Calc(PID_Type_Def *pid, float fdb, float set);
 float PID_Plc_Calc(PID_Type_Def *pid, float fdb, float set);
 
-extern void PID_Init(PID_Type_Def *pid, const float PID[3], float max_out, float max_iout);
+extern void PID_Init(PID_Type_Def *pid, float PID[3], float max_out, float max_iout);
 
 #endif

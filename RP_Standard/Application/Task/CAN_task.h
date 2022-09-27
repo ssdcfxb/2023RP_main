@@ -5,6 +5,7 @@
 #include "main.h"
 #include "can.h"
 #include "motor.h"
+#include "6020_motor.h"
 
 
 void Start_CAN_task(void const * argument);

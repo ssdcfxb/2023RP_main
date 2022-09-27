@@ -1,6 +1,6 @@
 #include "CAN_task.h"
 
-int16_t speed = 500;
+int16_t speed = 1000;
 float current_out = 0.0f;
 float speed_out = 0.0f;
 
@@ -8,21 +8,30 @@ void Start_CAN_task(void const * argument)
 {
 	CAN_filter_init();
 	motor_data.Init(&motor_data);
+	motor_6020.Init(&motor_6020);
+	
+	speed_out = 500.0f;
 	for(;;)
 	{
-		if ((motor_data.errno != NONE_ERR) || (motor_data.work_state == DEV_OFFLINE))
+//		if ((motor_data.errno != NONE_ERR) || (motor_data.work_state == DEV_OFFLINE))
+//		{
+//			motor_data.driver->can_tx_cmd(&hcan1, RM3508_GetTxId(motor_data.driver), 0, 0, 0, 0);
+//			LED_RED_ON();
+//		}
+		if ((motor_6020.errno != NONE_ERR) || (motor_6020.work_state == DEV_OFFLINE))
 		{
-			motor_data.driver->can_tx_cmd(&hcan1, 0x200, 0, 0, 0, 0);
+			motor_data.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), 0, 0, 0, 0);
 			LED_RED_ON();
 		}
 		else
 		{
 			LED_RED_OFF();
-			motor_data.Angle_out = PID_Plc_Calc(&motor_data.hpid_angle, motor_data.info->speed_rpm, 500.0f);
-			speed_out = motor_data.Angle_out;
-			motor_data.Speed_out = PID_Plc_Calc(&motor_data.hpid_speed, motor_data.info->given_current, motor_data.Angle_out);
-			current_out = motor_data.Speed_out;
-			motor_data.driver->can_tx_cmd(&hcan1, 0x200, speed, 0, 0, 0);
+////			motor_data.Angle_out = 0.0f;//PID_Plc_Calc(&motor_data.hpid_angle, motor_data.info->speed_rpm, 500.0f);
+////			speed_out = motor_data.Angle_out;
+//			motor_data.Speed_out = PID_Inc_Calc(&motor_data.hpid_speed, motor_data.info->speed_rpm, speed_out);
+//			current_out = motor_data.Speed_out;
+//			motor_data.driver->can_tx_cmd(&hcan1, 0x200, (int16_t)motor_data.Speed_out, 0, 0, 0);
+			motor_6020.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), speed, 0, 0, 0);
 		}
 		
 		osDelay(1);
@@ -36,8 +45,26 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	uint8_t rx_data[8];
 	
 	HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data);
-	motor_data.Update(&motor_data, rx_data);
-	motor_data.Check(&motor_data);
+	switch(rx_header.StdId)
+	{
+		case RM3508_CAN_ID_201:
+		{
+			motor_data.Update(&motor_data, rx_data);
+	    motor_data.Check(&motor_data);
+		  break;
+		}
+		case GM6020_CAN_ID_205:
+		{
+			motor_6020.Update(&motor_6020, rx_data);
+	    motor_6020.Check(&motor_6020);
+		  break;
+		}
+		default :
+		{
+			
+		}
+	}
+	
 }
 
 void CAN_Tx_cmd(CAN_HandleTypeDef *hcan, uint32_t identifier, int16_t data_1, 
