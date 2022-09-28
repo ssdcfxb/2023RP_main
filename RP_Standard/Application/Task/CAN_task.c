@@ -14,12 +14,12 @@ void trans(uint8_t data[8])
 	
 	idx = (uint8_t *)&info_pack.my_info->height;
 	
-	data[0] = *idx;
-	data[1] = *(idx + 1);
-	data[2] = *(idx + 2);
-	data[3] = *(idx + 3);
+	data[3] = *idx;
+	data[4] = *(idx + 1);
+	data[5] = *(idx + 2);
+	data[6] = *(idx + 3);
 	
-	data[5] = (uint8_t)info_pack.my_info->age;
+	data[0] = (uint8_t)info_pack.my_info->age;
 	
 	
 	tx_header.StdId = 0x123;
@@ -35,12 +35,12 @@ void reserve(uint8_t data[8])
 	uint8_t *idx;
 	idx = (uint8_t *)&info_pack.get_info->height;
 	
-	idx[0] = data[0];
-	idx[1] = data[1];
-	idx[2] = data[2];
-	idx[3] = data[3];
+	idx[0] = data[3];
+	idx[1] = data[4];
+	idx[2] = data[5];
+	idx[3] = data[6];
 	
-	info_pack.get_info->age = (char)data[5];
+	info_pack.get_info->age = (char)data[0];
 	
 }
 

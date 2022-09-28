@@ -5,7 +5,6 @@
 #include "main.h"
 #include "motor.h"
 #include "6020_motor.h"
-#include "iwdg.h"
 
 
 void Start_Monitor_task(void const * argument);
