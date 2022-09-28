@@ -39,4 +39,4 @@ rp_standard\rm_protocol.o: ../Application/ConfigLayer/rp_driver_config.h
 rp_standard\rm_protocol.o: ../Application/ConfigLayer/rp_device_config.h
 rp_standard\rm_protocol.o: ../Application/ConfigLayer/rp_user_config.h
 rp_standard\rm_protocol.o: ../Application/DriverLayer/drv_can.h
-rp_standard\rm_protocol.o: ..\Application\AlgorithmLayer\rp_math.h
+rp_standard\rm_protocol.o: ../Application/AlgorithmLayer/rp_math.h

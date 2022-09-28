@@ -75,7 +75,7 @@ rp_standard\monitor_task.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP
 rp_standard\monitor_task.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\dsp/quaternion_math_functions.h
 rp_standard\monitor_task.o: ../Application/DriverLayer/drv_io.h
 rp_standard\monitor_task.o: ../Core/Inc/main.h
-rp_standard\monitor_task.o: ..\Application\DeviceLayer\Motor\motor.h
+rp_standard\monitor_task.o: ../Application/DeviceLayer/Motor/motor.h
 rp_standard\monitor_task.o: ../Application/ConfigLayer/rp_config.h
 rp_standard\monitor_task.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 rp_standard\monitor_task.o: ../Application/ConfigLayer/rp_driver_config.h
@@ -83,6 +83,6 @@ rp_standard\monitor_task.o: ../Application/ConfigLayer/rp_device_config.h
 rp_standard\monitor_task.o: ../Application/ConfigLayer/rp_user_config.h
 rp_standard\monitor_task.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\monitor_task.o: ../Application/ProtocolLayer/rm_protocol.h
-rp_standard\monitor_task.o: ..\Application\AlgorithmLayer\pid.h
-rp_standard\monitor_task.o: ..\Application\DeviceLayer\Motor\6020_motor.h
+rp_standard\monitor_task.o: ../Application/AlgorithmLayer/pid.h
+rp_standard\monitor_task.o: ../Application/DeviceLayer/Motor/6020_motor.h
 rp_standard\monitor_task.o: ../Core/Inc/iwdg.h

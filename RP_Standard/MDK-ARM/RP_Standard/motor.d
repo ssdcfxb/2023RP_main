@@ -40,7 +40,7 @@ rp_standard\motor.o: ../Application/ConfigLayer/rp_device_config.h
 rp_standard\motor.o: ../Application/ConfigLayer/rp_user_config.h
 rp_standard\motor.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\motor.o: ../Application/ProtocolLayer/rm_protocol.h
-rp_standard\motor.o: ..\Application\AlgorithmLayer\pid.h
+rp_standard\motor.o: ../Application/AlgorithmLayer/pid.h
 rp_standard\motor.o: ../Core/Inc/main.h
 rp_standard\motor.o: ../Application/DeviceLayer/Imu/bmi.h
 rp_standard\motor.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\arm_math.h

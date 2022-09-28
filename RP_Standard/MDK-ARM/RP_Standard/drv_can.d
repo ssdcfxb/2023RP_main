@@ -49,5 +49,5 @@ rp_standard\drv_can.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers
 rp_standard\drv_can.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 rp_standard\drv_can.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 rp_standard\drv_can.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
-rp_standard\drv_can.o: ..\Application\AlgorithmLayer\rp_math.h
+rp_standard\drv_can.o: ../Application/AlgorithmLayer/rp_math.h
 rp_standard\drv_can.o: ..\Application\DriverLayer\drv_haltick.h

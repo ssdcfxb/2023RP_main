@@ -38,12 +38,12 @@ rp_standard\device.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 rp_standard\device.o: ../Application/ConfigLayer/rp_driver_config.h
 rp_standard\device.o: ../Application/ConfigLayer/rp_device_config.h
 rp_standard\device.o: ../Application/ConfigLayer/rp_user_config.h
-rp_standard\device.o: ..\Application\DeviceLayer\Sensor\imu_sensor.h
-rp_standard\device.o: ..\Application\DeviceLayer\Motor\6020_motor.h
-rp_standard\device.o: ..\Application\DeviceLayer\Motor\motor.h
+rp_standard\device.o: ../Application/DeviceLayer/Sensor/imu_sensor.h
+rp_standard\device.o: ../Application/DeviceLayer/Motor/6020_motor.h
+rp_standard\device.o: ../Application/DeviceLayer/Motor/motor.h
 rp_standard\device.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\device.o: ../Application/ProtocolLayer/rm_protocol.h
-rp_standard\device.o: ..\Application\AlgorithmLayer\pid.h
+rp_standard\device.o: ../Application/AlgorithmLayer/pid.h
 rp_standard\device.o: ../Core/Inc/main.h
 rp_standard\device.o: ../Application/DeviceLayer/Imu/bmi.h
 rp_standard\device.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\arm_math.h

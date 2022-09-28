@@ -1,21 +1,26 @@
 #include "CAN_task.h"
 
-int16_t speed = 1000;
+int16_t speed = 1500;
 float current_out = 0.0f;
 float speed_out = 0.0f;
 
 uint8_t tx_info[8] = {0};
 
-void trans(uint8_t *data)
+void trans(uint8_t data[8])
 {
 	CAN_TxHeaderTypeDef tx_header;
 	uint32_t tx_mail_box;
+	uint8_t *idx;
 	
-	data[0] = (uint8_t)info_pack.my_info->age;
-	data[1] = ((uint32_t)info_pack.my_info->height >> 24);
-	data[2] = ((uint32_t)info_pack.my_info->height >> 16);
-	data[3] = ((uint32_t)info_pack.my_info->height >> 8);
-	data[4] = ((uint32_t)info_pack.my_info->height >> 0);
+	idx = (uint8_t *)&info_pack.my_info->height;
+	
+	data[0] = *idx;
+	data[1] = *(idx + 1);
+	data[2] = *(idx + 2);
+	data[3] = *(idx + 3);
+	
+	data[5] = (uint8_t)info_pack.my_info->age;
+	
 	
 	tx_header.StdId = 0x123;
 	tx_header.IDE = CAN_ID_STD;
@@ -25,11 +30,18 @@ void trans(uint8_t *data)
 	HAL_CAN_AddTxMessage(&hcan1, &tx_header, data, &tx_mail_box);
 }
 
-void reserve(uint8_t *data)
+void reserve(uint8_t data[8])
 {
-	info_pack.get_info->age = (char)data[0];
-	info_pack.get_info->height = (float)((data[1] << 24) | (data[2] << 16)
-		                                   | (data[3] << 8) | data[4]);
+	uint8_t *idx;
+	idx = (uint8_t *)&info_pack.get_info->height;
+	
+	idx[0] = data[0];
+	idx[1] = data[1];
+	idx[2] = data[2];
+	idx[3] = data[3];
+	
+	info_pack.get_info->age = (char)data[5];
+	
 }
 
 void Start_CAN_task(void const * argument)

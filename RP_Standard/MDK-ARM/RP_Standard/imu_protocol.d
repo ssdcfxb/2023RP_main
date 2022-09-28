@@ -66,4 +66,4 @@ rp_standard\imu_protocol.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP
 rp_standard\imu_protocol.o: ../Application/DriverLayer/drv_io.h
 rp_standard\imu_protocol.o: ../Core/Inc/main.h
 rp_standard\imu_protocol.o: ../Application/DeviceLayer/Imu/bmi.h
-rp_standard\imu_protocol.o: ..\Application\DeviceLayer\Sensor\imu_sensor.h
+rp_standard\imu_protocol.o: ../Application/DeviceLayer/Sensor/imu_sensor.h
