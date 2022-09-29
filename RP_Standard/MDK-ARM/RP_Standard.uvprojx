@@ -651,14 +651,19 @@
           <GroupName>Application/Driver</GroupName>
           <Files>
             <File>
-              <FileName>drv_haltick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DriverLayer\drv_haltick.c</FilePath>
-            </File>
-            <File>
               <FileName>drv_can.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\DriverLayer\drv_can.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DriverLayer\drv_uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>drv_haltick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DriverLayer\drv_haltick.c</FilePath>
             </File>
           </Files>
         </Group>

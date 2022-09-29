@@ -3,14 +3,15 @@
 #include "main.h"
 
 
-#define MAX_OUT 2000.0f
-#define MAX_I_OUT 1000.0f
+#define MAX_OUT 10000.0f
+#define MAX_I_OUT 3000.0f
 
 typedef struct __PID_Type_Def
 {
     float Kp;
     float Ki;
     float Kd;
+	  float	integral;
 
     float max_out;
     float max_iout;

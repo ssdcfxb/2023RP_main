@@ -60,3 +60,4 @@ rp_standard\stm32f4xx_it.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP
 rp_standard\stm32f4xx_it.o: ../Application/DriverLayer/drv_io.h
 rp_standard\stm32f4xx_it.o: ../Core/Inc/main.h
 rp_standard\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
+rp_standard\stm32f4xx_it.o: ../Application/DriverLayer/drv_uart.h

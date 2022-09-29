@@ -17,13 +17,17 @@
 //#define SPEED_KI 0.01f
 //#define SPEED_KD 0.15f
 		
-#define SPEED_KP 0.005f
-#define SPEED_KI 0.0f
+//#define ANGLE_KP 1.3f
+//#define ANGLE_KI 0.00005f
+//#define ANGLE_KD 8.0f
+		
+#define SPEED_KP 10.0f
+#define SPEED_KI 0.33f
 #define SPEED_KD 0.0f
 
-#define ANGLE_KP 1.3f
-#define ANGLE_KI 0.00005f
-#define ANGLE_KD 8.0f
+#define ANGLE_KP 20.0f
+#define ANGLE_KI 0.0f
+#define ANGLE_KD 0.0f
 		
 float PID_Speed[3] = {SPEED_KP, SPEED_KI, SPEED_KD};
 float PID_Angle[3] = {ANGLE_KP, ANGLE_KI, ANGLE_KD};
@@ -41,7 +45,7 @@ void PID_Init(PID_Type_Def *pid, float PID[3], float max_out, float max_iout)
     pid->max_iout = max_iout;
     pid->Dbuf[0] = pid->Dbuf[1] = pid->Dbuf[2] = 0.0f;
     pid->error[0] = pid->error[1] = pid->error[2] = pid->Pout = pid->Iout = pid->Dout = pid->out = 0.0f;
-		
+		pid->integral = 0;
 }
 		
 float PID_Inc_Calc(PID_Type_Def *pid, float fdb, float set)
@@ -80,13 +84,16 @@ float PID_Plc_Calc(PID_Type_Def *pid, float fdb, float set)
     pid->set = set;
     pid->fdb = fdb;
     pid->error[0] = set - fdb;
+		pid->integral += pid->error[0];
+		LimitMax(pid->integral, pid->max_iout);
+		
     pid->Pout = pid->Kp * pid->error[0];
-    pid->Iout += pid->Ki * pid->error[0];
+    pid->Iout = pid->Ki * pid->integral;
+		
 		pid->Dbuf[2] = pid->Dbuf[1];
 		pid->Dbuf[1] = pid->Dbuf[0];
 		pid->Dbuf[0] = (pid->error[0] - 2.0f * pid->error[1] + pid->error[2]);
 		pid->Dout = pid->Kd * pid->Dbuf[0];
-		LimitMax(pid->Iout, pid->max_iout);
 		pid->out = pid->Pout + pid->Iout + pid->Dout;
 		LimitMax(pid->out, pid->max_out);
     

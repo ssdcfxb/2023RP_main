@@ -1,8 +1,8 @@
 #include "CAN_task.h"
 
-int16_t speed = 1500;
-float current_out = 0.0f;
+float angle_set = 0.0f;
 float speed_out = 0.0f;
+float angle_out = 0.0f;
 
 uint8_t tx_info[8] = {0};
 
@@ -50,31 +50,31 @@ void Start_CAN_task(void const * argument)
 	motor_data.Init(&motor_data);
 	motor_6020.Init(&motor_6020);
 	
-	speed_out = 500.0f;
+//	speed_out = 500.0f;
 	for(;;)
 	{
-//		if ((motor_data.errno != NONE_ERR) || (motor_data.work_state == DEV_OFFLINE))
-//		{
-//			motor_data.driver->can_tx_cmd(&hcan1, RM3508_GetTxId(motor_data.driver), 0, 0, 0, 0);
-//			LED_RED_ON();
-//		}
-		if ((motor_6020.errno != NONE_ERR) || (motor_6020.work_state == DEV_OFFLINE))
+		if ((motor_data.errno != NONE_ERR) || (motor_data.work_state == DEV_OFFLINE))
 		{
-			motor_data.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), 0, 0, 0, 0);
+			motor_data.driver->can_tx_cmd(&hcan1, RM3508_GetTxId(motor_data.driver), 0, 0, 0, 0);
 			LED_RED_ON();
 		}
+//		if ((motor_6020.errno != NONE_ERR) || (motor_6020.work_state == DEV_OFFLINE))
+//		{
+//			motor_data.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), 0, 0, 0, 0);
+//			LED_RED_ON();
+//		}
 		else
 		{
 			LED_RED_OFF();
-////			motor_data.Angle_out = 0.0f;//PID_Plc_Calc(&motor_data.hpid_angle, motor_data.info->speed_rpm, 500.0f);
-////			speed_out = motor_data.Angle_out;
-//			motor_data.Speed_out = PID_Inc_Calc(&motor_data.hpid_speed, motor_data.info->speed_rpm, speed_out);
-//			current_out = motor_data.Speed_out;
-//			motor_data.driver->can_tx_cmd(&hcan1, 0x200, (int16_t)motor_data.Speed_out, 0, 0, 0);
+			motor_data.Angle_out = PID_Plc_Calc(&motor_data.hpid_angle, motor_data.info->angle, angle_set);
+			angle_out = motor_data.Angle_out;
+			motor_data.Speed_out = PID_Plc_Calc(&motor_data.hpid_speed, motor_data.info->speed_rpm, motor_data.Angle_out);
+			speed_out = motor_data.Speed_out;
+			motor_data.driver->can_tx_cmd(&hcan1, 0x200, (int16_t)motor_data.Speed_out, 0, 0, 0);
 			
-			motor_6020.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), speed, 0, 0, 0);
+//			motor_6020.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), speed, 0, 0, 0);
 		}
-		trans(tx_info);
+//		trans(tx_info);
 		
 		osDelay(1);
 	}
@@ -101,7 +101,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	    motor_6020.Check(&motor_6020);
 		  break;
 		}
-		case 0x123:
+		case 0x123://任务七部分
 		{
 			reserve(rx_data);
 			break;

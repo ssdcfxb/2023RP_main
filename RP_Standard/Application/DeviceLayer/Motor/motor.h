@@ -7,6 +7,7 @@
 #include "pid.h"
 
 #define ECD_TO_ANGLE 0.001220703125
+#define RM3508_ECD_TO_ANGLE 0.00231291118421
 #define HALF_ECD_RANGE 4096
 #define ECD_RANGE 8191
 
