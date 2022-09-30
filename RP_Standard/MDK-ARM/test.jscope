@@ -20,13 +20,10 @@
         </Windows>
         <SelectedSymbols>
             <Symbol>
-                <Options Name="speed_out" Address="0x2000004C" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="-10000" YMaxSampled="10000" YAvgSampled="-421" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="300" IsAutoConfig="1" YResolution="5000" MaxValue="15000" File="..\Application\Task\CAN_task.c" Scope="0" DrawStyle="0" />
+                <Options Name="speed_out" Address="0x20000040" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="-10000" YMaxSampled="10000" YAvgSampled="0" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="300" IsAutoConfig="1" YResolution="5000" MaxValue="15000" File="..\Application\Task\CAN_task.c" Scope="0" DrawStyle="0" />
             </Symbol>
             <Symbol>
-                <Options Name="angle_out" Address="0x20000050" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="-10000" YMaxSampled="10000" YAvgSampled="-28" Offset="8" ShowInGraph="1" ACCoupling="0" YOffset="680" IsAutoConfig="1" YResolution="5000" MaxValue="10000" File="..\Application\Task\CAN_task.c" Scope="0" DrawStyle="0" />
-            </Symbol>
-            <Symbol>
-                <Options Name="angle_set" Address="0x20000048" Type="float" TypeID="1" Size="4" GraphColorRed="102" GraphColorGreen="102" GraphColorBlue="178" YMinSampled="-720" YMaxSampled="1080" YAvgSampled="74" Offset="12" ShowInGraph="1" ACCoupling="0" YOffset="680" IsAutoConfig="1" YResolution="1000" MaxValue="2000" File="..\Application\Task\CAN_task.c" Scope="0" DrawStyle="0" />
+                <Options Name="angle_set" Address="0x2000003C" Type="float" TypeID="1" Size="4" GraphColorRed="102" GraphColorGreen="102" GraphColorBlue="178" YMinSampled="-720" YMaxSampled="1080" YAvgSampled="0" Offset="12" ShowInGraph="1" ACCoupling="0" YOffset="680" IsAutoConfig="1" YResolution="1000" MaxValue="2000" File="..\Application\Task\CAN_task.c" Scope="0" DrawStyle="0" />
             </Symbol>
         </SelectedSymbols>
     </Project>

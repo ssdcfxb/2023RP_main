@@ -17,7 +17,7 @@
 /* Private variables ---------------------------------------------------------*/
 /* Exported variables --------------------------------------------------------*/
 dev_list_t dev_list = {
-//	.rc_sen = &rc_sensor,
+	.rc_sen = &rc_sensor,
 	.imu_sen = &imu_sensor,
 //	.chas_mtr[CHAS_LF] = &chassis_motor[CHAS_LF],
 //	.chas_mtr[CHAS_RF] = &chassis_motor[CHAS_RF],
@@ -29,7 +29,7 @@ dev_list_t dev_list = {
 /* Exported functions --------------------------------------------------------*/
 void DEV_Init(void)
 {
-//	dev_list.rc_sen->init(dev_list.rc_sen);
+	dev_list.rc_sen->init(dev_list.rc_sen);
 	dev_list.imu_sen->init(dev_list.imu_sen);
 //	dev_list.chas_mtr[CHAS_LF]->init(dev_list.chas_mtr[CHAS_LF]);
 //	dev_list.chas_mtr[CHAS_RF]->init(dev_list.chas_mtr[CHAS_RF]);

@@ -1,5 +1,5 @@
-#ifndef __MOTOR_H
-#define __MOTOR_H
+#ifndef __MOTOR_3508_H
+#define __MOTOR_3508_H
 
 
 #include "rp_config.h"
@@ -30,10 +30,10 @@ typedef struct __chassis_motor_t
 {
 	  chassis_motor_info_t   *info;
 	  drv_can_t              *driver;
-	  void					 (*Init)(struct __chassis_motor_t *motor);
-		void           (*Update)(struct __chassis_motor_t *motor, uint8_t* data);
-	  void           (*Check)(struct __chassis_motor_t *motor);	
-	  void					 (*Heart_Beat)(struct __chassis_motor_t *motor);
+	  void					 (*init)(struct __chassis_motor_t *motor);
+		void           (*update)(struct __chassis_motor_t *motor, uint8_t* data);
+	  void           (*check)(struct __chassis_motor_t *motor);	
+	  void					 (*heart_beat)(struct __chassis_motor_t *motor);
 	  volatile dev_work_state_t   work_state;
 	  volatile dev_errno_t errno;
 	  const    dev_id_t		      	id;
@@ -48,6 +48,6 @@ typedef struct __chassis_motor_t
 } chassis_motor_t;
 
 
-extern chassis_motor_t motor_data;
+extern chassis_motor_t chassis_motor[CHAS_MOTOR_CNT];
 
 #endif

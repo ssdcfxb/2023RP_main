@@ -4,77 +4,33 @@ float angle_set = 0.0f;
 float speed_out = 0.0f;
 float angle_out = 0.0f;
 
-uint8_t tx_info[8] = {0};
-
-void trans(uint8_t data[8])
-{
-	CAN_TxHeaderTypeDef tx_header;
-	uint32_t tx_mail_box;
-	uint8_t *idx;
-	
-	idx = (uint8_t *)&info_pack.my_info->height;
-	
-	data[3] = *idx;
-	data[4] = *(idx + 1);
-	data[5] = *(idx + 2);
-	data[6] = *(idx + 3);
-	
-	data[0] = (uint8_t)info_pack.my_info->age;
-	
-	
-	tx_header.StdId = 0x123;
-	tx_header.IDE = CAN_ID_STD;
-	tx_header.RTR = CAN_RTR_DATA;
-	tx_header.DLC = 0x08;
-	
-	HAL_CAN_AddTxMessage(&hcan1, &tx_header, data, &tx_mail_box);
-}
-
-void reserve(uint8_t data[8])
-{
-	uint8_t *idx;
-	idx = (uint8_t *)&info_pack.get_info->height;
-	
-	idx[0] = data[3];
-	idx[1] = data[4];
-	idx[2] = data[5];
-	idx[3] = data[6];
-	
-	info_pack.get_info->age = (char)data[0];
-	
-}
-
 void Start_CAN_task(void const * argument)
 {
 	CAN_filter_init();
-	motor_data.Init(&motor_data);
-	motor_6020.Init(&motor_6020);
+	chassis_motor[CHAS_LF].init(&chassis_motor[CHAS_LF]);
+	motor_6020.init(&motor_6020);
 	
-//	speed_out = 500.0f;
 	for(;;)
 	{
-		if ((motor_data.errno != NONE_ERR) || (motor_data.work_state == DEV_OFFLINE))
+		if ((chassis_motor[CHAS_LF].errno != NONE_ERR) || (chassis_motor[CHAS_LF].work_state == DEV_OFFLINE))
 		{
-			motor_data.driver->can_tx_cmd(&hcan1, RM3508_GetTxId(motor_data.driver), 0, 0, 0, 0);
-			LED_RED_ON();
+			chassis_motor[CHAS_LF].driver->can_tx_cmd(&hcan1, RM3508_GetTxId(chassis_motor[CHAS_LF].driver), 0, 0, 0, 0);
 		}
 //		if ((motor_6020.errno != NONE_ERR) || (motor_6020.work_state == DEV_OFFLINE))
 //		{
 //			motor_data.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), 0, 0, 0, 0);
-//			LED_RED_ON();
 //		}
 		else
 		{
 			LED_RED_OFF();
-			motor_data.Angle_out = PID_Plc_Calc(&motor_data.hpid_angle, motor_data.info->angle, angle_set);
-			angle_out = motor_data.Angle_out;
-			motor_data.Speed_out = PID_Inc_Calc(&motor_data.hpid_speed, motor_data.info->speed_rpm, motor_data.Angle_out);
-			speed_out = motor_data.Speed_out;
-			motor_data.driver->can_tx_cmd(&hcan1, 0x200, (int16_t)motor_data.Speed_out, 0, 0, 0);
+			chassis_motor[CHAS_LF].Angle_out = PID_Plc_Calc(&chassis_motor[CHAS_LF].hpid_angle, chassis_motor[CHAS_LF].info->angle, angle_set);
+			angle_out = chassis_motor[CHAS_LF].Angle_out;
+			chassis_motor[CHAS_LF].Speed_out = PID_Inc_Calc(&chassis_motor[CHAS_LF].hpid_speed, chassis_motor[CHAS_LF].info->speed_rpm, chassis_motor[CHAS_LF].Angle_out);
+			speed_out = chassis_motor[CHAS_LF].Speed_out;
+			chassis_motor[CHAS_LF].driver->can_tx_cmd(&hcan1, 0x200, (int16_t)chassis_motor[CHAS_LF].Speed_out, 0, 0, 0);
 			
 //			motor_6020.driver->can_tx_cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), speed, 0, 0, 0);
 		}
-//		trans(tx_info);
 		
 		osDelay(1);
 	}
@@ -91,20 +47,15 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	{
 		case RM3508_CAN_ID_201:
 		{
-			motor_data.Update(&motor_data, rx_data);
-	    motor_data.Check(&motor_data);
+			chassis_motor[CHAS_LF].update(&chassis_motor[CHAS_LF], rx_data);
+	    chassis_motor[CHAS_LF].check(&chassis_motor[CHAS_LF]);
 		  break;
 		}
 		case GM6020_CAN_ID_205:
 		{
-			motor_6020.Update(&motor_6020, rx_data);
-	    motor_6020.Check(&motor_6020);
+			motor_6020.update(&motor_6020, rx_data);
+	    motor_6020.check(&motor_6020);
 		  break;
-		}
-		case 0x123://任务七部分
-		{
-			reserve(rx_data);
-			break;
 		}
 		default :
 		{
