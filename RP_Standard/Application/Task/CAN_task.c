@@ -68,7 +68,7 @@ void Start_CAN_task(void const * argument)
 			LED_RED_OFF();
 			motor_data.Angle_out = PID_Plc_Calc(&motor_data.hpid_angle, motor_data.info->angle, angle_set);
 			angle_out = motor_data.Angle_out;
-			motor_data.Speed_out = PID_Plc_Calc(&motor_data.hpid_speed, motor_data.info->speed_rpm, motor_data.Angle_out);
+			motor_data.Speed_out = PID_Inc_Calc(&motor_data.hpid_speed, motor_data.info->speed_rpm, motor_data.Angle_out);
 			speed_out = motor_data.Speed_out;
 			motor_data.driver->can_tx_cmd(&hcan1, 0x200, (int16_t)motor_data.Speed_out, 0, 0, 0);
 			

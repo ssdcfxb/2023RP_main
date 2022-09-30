@@ -3,8 +3,10 @@
 #include "main.h"
 
 
-#define MAX_OUT 10000.0f
-#define MAX_I_OUT 3000.0f
+#define SP_MAX_OUT 10000.0f
+#define SP_MAX_INTEGRAL 3000.0f
+#define AG_MAX_OUT 10000.0f
+#define AG_MAX_I_OUT 3000.0f
 
 typedef struct __PID_Type_Def
 {
@@ -23,6 +25,7 @@ typedef struct __PID_Type_Def
     float Pout;
     float Iout;
     float Dout;
+	
     float Dbuf[3];  //微分项 0最新 1上一次 2上上次
     float error[3]; //误差项 0最新 1上一次 2上上次
 		

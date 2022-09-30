@@ -48,9 +48,9 @@ static void Motor_Init(chassis_motor_t *motor)
 		motor->info->offline_cnt = 0;
 		motor->errno = NONE_ERR;
 		motor->work_state = DEV_OFFLINE;
-		PID_Init(&motor_data.hpid_speed, PID_Speed, MAX_OUT, MAX_I_OUT);
+		PID_Init(&motor_data.hpid_speed, PID_Speed, SP_MAX_OUT, SP_MAX_INTEGRAL);
 		
-		PID_Init(&motor_data.hpid_angle, PID_Angle, MAX_OUT, MAX_I_OUT);
+		PID_Init(&motor_data.hpid_angle, PID_Angle, AG_MAX_OUT, AG_MAX_I_OUT);
 		
 }
 
@@ -89,7 +89,7 @@ static void Check_Motor_Data(chassis_motor_t *motor)
 	
 	  motor->info->last_ecd = motor->info->ecd;
 		motor->info->total_ecd += motor->info->delta_ecd;
-		motor->info->angle = motor->info->total_ecd * RM3508_ECD_TO_ANGLE;
+		motor->info->angle = motor->info->total_ecd * M3508_ECD_TO_ANGLE;
 		
 		motor->info->offline_cnt = 0;
 }

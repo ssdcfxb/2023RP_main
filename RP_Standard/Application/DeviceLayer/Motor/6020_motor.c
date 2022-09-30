@@ -87,7 +87,7 @@ static void Check_Motor_Data(chassis_motor_t *motor)
 	
 	  motor->info->last_ecd = motor->info->ecd;
 		motor->info->total_ecd += motor->info->delta_ecd;
-		motor->info->angle = motor->info->total_ecd * ECD_TO_ANGLE;
+		motor->info->angle = motor->info->total_ecd * GM6020_ECD_TO_ANGLE;
 		
 		motor->info->offline_cnt = 0;
 }

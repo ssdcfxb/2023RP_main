@@ -449,6 +449,11 @@
               <FileType>1</FileType>
               <FilePath>..\Application\AlgorithmLayer\PID.c</FilePath>
             </File>
+            <File>
+              <FileName>rp_math.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\AlgorithmLayer\rp_math.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -550,6 +555,11 @@
               <FileType>1</FileType>
               <FilePath>..\Application\ProtocolLayer\imu_protocol.c</FilePath>
             </File>
+            <File>
+              <FileName>rc_protocol.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\ProtocolLayer\rc_protocol.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -561,9 +571,9 @@
               <FilePath>..\Application\DeviceLayer\Sensor\imu_sensor.c</FilePath>
             </File>
             <File>
-              <FileName>device.c</FileName>
+              <FileName>rc_sensor.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\device.c</FilePath>
+              <FilePath>..\Application\DeviceLayer\Sensor\rc_sensor.c</FilePath>
             </File>
             <File>
               <FileName>6020_motor.c</FileName>
@@ -574,6 +584,11 @@
               <FileName>motor.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\DeviceLayer\Motor\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>device.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\device.c</FilePath>
             </File>
           </Files>
         </Group>
