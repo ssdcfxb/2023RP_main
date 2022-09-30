@@ -13,44 +13,18 @@
         }                      \
     }
 
-//Plc-Inc
-#define SPEED_KP 15.0f
-#define SPEED_KI 0.5f
-#define SPEED_KD 0.5f
-
-#define ANGLE_KP 60.0f
-#define ANGLE_KI 0.0f
-#define ANGLE_KD 1.0f
-
-//Plc-Plc
-//#define SPEED_KP 10.0f
-//#define SPEED_KI 0.33f
-//#define SPEED_KD 0.0f
-
-//#define ANGLE_KP 25.0f
-//#define ANGLE_KI 0.0f
-//#define ANGLE_KD 5.0f
-		
-float PID_Speed[3] = {SPEED_KP, SPEED_KI, SPEED_KD};
-float PID_Angle[3] = {ANGLE_KP, ANGLE_KI, ANGLE_KD};
-
-void PID_Init(PID_Type_Def *pid, float PID[3], float max_out, float max_iout)
+void PID_Init(pid_type_t *pid)
 {
-    if (pid == NULL || PID == NULL)
+    if (pid == NULL)
     {
         return;
     }
-    pid->Kp = PID[0];
-    pid->Ki = PID[1];
-    pid->Kd = PID[2];
-    pid->max_out = max_out;
-    pid->max_iout = max_iout;
     pid->Dbuf[0] = pid->Dbuf[1] = pid->Dbuf[2] = 0.0f;
     pid->error[0] = pid->error[1] = pid->error[2] = pid->Pout = pid->Iout = pid->Dout = pid->out = 0.0f;
 		pid->integral = 0;
 }
 		
-float PID_Inc_Calc(PID_Type_Def *pid, float fdb, float set)
+float PID_Inc_Calc(pid_type_t *pid, float fdb, float set)
 {
     if (pid == NULL)
     {
@@ -100,7 +74,7 @@ float PID_Inc_Calc(PID_Type_Def *pid, float fdb, float set)
     return pid->out;
 }
 
-float PID_Plc_Calc(PID_Type_Def *pid, float fdb, float set)
+float PID_Plc_Calc(pid_type_t *pid, float fdb, float set)
 {
     if (pid == NULL)
     {

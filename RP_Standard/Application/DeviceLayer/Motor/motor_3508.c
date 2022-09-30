@@ -123,9 +123,10 @@ static void Motor_Init(chassis_motor_t *motor)
 		motor->info->offline_cnt = 0;
 		motor->errno = NONE_ERR;
 		motor->work_state = DEV_OFFLINE;
-		PID_Init(&motor_data.hpid_speed, PID_Speed, SP_MAX_OUT, SP_MAX_INTEGRAL);
 		
-		PID_Init(&motor_data.hpid_angle, PID_Angle, AG_MAX_OUT, AG_MAX_I_OUT);
+		PID_Init(&motor->hpid_speed);
+		
+		PID_Init(&motor->hpid_angle);
 		
 }
 

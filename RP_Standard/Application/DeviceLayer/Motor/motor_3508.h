@@ -6,11 +6,6 @@
 #include "can_protocol.h"
 #include "pid.h"
 
-#define M2006_ECD_TO_ANGLE 0.001220703125
-#define M3508_ECD_TO_ANGLE 0.00231319355647
-#define GM6020_ECD_TO_ANGLE 0.0439453125
-#define HALF_ECD_RANGE 4096
-#define ECD_RANGE 8191
 
 typedef struct __chassis_motor_info_t
 {
@@ -38,9 +33,9 @@ typedef struct __chassis_motor_t
 	  volatile dev_errno_t errno;
 	  const    dev_id_t		      	id;
 	
-
-		PID_Type_Def hpid_angle;
-		PID_Type_Def hpid_speed;
+	//临时变量
+		pid_type_t hpid_angle;
+		pid_type_t hpid_speed;
 	
 		float Speed_out; //部分内容用于云台电机
 		float Angle_out;

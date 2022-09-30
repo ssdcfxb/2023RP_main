@@ -55,6 +55,13 @@
 #define GM3510_CAN_ID_205 (0x205U)
 #define GM3510_CAN_ID_206 (0x206U)
 #define GM3510_CAN_ID_207 (0x207U)
+//电机码盘值相关参数
+#define M2006_ECD_TO_ANGLE 0.001220703125
+#define M3508_ECD_TO_ANGLE 0.00231319355647
+#define GM6020_ECD_TO_ANGLE 0.0439453125
+
+#define HALF_ECD_RANGE 4096
+#define ECD_RANGE 8191
 
 /* Exported types ------------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
