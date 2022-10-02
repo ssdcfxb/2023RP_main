@@ -79,21 +79,10 @@ typedef struct drv_iic {
  *	@brief	can驱动
  *	@class	driver
  */
-typedef struct drv_can {
-		drv_type_t 	type;
-    can_id_t    id;
-		uint32_t  	rx_id;  // 反馈报文标识符
-		uint32_t  	tx_id;  // 上传报文标识符
-		uint8_t	  	data_idx;// 数据下标
-    uint16_t    tx_period; // 定时发送间隔(ms)
-		void		    (*add_msg)(struct drv_can *self, uint8_t *data, uint8_t data_cnt);
-    void        (*add_byte)(struct drv_can *self, uint8_t byte);
-    void        (*add_halfword)(struct drv_can *self, uint16_t hword);
-    void        (*add_word)(struct drv_can *self, uint32_t word);
-    void        (*manual_tx)(struct drv_can *self, uint8_t *data);
-	
-	  void        (*can_tx_cmd)(CAN_HandleTypeDef *hcan, uint32_t identifier, int16_t data_1, //临时函数
-								              int16_t data_2, int16_t data_3, int16_t data_4);
+typedef struct 
+{
+	CAN_HandleTypeDef *hcan;
+	uint32_t rx_id;
 } drv_can_t;
 
 /**

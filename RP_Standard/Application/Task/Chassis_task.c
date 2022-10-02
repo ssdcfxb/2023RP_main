@@ -1,15 +1,18 @@
 #include "Chassis_task.h"
 
-void StartControlTask(void const * argument)
+void Start_Chassis_task(void const * argument)
 {
-//	chassis.init();
+	chassis.init();
 	for(;;)
 	{
-//		if(sys.state == SYS_STATE_NORMAL) {
-//			chassis.ctrl();
-//		} else {
-//			chassis.self_protect();
-//		}
+		if(1)//sys.state == SYS_STATE_NORMAL) 
+		{
+			chassis.ctrl();
+		} 
+		else 
+		{
+			chassis.self_protect();
+		}
 		
 		osDelay(2);
 	}

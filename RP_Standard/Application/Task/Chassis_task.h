@@ -3,6 +3,7 @@
 
 #include "cmsis_os.h"
 #include "main.h"
+#include "chassis.h"
 #include "device.h"
 #include "driver.h"
 

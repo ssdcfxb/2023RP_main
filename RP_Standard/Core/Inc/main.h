@@ -54,6 +54,7 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 extern void DEV_Init(void);
+extern void DRIVER_Init(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

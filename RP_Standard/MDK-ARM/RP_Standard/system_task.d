@@ -85,10 +85,14 @@ rp_standard\system_task.o: ../Application/DeviceLayer/Sensor/rc_sensor.h
 rp_standard\system_task.o: ../Application/DeviceLayer/Sensor/imu_sensor.h
 rp_standard\system_task.o: ../Application/DeviceLayer/Motor/motor_3508.h
 rp_standard\system_task.o: ../Application/ProtocolLayer/can_protocol.h
-rp_standard\system_task.o: ../Application/ProtocolLayer/rm_protocol.h
-rp_standard\system_task.o: ../Application/AlgorithmLayer/pid.h
-rp_standard\system_task.o: ../Application/DeviceLayer/Motor/motor_6020.h
+rp_standard\system_task.o: ../Application/DeviceLayer/device.h
 rp_standard\system_task.o: ../Application/DriverLayer/driver.h
 rp_standard\system_task.o: ../Application/DriverLayer/drv_haltick.h
 rp_standard\system_task.o: ../Application/DriverLayer/drv_can.h
+rp_standard\system_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+rp_standard\system_task.o: ../Application/ProtocolLayer/rm_protocol.h
+rp_standard\system_task.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\system_task.o: ../Application/DriverLayer/drv_uart.h
+rp_standard\system_task.o: ../Application/ProtocolLayer/rc_protocol.h
+rp_standard\system_task.o: ../Application/AlgorithmLayer/pid.h
+rp_standard\system_task.o: ../Application/DeviceLayer/Motor/motor_6020.h

@@ -18,23 +18,7 @@ typedef enum {
 } chassis_mode_t;
 
 typedef struct {
-	pid_type_t	speed;
-	pid_type_t	angle;
-	float		speed_out;
-	float   angle_out;
-} chassis_motor_pid_t;
-
-typedef struct {
-	pid_type_t	angle;
-	float 	angle_out;
-} chassis_z_pid_t;
-
-typedef struct {
-	chassis_motor_pid_t		(*motor)[CHAS_MOTOR_CNT];
-} chassis_ctrl_t;
-
-typedef struct {
-	chassis_motor_t	*chas_motor[CHAS_MOTOR_CNT];
+	motor_3508_t	*chas_motor[CHAS_MOTOR_CNT];
 	imu_sensor_t	*imu_sensor;
 	rc_sensor_t		*rc_sensor;
 } chassis_dev_t;
@@ -45,7 +29,6 @@ typedef struct {
 }chassis_info_t;
 
 typedef struct chassis{
-	chassis_ctrl_t	*controller;
 	chassis_dev_t 	*dev;
 	chassis_info_t	*info;
 	bool			test_open;

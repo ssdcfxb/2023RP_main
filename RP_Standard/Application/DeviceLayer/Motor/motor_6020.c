@@ -1,31 +1,20 @@
 #include "motor_6020.h"
 
-extern void CAN_Tx_cmd(CAN_HandleTypeDef *hcan, uint32_t identifier, int16_t data_1, //临时函数
-								       int16_t data_2, int16_t data_3, int16_t data_4);
-
-static void Motor_Init(chassis_motor_t *motor);
-static void UpdateMotorData(chassis_motor_t *motor, uint8_t* data);
-static void Check_Motor_Data(chassis_motor_t *motor);
-static void Chassis_Motor_Heart_Beat(chassis_motor_t *motor);
+static void Motor_Init(motor_6020_t *motor);
+static void UpdateMotorData(motor_6020_t *motor, uint8_t* data);
+static void Check_Motor_Data(motor_6020_t *motor);
+static void Chassis_Motor_Heart_Beat(motor_6020_t *motor);
 
 drv_can_t motor_6020_driver = {
-    .id = DRV_CAN1,
+    .hcan = &hcan1,
     .rx_id = GM6020_CAN_ID_205,
-	
-    .add_msg = CAN_AddMsg,
-    .add_byte = CAN_AddByte,
-    .add_halfword = CAN_AddHalfWord,
-    .add_word = CAN_AddWord,
-    .manual_tx = CAN_ManualTx,
-	
-  	.can_tx_cmd = CAN_Tx_cmd,//临时函数
 };
 
-chassis_motor_info_t motor_6020_info = {
+motor_6020_info_t motor_6020_info = {
     .offline_max_cnt = 50,
 };
 
-chassis_motor_t motor_6020 = {
+motor_6020_t motor_6020 = {
     .info = &motor_6020_info,
 	  .driver = &motor_6020_driver,
     .init = Motor_Init,
@@ -36,7 +25,7 @@ chassis_motor_t motor_6020 = {
 	  .id = DEV_ID_CHASSIS_LF,
 };
 
-static void Motor_Init(chassis_motor_t *motor)
+static void Motor_Init(motor_6020_t *motor)
 {
 		if (motor->info == NULL || motor == NULL || motor->driver == NULL)
 		{
@@ -51,7 +40,7 @@ static void Motor_Init(chassis_motor_t *motor)
 		
 }
 
-static void UpdateMotorData(chassis_motor_t *motor, uint8_t *data)
+static void UpdateMotorData(motor_6020_t *motor, uint8_t *data)
 {
 	  if (motor->info == NULL || motor == NULL)
 		{
@@ -62,10 +51,9 @@ static void UpdateMotorData(chassis_motor_t *motor, uint8_t *data)
 		motor->info->speed_rpm = GM6020_GetMotorSpeed(data);
 		motor->info->given_current = GM6020_GetMotorCurrent(data);
 		motor->info->temperature = GM6020_GetMotorTemperature(data);
-		
 }
 
-static void Check_Motor_Data(chassis_motor_t *motor)
+static void Check_Motor_Data(motor_6020_t *motor)
 {
 		if (motor->info == NULL || motor == NULL)
 		{
@@ -73,7 +61,7 @@ static void Check_Motor_Data(chassis_motor_t *motor)
 			return;
 		}
 
-		chassis_motor_info_t *motor_info = motor->info;
+		motor_6020_info_t *motor_info = motor->info;
 
 		motor_info->delta_ecd = motor_info->ecd - motor_info->last_ecd;
 		if (motor_info->delta_ecd > HALF_ECD_RANGE)
@@ -92,7 +80,7 @@ static void Check_Motor_Data(chassis_motor_t *motor)
 		motor->info->offline_cnt = 0;
 }
 
-static void Chassis_Motor_Heart_Beat(chassis_motor_t *motor)
+static void Chassis_Motor_Heart_Beat(motor_6020_t *motor)
 {
 	if (motor->info == NULL || motor == NULL)
 	{
@@ -100,7 +88,7 @@ static void Chassis_Motor_Heart_Beat(chassis_motor_t *motor)
 		return;
 	}
 	
-	chassis_motor_info_t *motor_info = motor->info;
+	motor_6020_info_t *motor_info = motor->info;
 	
 	motor_info->offline_cnt++;
 	

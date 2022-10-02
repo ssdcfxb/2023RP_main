@@ -183,10 +183,10 @@ uint8_t CAN_6_GetMotorTemperature(uint8_t *rxData)
  */
 void CAN_AddMotorOutput(drv_can_t *drv, uint16_t txData)
 {
-    uint8_t data[2];
-    data[0] = (uint8_t)(txData >> 8);
-    data[1] = (uint8_t)(txData);
-	CAN_AddMsgByDriver(drv, data, 2);
+//    uint8_t data[2];
+//    data[0] = (uint8_t)(txData >> 8);
+//    data[1] = (uint8_t)(txData);
+//	CAN_AddMsgByDriver(drv, data, 2);
 }
 
 /* RM电机 设备层协议 --------------------------------------------------------*/

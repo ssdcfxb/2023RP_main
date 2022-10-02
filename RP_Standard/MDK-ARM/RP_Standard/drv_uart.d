@@ -33,4 +33,11 @@ rp_standard\drv_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex
 rp_standard\drv_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h
 rp_standard\drv_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 rp_standard\drv_uart.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+rp_standard\drv_uart.o: ../Application/ProtocolLayer/rc_protocol.h
+rp_standard\drv_uart.o: ../Application/ConfigLayer/rp_config.h
+rp_standard\drv_uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+rp_standard\drv_uart.o: ../Application/ConfigLayer/rp_driver_config.h
+rp_standard\drv_uart.o: ../Application/ConfigLayer/rp_device_config.h
+rp_standard\drv_uart.o: ../Application/ConfigLayer/rp_user_config.h
+rp_standard\drv_uart.o: ../Application/DeviceLayer/Sensor/rc_sensor.h
 rp_standard\drv_uart.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h

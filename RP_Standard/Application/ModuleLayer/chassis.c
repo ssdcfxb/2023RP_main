@@ -1,70 +1,14 @@
 #include "chassis.h"
 
-drv_can_t				*chas_drv[CHAS_MOTOR_CNT];
-chassis_motor_t			*chas_motor[CHAS_MOTOR_CNT];
-chassis_motor_info_t	*chas_motor_info[CHAS_MOTOR_CNT];
+drv_can_t				  *chas_drv[CHAS_MOTOR_CNT];
+motor_3508_t			*chas_motor[CHAS_MOTOR_CNT];
+motor_3508_info_t	*chas_motor_info[CHAS_MOTOR_CNT];
+uint16_t           out[CHAS_MOTOR_CNT];
 
-void CHASSIS_Init(void);
-void CHASSIS_Ctrl(void);
-void CHASSIS_Test(void);
-void CHASSIS_SelfProtect(void);
-
-// 底盘电机PID控制器(Plc-Inc)
-chassis_motor_pid_t 	chas_motor_pid[CHAS_MOTOR_CNT] = {
-	[CHAS_LF] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
-		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
-		.angle.max_integral = AG_MAX_INTEGRAL,
-		.angle.max_out = AG_MAX_OUT,
-	},
-	[CHAS_RF] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
-		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
-		.angle.max_integral = AG_MAX_INTEGRAL,
-		.angle.max_out = AG_MAX_OUT,
-	},
-	[CHAS_LB] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
-		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
-		.angle.max_integral = AG_MAX_INTEGRAL,
-		.angle.max_out = AG_MAX_OUT,
-	},
-	[CHAS_RB] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
-		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
-		.angle.max_integral = AG_MAX_INTEGRAL,
-		.angle.max_out = AG_MAX_OUT,
-	},
-};
-
-// 底盘模块控制器
-chassis_ctrl_t		chas_ctrl = {
-	.motor = &chas_motor_pid,
-};
+void Chassis_Init(void);
+void Chassis_Ctrl(void);
+void Chassis_Test(void);
+void Chassis_SelfProtect(void);
 
 // 底盘模块传感器
 chassis_dev_t		chas_dev = {
@@ -83,16 +27,15 @@ chassis_info_t 	chas_info = {
 };
 
 chassis_t chassis = {
-	.controller = &chas_ctrl,
 	.dev = &chas_dev,
 	.info = &chas_info,
-	.init = CHASSIS_Init,
-	.test = CHASSIS_Test,
-	.ctrl = CHASSIS_Ctrl,
-	.self_protect = CHASSIS_SelfProtect,
+	.init = Chassis_Init,
+	.test = Chassis_Test,
+	.ctrl = Chassis_Ctrl,
+	.self_protect = Chassis_SelfProtect,
 };
 
-void CHASSIS_Init(void)
+void Chassis_Init(void)
 {
 	chas_drv[CHAS_LF] = chas_dev.chas_motor[CHAS_LF]->driver;
 	chas_drv[CHAS_RF] = chas_dev.chas_motor[CHAS_RF]->driver;
@@ -112,82 +55,99 @@ void CHASSIS_Init(void)
 }
 
 
-//底盘电机PID参数初始化
-void CHASSIS_PidParamsInit(chassis_motor_pid_t *pid, uint8_t motor_cnt)
-{
-	for(uint8_t i = 0; i < motor_cnt; i++) {
-		PID_Init(&pid[i].speed);
-	}
-}
-
 //底盘电机卸力
-static void CHASSIS_Stop(chassis_motor_pid_t *pid)
+static void Chassis_Stop(chassis_dev_t *chas_dev)
 {
-	for(uint8_t i=0; i<CHAS_MOTOR_CNT; i++)
+	for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
 	{
-		pid[i].speed_out = 0;
-//		chas_drv[i]->add_halfword(chas_drv[i], (int16_t)pid[i].out);
+		chas_dev->chas_motor[i]->pid->speed_out = 0.0f;
+		out[i] = (int16_t)chas_dev->chas_motor[i]->pid->speed_out;
 	}
-}
-
-//底盘电机PID输出
-static void CHASSIS_PidOut(chassis_motor_pid_t *pid)
-{
-	for(uint8_t i=0; i<1; i++) {
-		if(chas_motor[i]->work_state == DEV_ONLINE) 
-		{
-         chas_drv[i]->add_halfword(chas_drv[i], (int16_t)pid[i].speed_out);
-		} 
-		else 
-		{
-         chas_drv[i]->add_halfword(chas_drv[i], 0);
-		}
-	}    
+	can1_tx_buf[(chas_motor[CHAS_LF]->driver->rx_id - 0x201) * 2] = (out[CHAS_LF] >> 8) & 0xFF;
+	can1_tx_buf[(chas_motor[CHAS_LF]->driver->rx_id - 0x201) * 2 + 1] = (out[CHAS_LF] & 0xFF);
+	can1_tx_buf[(chas_motor[CHAS_RF]->driver->rx_id - 0x201) * 2] = (out[CHAS_RF] >> 8) & 0xFF;
+	can1_tx_buf[(chas_motor[CHAS_RF]->driver->rx_id - 0x201)* 2 + 1] = (out[CHAS_RF] & 0xFF);
+	can1_tx_buf[(chas_motor[CHAS_LB]->driver->rx_id - 0x201) * 2] = (out[CHAS_LB] >> 8) & 0xFF;
+	can1_tx_buf[(chas_motor[CHAS_LB]->driver->rx_id - 0x201) * 2 + 1] = (out[CHAS_LB] & 0xFF);
+	can1_tx_buf[(chas_motor[CHAS_RB]->driver->rx_id - 0x201) * 2] = (out[CHAS_RB] >> 8) & 0xFF;
+	can1_tx_buf[(chas_motor[CHAS_RB]->driver->rx_id - 0x201) * 2 + 1] = (out[CHAS_RB] & 0xFF);
 }
 
 //底盘电机速度环
-static void CHASSIS_Speed_PidCalc(chassis_motor_pid_t *pid, chassis_dev_t *dev, chassis_motor_cnt_t MOTORx)
+static void Chassis_Speed_PidCalc(chassis_dev_t *chas_dev, chassis_motor_cnt_t MOTORx)
 {
+		chas_motor[MOTORx]->pid->speed_out = PID_Inc_Calc(&chas_motor[MOTORx]->pid->speed, chas_motor[MOTORx]->info->speed_rpm,
+                                                 chas_motor[MOTORx]->pid->speed.set);
+		out[MOTORx] = (int16_t)chas_motor[MOTORx]->pid->speed_out;
 //	pid[MOTORx].speed.err = pid[MOTORx].speed.target - pid[MOTORx].speed.measure;
 //	single_pid_ctrl(&pid[MOTORx].speed);
 //	pid[MOTORx].out = pid[MOTORx].speed.out;
 }
 
-void CHASSIS_SelfProtect(void)
+//底盘电机PID输出
+static void Chassis_PidOut(chassis_dev_t *chas_dev)
 {
-//	CHASSIS_Stop(chas_motor_pid);
-//	CHASSIS_PidParamsInit(chas_motor_pid, CHAS_MOTOR_CNT);
-//	CHASSIS_GetInfo();
+	for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++) {
+		if(chas_motor[i]->work_state == DEV_ONLINE) 
+		{
+			can1_tx_buf[(chas_motor[i]->driver->rx_id - 0x201) * 2] = (out[CHAS_LF] >> 8) & 0xFF;
+			can1_tx_buf[(chas_motor[i]->driver->rx_id - 0x201) * 2 + 1] = (out[CHAS_LF] & 0xFF);
+//         chas_drv[i]->add_halfword(chas_drv[i], (int16_t)pid[i].speed_out);
+		} 
+		else 
+		{
+			can1_tx_buf[(chas_motor[i]->driver->rx_id - 0x201) * 2] = 0;
+			can1_tx_buf[(chas_motor[i]->driver->rx_id - 0x201) * 2 + 1] = 0;
+//         chas_drv[i]->add_halfword(chas_drv[i], 0);
+		}
+	}    
 }
 
-void CHASSIS_PidCtrl(void)
+void Chassis_PidCtrl(void)
 {
 	// 底盘电机速度环
-	CHASSIS_Speed_PidCalc(chas_motor_pid, CHAS_LF);
-	CHASSIS_Speed_PidCalc(chas_motor_pid, CHAS_LB);
-	CHASSIS_Speed_PidCalc(chas_motor_pid, CHAS_RF);
-	CHASSIS_Speed_PidCalc(chas_motor_pid, CHAS_RB);
+	Chassis_Speed_PidCalc(&chas_dev, CHAS_LF);
+//	Chassis_Speed_PidCalc(chas_motor_pid, CHAS_LB);
+//	Chassis_Speed_PidCalc(chas_motor_pid, CHAS_RF);
+//	Chassis_Speed_PidCalc(chas_motor_pid, CHAS_RB);
 	
 	// 底盘电机输出响应
-	CHASSIS_PidOut(chas_motor_pid);
+	Chassis_PidOut(&chas_dev);
 }
 
-void CHASSIS_Ctrl(void)
+void Chassis_SelfProtect(void)
+{
+	Chassis_Stop(&chas_dev);
+//	Chassis_PidParamsInit(chas_motor_pid, CHAS_MOTOR_CNT);
+//	Chassis_GetInfo();
+}
+
+void Chassis_GetRcInfo(void)
+{
+	chas_motor[CHAS_LF]->pid->speed.set = (float)rc_sensor.info->ch0;
+}
+
+void Chassis_GetInfo(void)
+{
+	Chassis_GetRcInfo();
+}
+
+void Chassis_Ctrl(void)
 {
 //	/*----信息读入----*/
-//	CHASSIS_GetInfo();
+	Chassis_GetInfo();
 //	/*----期望修改----*/ 
 //	if(chas_info.remote_mode == RC) {
-//		CHASSIS_RcCtrl();
+//		Chassis_RcCtrl();
 //	}
 //	else if(chas_info.remote_mode == KEY) {
-//		CHASSIS_KeyCtrl();
+//		Chassis_KeyCtrl();
 //	}
 //	/*----最终输出----*/
-//	CHASSIS_PidCtrl();	
+	Chassis_PidCtrl();
 }
 
-void CHASSIS_Test(void)
+void Chassis_Test(void)
 {
     
 }

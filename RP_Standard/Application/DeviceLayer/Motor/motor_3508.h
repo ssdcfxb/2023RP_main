@@ -1,13 +1,12 @@
 #ifndef __MOTOR_3508_H
 #define __MOTOR_3508_H
 
-
 #include "rp_config.h"
 #include "can_protocol.h"
 #include "pid.h"
+#include "driver.h"
 
-
-typedef struct __chassis_motor_info_t
+typedef struct __motor_3508_info_t
 {
 	  volatile uint16_t ecd;
     volatile int16_t  speed_rpm;
@@ -19,30 +18,25 @@ typedef struct __chassis_motor_info_t
 		volatile float    angle;
 	  volatile uint8_t  offline_cnt;
 	  const    uint8_t	offline_max_cnt;
-} chassis_motor_info_t;
+} motor_3508_info_t;
 
-typedef struct __chassis_motor_t
+typedef struct __motor_3508_t
 {
-	  chassis_motor_info_t   *info;
-	  drv_can_t              *driver;
-	  void					 (*init)(struct __chassis_motor_t *motor);
-		void           (*update)(struct __chassis_motor_t *motor, uint8_t* data);
-	  void           (*check)(struct __chassis_motor_t *motor);	
-	  void					 (*heart_beat)(struct __chassis_motor_t *motor);
+	  motor_3508_info_t  *info;
+	  drv_can_t          *driver;
+		pid_t              *pid;
+	  void					 (*init)(struct __motor_3508_t *motor);
+		void           (*update)(struct __motor_3508_t *motor, uint8_t* data);
+	  void           (*check)(struct __motor_3508_t *motor);	
+	  void					 (*heart_beat)(struct __motor_3508_t *motor);
 	  volatile dev_work_state_t   work_state;
-	  volatile dev_errno_t errno;
+	  volatile dev_errno_t        errno;
 	  const    dev_id_t		      	id;
 	
-	//临时变量
-		pid_type_t hpid_angle;
-		pid_type_t hpid_speed;
-	
-		float Speed_out; //部分内容用于云台电机
-		float Angle_out;
-	
-} chassis_motor_t;
+} motor_3508_t;
 
-
-extern chassis_motor_t chassis_motor[CHAS_MOTOR_CNT];
+extern CAN_HandleTypeDef hcan1;
+extern CAN_HandleTypeDef hcan2;
+extern motor_3508_t chassis_motor[CHAS_MOTOR_CNT];
 
 #endif

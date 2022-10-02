@@ -101,8 +101,10 @@ int main(void)
   /* USER CODE BEGIN 2 */
 	HAL_CAN_MspInit(&hcan1);
 	HAL_CAN_MspInit(&hcan2);
+//	HAL_UART_MspInit(&huart2);
 	
 	DEV_Init();
+	DRIVER_Init();
   MX_IWDG_Init();
   /* USER CODE END 2 */
 

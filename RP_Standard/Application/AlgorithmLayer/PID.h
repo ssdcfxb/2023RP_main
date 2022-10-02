@@ -3,7 +3,6 @@
 #include "main.h"
 
 
-
 //Plc-Inc
 #define SPEED_KP 15.0f
 #define SPEED_KI 0.5f
@@ -53,6 +52,12 @@ typedef struct __pid_type_t
 		
 } pid_type_t;
 
+typedef struct __pid_t{
+	pid_type_t	speed;
+	pid_type_t	angle;
+	float		speed_out;
+	float   angle_out;
+} pid_t;
 
 float PID_Inc_Calc(pid_type_t *pid, float fdb, float set);
 float PID_Plc_Calc(pid_type_t *pid, float fdb, float set);

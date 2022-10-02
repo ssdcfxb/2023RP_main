@@ -1,59 +1,31 @@
 #include "motor_3508.h"
 
-extern void CAN_Tx_cmd(CAN_HandleTypeDef *hcan, uint32_t identifier, int16_t data_1, //临时函数
-								       int16_t data_2, int16_t data_3, int16_t data_4);
 
-static void Motor_Init(chassis_motor_t *motor);
-static void UpdateMotorData(chassis_motor_t *motor, uint8_t* data);
-static void Check_Motor_Data(chassis_motor_t *motor);
-static void Chassis_Motor_Heart_Beat(chassis_motor_t *motor);
+static void Motor_Init(motor_3508_t *motor);
+static void UpdateMotorData(motor_3508_t *motor, uint8_t* data);
+static void Check_Motor_Data(motor_3508_t *motor);
+static void Chassis_Motor_Heart_Beat(motor_3508_t *motor);
 
 drv_can_t motor_driver[] = {
 	[CHAS_LF] = {
-	  .id = DRV_CAN1,
+	  .hcan = &hcan1,
 	  .rx_id = RM3508_CAN_ID_201,
-	
-		.add_msg = CAN_AddMsg,
-		.add_byte = CAN_AddByte,
-		.add_halfword = CAN_AddHalfWord,
-		.add_word = CAN_AddWord,
-		.manual_tx = CAN_ManualTx,
-	
-	  .can_tx_cmd = CAN_Tx_cmd,//临时函数
 	},
 	[CHAS_RF] = {
-	  .id = DRV_CAN1,
+	  .hcan = &hcan1,
 	  .rx_id = RM3508_CAN_ID_202,
-	
-		.add_msg = CAN_AddMsg,
-		.add_byte = CAN_AddByte,
-		.add_halfword = CAN_AddHalfWord,
-		.add_word = CAN_AddWord,
-		.manual_tx = CAN_ManualTx,
 	},
 	[CHAS_LB] = {
-	  .id = DRV_CAN1,
+	  .hcan = &hcan1,
 	  .rx_id = RM3508_CAN_ID_203,
-	
-		.add_msg = CAN_AddMsg,
-		.add_byte = CAN_AddByte,
-		.add_halfword = CAN_AddHalfWord,
-		.add_word = CAN_AddWord,
-		.manual_tx = CAN_ManualTx,
 	},
 	[CHAS_RB] = {
-	  .id = DRV_CAN1,
+	  .hcan = &hcan1,
 	  .rx_id = RM3508_CAN_ID_204,
-	
-		.add_msg = CAN_AddMsg,
-		.add_byte = CAN_AddByte,
-		.add_halfword = CAN_AddHalfWord,
-		.add_word = CAN_AddWord,
-		.manual_tx = CAN_ManualTx,
 	},
 };
 
-chassis_motor_info_t motor_info[] = {
+motor_3508_info_t motor_info[] = {
 	{
     .offline_max_cnt = 50,
 	},
@@ -68,10 +40,63 @@ chassis_motor_info_t motor_info[] = {
 	},
 };
 
-chassis_motor_t chassis_motor[] = {
+// 底盘电机PID(Plc-Inc)
+pid_t pid[] = {
+	[CHAS_LF] = {
+		.speed.Kp = SPEED_KP,
+		.speed.Ki = SPEED_KI,
+		.speed.Kd = SPEED_KD,
+		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.max_out = SP_MAX_OUT,
+		.angle.Kp = ANGLE_KP,
+		.angle.Ki = ANGLE_KI,
+		.angle.Kd = ANGLE_KD,
+		.angle.max_integral = AG_MAX_INTEGRAL,
+		.angle.max_out = AG_MAX_OUT,
+	},
+	[CHAS_RF] = {
+		.speed.Kp = SPEED_KP,
+		.speed.Ki = SPEED_KI,
+		.speed.Kd = SPEED_KD,
+		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.max_out = SP_MAX_OUT,
+		.angle.Kp = ANGLE_KP,
+		.angle.Ki = ANGLE_KI,
+		.angle.Kd = ANGLE_KD,
+		.angle.max_integral = AG_MAX_INTEGRAL,
+		.angle.max_out = AG_MAX_OUT,
+	},
+	[CHAS_LB] = {
+		.speed.Kp = SPEED_KP,
+		.speed.Ki = SPEED_KI,
+		.speed.Kd = SPEED_KD,
+		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.max_out = SP_MAX_OUT,
+		.angle.Kp = ANGLE_KP,
+		.angle.Ki = ANGLE_KI,
+		.angle.Kd = ANGLE_KD,
+		.angle.max_integral = AG_MAX_INTEGRAL,
+		.angle.max_out = AG_MAX_OUT,
+	},
+	[CHAS_RB] = {
+		.speed.Kp = SPEED_KP,
+		.speed.Ki = SPEED_KI,
+		.speed.Kd = SPEED_KD,
+		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.max_out = SP_MAX_OUT,
+		.angle.Kp = ANGLE_KP,
+		.angle.Ki = ANGLE_KI,
+		.angle.Kd = ANGLE_KD,
+		.angle.max_integral = AG_MAX_INTEGRAL,
+		.angle.max_out = AG_MAX_OUT,
+	},
+};
+
+motor_3508_t chassis_motor[] = {
 	[CHAS_LF] = {
     .info = &motor_info[CHAS_LF],
 	  .driver = &motor_driver[CHAS_LF],
+		.pid = &pid[CHAS_LF],
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
@@ -82,6 +107,7 @@ chassis_motor_t chassis_motor[] = {
 	[CHAS_RF] = {
     .info = &motor_info[CHAS_RF],
 	  .driver = &motor_driver[CHAS_RF],
+		.pid = &pid[CHAS_RF],
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
@@ -92,6 +118,7 @@ chassis_motor_t chassis_motor[] = {
 	[CHAS_LB] = {
     .info = &motor_info[CHAS_LB],
 	  .driver = &motor_driver[CHAS_LB],
+		.pid = &pid[CHAS_LB],
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
@@ -102,6 +129,7 @@ chassis_motor_t chassis_motor[] = {
 	[CHAS_RB] = {
     .info = &motor_info[CHAS_RB],
 	  .driver = &motor_driver[CHAS_RB],
+		.pid = &pid[CHAS_RB],
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
@@ -111,7 +139,9 @@ chassis_motor_t chassis_motor[] = {
 	},
 };
 
-static void Motor_Init(chassis_motor_t *motor)
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+static void Motor_Init(motor_3508_t *motor)
 {
 		if (motor->info == NULL || motor == NULL || motor->driver == NULL)
 		{
@@ -124,13 +154,11 @@ static void Motor_Init(chassis_motor_t *motor)
 		motor->errno = NONE_ERR;
 		motor->work_state = DEV_OFFLINE;
 		
-		PID_Init(&motor->hpid_speed);
-		
-		PID_Init(&motor->hpid_angle);
-		
+		PID_Init(&motor->pid->speed);
+		PID_Init(&motor->pid->angle);
 }
 
-static void UpdateMotorData(chassis_motor_t *motor, uint8_t *data)
+static void UpdateMotorData(motor_3508_t *motor, uint8_t *data)
 {
 	  if (motor->info == NULL || motor == NULL)
 		{
@@ -140,10 +168,10 @@ static void UpdateMotorData(chassis_motor_t *motor, uint8_t *data)
 		motor->info->ecd = (uint16_t)((data[0] << 8) | data[1]);
 		motor->info->speed_rpm = (int16_t)((data[2] << 8) | data[3]);
 		motor->info->given_current = (int16_t)((data[4] << 8) | data[5]);
-		
+		motor->info->temperature = (int8_t)data[6];
 }
 
-static void Check_Motor_Data(chassis_motor_t *motor)
+static void Check_Motor_Data(motor_3508_t *motor)
 {
 		if (motor->info == NULL || motor == NULL)
 		{
@@ -151,7 +179,7 @@ static void Check_Motor_Data(chassis_motor_t *motor)
 			return;
 		}
 
-		chassis_motor_info_t *motor_info = motor->info;
+		motor_3508_info_t *motor_info = motor->info;
 
 		motor_info->delta_ecd = motor_info->ecd - motor_info->last_ecd;
 		if (motor_info->delta_ecd > HALF_ECD_RANGE)
@@ -170,7 +198,7 @@ static void Check_Motor_Data(chassis_motor_t *motor)
 		motor->info->offline_cnt = 0;
 }
 
-static void Chassis_Motor_Heart_Beat(chassis_motor_t *motor)
+static void Chassis_Motor_Heart_Beat(motor_3508_t *motor)
 {
 	if (motor->info == NULL || motor == NULL)
 	{
@@ -178,7 +206,7 @@ static void Chassis_Motor_Heart_Beat(chassis_motor_t *motor)
 		return;
 	}
 	
-	chassis_motor_info_t *motor_info = motor->info;
+	motor_3508_info_t *motor_info = motor->info;
 	
 	motor_info->offline_cnt++;
 	
@@ -194,19 +222,3 @@ static void Chassis_Motor_Heart_Beat(chassis_motor_t *motor)
 	}
 }
 
-
-
-//static int16_t delta_ecd_calc(uint16_t ecd, uint16_t last_ecd)
-//{
-//    int16_t delta_ecd = ecd - last_ecd;
-//    if (delta_ecd > HALF_ECD_RANGE)
-//    {
-//        delta_ecd -= ECD_RANGE;
-//    }
-//    else if (delta_ecd < -HALF_ECD_RANGE)
-//    {
-//        delta_ecd += ECD_RANGE;
-//    }
-
-//    return delta_ecd ;
-//}

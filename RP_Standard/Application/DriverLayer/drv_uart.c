@@ -26,7 +26,7 @@ extern UART_HandleTypeDef huart5;
 
 /* Private function prototypes -----------------------------------------------*/
 __WEAK void USART1_rxDataHandler(uint8_t *rxBuf);
-__WEAK void USART2_rxDataHandler(uint8_t *rxBuf);
+//__WEAK void USART2_rxDataHandler(uint8_t *rxBuf);
 __WEAK void USART4_rxDataHandler(uint8_t *rxBuf);
 __WEAK void USART5_rxDataHandler(uint8_t *rxBuf);
 

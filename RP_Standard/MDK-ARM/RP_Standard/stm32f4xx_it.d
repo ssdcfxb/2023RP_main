@@ -62,3 +62,10 @@ rp_standard\stm32f4xx_it.o: ../Application/DriverLayer/drv_io.h
 rp_standard\stm32f4xx_it.o: ../Core/Inc/main.h
 rp_standard\stm32f4xx_it.o: ../Core/Inc/stm32f4xx_it.h
 rp_standard\stm32f4xx_it.o: ../Application/DriverLayer/drv_uart.h
+rp_standard\stm32f4xx_it.o: ../Application/ProtocolLayer/rc_protocol.h
+rp_standard\stm32f4xx_it.o: ../Application/ConfigLayer/rp_config.h
+rp_standard\stm32f4xx_it.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+rp_standard\stm32f4xx_it.o: ../Application/ConfigLayer/rp_driver_config.h
+rp_standard\stm32f4xx_it.o: ../Application/ConfigLayer/rp_device_config.h
+rp_standard\stm32f4xx_it.o: ../Application/ConfigLayer/rp_user_config.h
+rp_standard\stm32f4xx_it.o: ../Application/DeviceLayer/Sensor/rc_sensor.h
