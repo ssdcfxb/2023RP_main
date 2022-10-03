@@ -26,6 +26,12 @@ typedef struct {
 typedef struct {
 	remote_mode_t		  remote_mode;
 	chassis_mode_t		local_mode;
+	int16_t target_front_speed;  //目标前进速度
+	int16_t target_right_speed;  //目标左移速度
+	int16_t target_cycle_speed;  //目标旋转速度
+	int16_t measure_front_speed; //当前前进速度
+	int16_t measure_right_speed; //当前左移速度
+	int16_t measure_cycle_speed; //当前旋转速度
 }chassis_info_t;
 
 typedef struct chassis{

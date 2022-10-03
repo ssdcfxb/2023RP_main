@@ -6,7 +6,7 @@ system_t sys = {
 	.mode = SYS_MODE_NORMAL,
 };
 
-void StartSystemTask(void const * argument)
+void Start_System_task(void const * argument)
 {
 	for(;;)
 	{

@@ -5,7 +5,7 @@ void Start_Chassis_task(void const * argument)
 	chassis.init();
 	for(;;)
 	{
-		if(1)//sys.state == SYS_STATE_NORMAL) 
+		if(sys.state == SYS_STATE_NORMAL) 
 		{
 			chassis.ctrl();
 		} 

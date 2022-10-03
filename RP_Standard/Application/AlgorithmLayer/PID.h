@@ -4,7 +4,7 @@
 
 
 //Plc-Inc
-#define SPEED_KP 15.0f
+#define SPEED_KP 13.0f
 #define SPEED_KI 0.5f
 #define SPEED_KD 0.5f
 

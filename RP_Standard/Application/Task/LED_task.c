@@ -6,6 +6,7 @@ void LED_Flash(void);
 
 void Start_LED_task(void const * argument)
 {
+	LED_GREEN_OFF();
 	for(;;)
 	{
 		LED_Flash();
