@@ -122,11 +122,11 @@ void MX_FREERTOS_Init(void) {
   Imu_taskHandle = osThreadCreate(osThread(Imu_task), NULL);
 
   /* definition and creation of LED_task */
-  osThreadDef(LED_task, Start_LED_task, osPriorityBelowNormal, 0, 128);
+  osThreadDef(LED_task, Start_LED_task, osPriorityRealtime, 0, 128);
   LED_taskHandle = osThreadCreate(osThread(LED_task), NULL);
 
   /* definition and creation of CAN_task */
-  osThreadDef(CAN_task, Start_CAN_task, osPriorityHigh, 0, 128);
+  osThreadDef(CAN_task, Start_CAN_task, osPriorityBelowNormal, 0, 128);
   CAN_taskHandle = osThreadCreate(osThread(CAN_task), NULL);
 
   /* definition and creation of Monitor_task */
@@ -134,11 +134,11 @@ void MX_FREERTOS_Init(void) {
   Monitor_taskHandle = osThreadCreate(osThread(Monitor_task), NULL);
 
   /* definition and creation of System_task */
-  osThreadDef(System_task, Start_System_task, osPriorityNormal, 0, 128);
+  osThreadDef(System_task, Start_System_task, osPriorityHigh, 0, 128);
   System_taskHandle = osThreadCreate(osThread(System_task), NULL);
 
   /* definition and creation of Chassis_task */
-  osThreadDef(Chassis_task, Start_Chassis_task, osPriorityNormal, 0, 128);
+  osThreadDef(Chassis_task, Start_Chassis_task, osPriorityHigh, 0, 128);
   Chassis_taskHandle = osThreadCreate(osThread(Chassis_task), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */

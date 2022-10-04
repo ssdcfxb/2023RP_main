@@ -32,9 +32,15 @@ void CAN1_Get_Data(uint32_t identifier, uint8_t *data)
 		}
 		case GM6020_CAN_ID_205:
 		{
-			motor_6020.update(&motor_6020, data);
-	    motor_6020.check(&motor_6020);
+			yaw_motor.update(&yaw_motor, data);
+	    yaw_motor.check(&yaw_motor);
 		  break;
+		}
+		case GM6020_CAN_ID_206:
+		{
+			pitch_motor.update(&pitch_motor, data);
+			pitch_motor.check(&pitch_motor);
+			break;
 		}
 		default :
 		{

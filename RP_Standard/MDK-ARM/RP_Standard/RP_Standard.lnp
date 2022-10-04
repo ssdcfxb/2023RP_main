@@ -10,6 +10,7 @@
 "rp_standard\can_task.o"
 "rp_standard\imu_task.o"
 "rp_standard\chassis.o"
+"rp_standard\gimbal.o"
 "rp_standard\imu_protocol.o"
 "rp_standard\can_protocol.o"
 "rp_standard\rc_protocol.o"

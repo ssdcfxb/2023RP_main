@@ -16,6 +16,7 @@ typedef struct __motor_3508_info_t
     volatile int16_t  delta_ecd;
     volatile int32_t  total_ecd;
 		volatile float    angle;
+  	volatile float    total_angle;
 	  volatile uint8_t  offline_cnt;
 	  const    uint8_t	offline_max_cnt;
 } motor_3508_info_t;

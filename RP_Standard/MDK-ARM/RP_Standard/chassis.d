@@ -74,6 +74,7 @@ rp_standard\chassis.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Incl
 rp_standard\chassis.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\dsp/quaternion_math_functions.h
 rp_standard\chassis.o: ../Application/DriverLayer/drv_io.h
 rp_standard\chassis.o: ../Core/Inc/main.h
+rp_standard\chassis.o: ../Application/AlgorithmLayer/pid_conf.h
 rp_standard\chassis.o: ../Application/DriverLayer/driver.h
 rp_standard\chassis.o: ../Application/DriverLayer/drv_haltick.h
 rp_standard\chassis.o: ../Application/DriverLayer/drv_can.h

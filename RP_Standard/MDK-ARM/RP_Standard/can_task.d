@@ -96,4 +96,5 @@ rp_standard\can_task.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\can_task.o: ../Application/DriverLayer/drv_uart.h
 rp_standard\can_task.o: ../Application/ProtocolLayer/rc_protocol.h
 rp_standard\can_task.o: ../Application/AlgorithmLayer/pid.h
+rp_standard\can_task.o: ../Application/AlgorithmLayer/pid_conf.h
 rp_standard\can_task.o: ../Application/DeviceLayer/Motor/motor_6020.h

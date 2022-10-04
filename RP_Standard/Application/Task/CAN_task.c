@@ -7,8 +7,8 @@
 void Start_CAN_task(void const * argument)
 {
 	CAN_Filter_Init();
-	chassis_motor[CHAS_LF].init(&chassis_motor[CHAS_LF]);
-	motor_6020.init(&motor_6020);
+//	chassis_motor[CHAS_LF].init(&chassis_motor[CHAS_LF]);
+//	motor_6020.init(&motor_6020);
 	
 	for(;;)
 	{
@@ -32,9 +32,17 @@ void Start_CAN_task(void const * argument)
 ////			CAN_Tx_Cmd(&hcan1, GM6020_GetTxId(motor_6020.driver), speed, 0, 0, 0);
 //		}
 		
-		CAN_SendData(&hcan1, 0x200, can1_tx_buf);
+		if (rc_sensor.work_state == DEV_OFFLINE)
+		{
+			memset(can1_tx_buf, 0, 16);
+		}
 		
-		osDelay(1);
+		CAN_SendData(&hcan1, 0x200, can1_tx_buf);
+		CAN_SendData(&hcan1, 0x1FF, &can1_tx_buf[8]);
+		
+	  memset(can1_tx_buf, 0, 16);
+	
+		osDelay(2);
 	}
 	
 }

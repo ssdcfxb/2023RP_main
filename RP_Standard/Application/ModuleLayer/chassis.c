@@ -4,7 +4,7 @@
 drv_can_t				  *chas_drv[CHAS_MOTOR_CNT];
 motor_3508_t			*chas_motor[CHAS_MOTOR_CNT];
 motor_3508_info_t	*chas_motor_info[CHAS_MOTOR_CNT];
-uint16_t           out[CHAS_MOTOR_CNT];
+int16_t            out[CHAS_MOTOR_CNT];
 
 int16_t speed_out;
 float target;
@@ -75,9 +75,9 @@ void Chassis_Init(void)
 
 void Chassis_GetRcInfo(void)
 {
-	chassis.info->target_front_speed = (float)rc_sensor.info->ch1 * 8000.0f / 660.0f;
-	chassis.info->target_right_speed = (float)rc_sensor.info->ch0 * 8000.0f / 660.0f;
-	chassis.info->target_cycle_speed = (float)rc_sensor.info->ch2 * 8000.0f / 660.0f;
+	chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * 8000.0f / 660.0f;
+	chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * 8000.0f / 660.0f;
+	chassis.info->target_cycle_speed = (float)rc_sensor.info->ch0 * 8000.0f / 660.0f;
 }
 
 void Chassis_GetKeyInfo(void)
@@ -130,7 +130,7 @@ static void Chassis_Speed_PidCalc(chassis_dev_t *chas_dev, chassis_motor_cnt_t M
 }
 
 // 添加底盘电机输出至发送缓存
-static void Chassis_PidOut(chassis_dev_t *chas_dev)
+static void Chassis_SendPidOut(chassis_dev_t *chas_dev)
 {
 	for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++) 
 	{
@@ -158,7 +158,7 @@ void Chassis_PidCtrl(void)
 	speed_out = out[CHAS_LF];
 	
 	// 添加底盘电机输出至发送缓存
-	Chassis_PidOut(&chas_dev);
+	Chassis_SendPidOut(&chas_dev);
 }
 
 void Chassis_RcCtrl(void)

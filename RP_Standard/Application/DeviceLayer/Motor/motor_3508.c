@@ -43,50 +43,74 @@ motor_3508_info_t motor_info[] = {
 // µ×ÅÌµç»úPID(Plc-Inc)
 pid_t pid[] = {
 	[CHAS_LF] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.I_Kp = M3508_INC_SP_KP,
+		.speed.I_Ki = M3508_INC_SP_KI,
+		.speed.I_Kd = M3508_INC_SP_KD,
+		.speed.Kp = M3508_SP_KP,
+		.speed.Ki = M3508_SP_KI,
+		.speed.Kd = M3508_SP_KD,
+		.speed.max_iout = SP_MAX_INC_OUT,
 		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
+		.angle.I_Kp = M3508_INC_AG_KP,
+		.angle.I_Ki = M3508_INC_AG_KI,
+		.angle.I_Kd = M3508_INC_AG_KD,
+		.angle.Kp = M3508_AG_KP,
+		.angle.Ki = M3508_AG_KI,
+		.angle.Kd = M3508_AG_KD,
 		.angle.max_integral = AG_MAX_INTEGRAL,
 		.angle.max_out = AG_MAX_OUT,
 	},
 	[CHAS_RF] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.I_Kp = M3508_INC_SP_KP,
+		.speed.I_Ki = M3508_INC_SP_KI,
+		.speed.I_Kd = M3508_INC_SP_KD,
+		.speed.Kp = M3508_SP_KP,
+		.speed.Ki = M3508_SP_KI,
+		.speed.Kd = M3508_SP_KD,
+		.speed.max_iout = SP_MAX_INC_OUT,
 		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
+		.angle.I_Kp = M3508_INC_AG_KP,
+		.angle.I_Ki = M3508_INC_AG_KI,
+		.angle.I_Kd = M3508_INC_AG_KD,
+		.angle.Kp = M3508_AG_KP,
+		.angle.Ki = M3508_AG_KI,
+		.angle.Kd = M3508_AG_KD,
 		.angle.max_integral = AG_MAX_INTEGRAL,
 		.angle.max_out = AG_MAX_OUT,
 	},
 	[CHAS_LB] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.I_Kp = M3508_INC_SP_KP,
+		.speed.I_Ki = M3508_INC_SP_KI,
+		.speed.I_Kd = M3508_INC_SP_KD,
+		.speed.Kp = M3508_SP_KP,
+		.speed.Ki = M3508_SP_KI,
+		.speed.Kd = M3508_SP_KD,
+		.speed.max_iout = SP_MAX_INC_OUT,
 		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
+		.angle.I_Kp = M3508_INC_AG_KP,
+		.angle.I_Ki = M3508_INC_AG_KI,
+		.angle.I_Kd = M3508_INC_AG_KD,
+		.angle.Kp = M3508_AG_KP,
+		.angle.Ki = M3508_AG_KI,
+		.angle.Kd = M3508_AG_KD,
 		.angle.max_integral = AG_MAX_INTEGRAL,
 		.angle.max_out = AG_MAX_OUT,
 	},
 	[CHAS_RB] = {
-		.speed.Kp = SPEED_KP,
-		.speed.Ki = SPEED_KI,
-		.speed.Kd = SPEED_KD,
-		.speed.max_iout = SP_MAX_I_OUT,
+		.speed.I_Kp = M3508_INC_SP_KP,
+		.speed.I_Ki = M3508_INC_SP_KI,
+		.speed.I_Kd = M3508_INC_SP_KD,
+		.speed.Kp = M3508_SP_KP,
+		.speed.Ki = M3508_SP_KI,
+		.speed.Kd = M3508_SP_KD,
+		.speed.max_iout = SP_MAX_INC_OUT,
 		.speed.max_out = SP_MAX_OUT,
-		.angle.Kp = ANGLE_KP,
-		.angle.Ki = ANGLE_KI,
-		.angle.Kd = ANGLE_KD,
+		.angle.I_Kp = M3508_INC_AG_KP,
+		.angle.I_Ki = M3508_INC_AG_KI,
+		.angle.I_Kd = M3508_INC_AG_KD,
+		.angle.Kp = M3508_AG_KP,
+		.angle.Ki = M3508_AG_KI,
+		.angle.Kd = M3508_AG_KD,
 		.angle.max_integral = AG_MAX_INTEGRAL,
 		.angle.max_out = AG_MAX_OUT,
 	},
@@ -150,7 +174,7 @@ static void Motor_Init(motor_3508_t *motor)
 		}
 		motor->info->angle = 0;
 		motor->info->total_ecd = 0;
-		motor->info->offline_cnt = 0;
+		motor->info->offline_cnt = 51;
 		motor->errno = NONE_ERR;
 		motor->work_state = DEV_OFFLINE;
 		
@@ -193,7 +217,8 @@ static void Check_Motor_Data(motor_3508_t *motor)
 	
 	  motor->info->last_ecd = motor->info->ecd;
 		motor->info->total_ecd += motor->info->delta_ecd;
-		motor->info->angle = motor->info->total_ecd * M3508_ECD_TO_ANGLE;
+		motor->info->angle = motor->info->ecd * M3508_ECD_TO_ANGLE;
+		motor->info->total_angle = motor->info->total_ecd * M3508_ECD_TO_ANGLE;
 		
 		motor->info->offline_cnt = 0;
 }

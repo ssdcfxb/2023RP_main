@@ -11,7 +11,8 @@ void Start_Monitor_task(void const * argument)
 		{
 			chassis_motor[i].heart_beat(&chassis_motor[i]);
 		}
-		motor_6020.heart_beat(&motor_6020);
+		yaw_motor.heart_beat(&yaw_motor);
+		pitch_motor.heart_beat(&pitch_motor);
 		osDelay(1);
 	}
 	

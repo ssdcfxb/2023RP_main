@@ -93,4 +93,5 @@ rp_standard\drv_can.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Incl
 rp_standard\drv_can.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\dsp/quaternion_math_functions.h
 rp_standard\drv_can.o: ../Application/DriverLayer/drv_io.h
 rp_standard\drv_can.o: ../Application/AlgorithmLayer/pid.h
+rp_standard\drv_can.o: ../Application/AlgorithmLayer/pid_conf.h
 rp_standard\drv_can.o: ../Application/DeviceLayer/Motor/motor_6020.h

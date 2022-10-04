@@ -28,7 +28,9 @@ typedef enum {
 	DEV_ID_CHASSIS_RF = 3,
 	DEV_ID_CHASSIS_LB = 4,
 	DEV_ID_CHASSIS_RB = 5,
-	DEV_ID_CNT = 6,
+	DEV_ID_GIMBAL_YAW = 6,
+	DEV_ID_GIMBAL_PITCH = 7,
+	DEV_ID_CNT = 8,
 } dev_id_t;
 
 /**

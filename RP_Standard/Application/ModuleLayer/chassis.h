@@ -15,6 +15,7 @@ typedef enum {
 	CHASSIS_MODE_BUFF   		= 1, // 打符模式
 	CHASSIS_MODE_RELOAD_BULLET	= 2, // 底盘低速补弹模式
 	CHASSIS_MODE_SZUPUP			= 3, // SZU爬坡模式
+	CHASSIS_MODE_FOLLOW     = 4, // 底盘跟随云台模式（未完成）
 } chassis_mode_t;
 
 typedef struct {

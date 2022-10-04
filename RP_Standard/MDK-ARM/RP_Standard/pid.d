@@ -61,3 +61,4 @@ rp_standard\pid.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\
 rp_standard\pid.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\dsp/quaternion_math_functions.h
 rp_standard\pid.o: ../Application/DriverLayer/drv_io.h
 rp_standard\pid.o: ../Core/Inc/main.h
+rp_standard\pid.o: ..\Application\AlgorithmLayer\pid_conf.h

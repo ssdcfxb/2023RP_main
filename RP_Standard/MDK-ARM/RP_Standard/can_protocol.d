@@ -72,6 +72,7 @@ rp_standard\can_protocol.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP
 rp_standard\can_protocol.o: D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\dsp/quaternion_math_functions.h
 rp_standard\can_protocol.o: ../Application/DriverLayer/drv_io.h
 rp_standard\can_protocol.o: ../Core/Inc/main.h
+rp_standard\can_protocol.o: ../Application/AlgorithmLayer/pid_conf.h
 rp_standard\can_protocol.o: ../Application/DriverLayer/driver.h
 rp_standard\can_protocol.o: ../Application/DriverLayer/drv_haltick.h
 rp_standard\can_protocol.o: ../Application/DriverLayer/drv_can.h

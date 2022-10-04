@@ -13,7 +13,8 @@ typedef struct __motor_6020_info_t
     volatile int16_t  last_ecd;
     volatile int16_t  delta_ecd;
     volatile int32_t  total_ecd;
-		volatile float    angle;
+		volatile float    angle; 
+  	volatile float    total_angle;
 	  volatile uint8_t  offline_cnt;
 	  const    uint8_t	offline_max_cnt;
 } motor_6020_info_t;
@@ -33,6 +34,7 @@ typedef struct __motor_6020_t
 	
 } motor_6020_t;
 
-extern motor_6020_t motor_6020;
+extern motor_6020_t yaw_motor;
+extern motor_6020_t pitch_motor;
 
 #endif

@@ -7,6 +7,7 @@
 #include "device.h"
 #include "driver.h"
 
+#include "gimbal.h"
 
 void Start_Chassis_task(void const * argument);
 
