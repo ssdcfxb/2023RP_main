@@ -3,7 +3,7 @@
 static void Motor_Init(motor_6020_t *motor);
 static void UpdateMotorData(motor_6020_t *motor, uint8_t* data);
 static void Check_Motor_Data(motor_6020_t *motor);
-static void Chassis_Motor_Heart_Beat(motor_6020_t *motor);
+static void Gimbal_Motor_Heart_Beat(motor_6020_t *motor);
 
 drv_can_t yaw_motor_driver = {
     .hcan = &hcan1,
@@ -40,11 +40,17 @@ pid_t pitch_pid = {
 	.speed.Kp = GM6020_SP_KP,
 	.speed.Ki = GM6020_SP_KI,
 	.speed.Kd = GM6020_SP_KD,
+	.speed.I_Kp = GM6020_INC_SP_KP,
+	.speed.I_Ki = GM6020_INC_SP_KI,
+	.speed.I_Kd = GM6020_INC_SP_KD,
 	.speed.max_iout = SP_MAX_INC_OUT,
 	.speed.max_out = SP_MAX_OUT,
 	.angle.Kp = GM6020_AG_KP,
 	.angle.Ki = GM6020_AG_KI,
 	.angle.Kd = GM6020_AG_KD,
+//	.angle.I_Kp = GM6020_AG_KP,
+//	.angle.I_Ki = GM6020_AG_KI,
+//	.angle.I_Kd = GM6020_AG_KD,
 	.angle.max_integral = AG_MAX_INTEGRAL,
 	.angle.max_out = AG_MAX_OUT,
 	.angle.max_iout = AG_MAX_INC_OUT,
@@ -57,7 +63,7 @@ motor_6020_t yaw_motor = {
     .init = Motor_Init,
   	.update = UpdateMotorData,
   	.check = Check_Motor_Data,
-	  .heart_beat = Chassis_Motor_Heart_Beat,
+	  .heart_beat = Gimbal_Motor_Heart_Beat,
   	.work_state = DEV_OFFLINE,
 	  .id = DEV_ID_GIMBAL_YAW,
 };
@@ -69,7 +75,7 @@ motor_6020_t pitch_motor = {
     .init = Motor_Init,
   	.update = UpdateMotorData,
   	.check = Check_Motor_Data,
-	  .heart_beat = Chassis_Motor_Heart_Beat,
+	  .heart_beat = Gimbal_Motor_Heart_Beat,
   	.work_state = DEV_OFFLINE,
 	  .id = DEV_ID_GIMBAL_PITCH,
 };
@@ -130,7 +136,7 @@ static void Check_Motor_Data(motor_6020_t *motor)
 		motor->info->offline_cnt = 0;
 }
 
-static void Chassis_Motor_Heart_Beat(motor_6020_t *motor)
+static void Gimbal_Motor_Heart_Beat(motor_6020_t *motor)
 {
 	if (motor->info == NULL || motor == NULL)
 	{

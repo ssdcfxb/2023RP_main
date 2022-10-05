@@ -26,12 +26,19 @@
 
 
 // GM6020电机PID参数
-#define GM6020_SP_KP 30.0f
+#define GM6020_SP_KP 0.0f//30.0f
 #define GM6020_SP_KI 0.0f
-#define GM6020_SP_KD 8.0f
-#define GM6020_AG_KP 30.0f
+#define GM6020_SP_KD 0.0f//8.0f
+#define GM6020_AG_KP 0.0f//30.0f
 #define GM6020_AG_KI 0.0f
-#define GM6020_AG_KD 8.0f
+#define GM6020_AG_KD 0.0f//8.0f
+// Plc-Inc
+#define GM6020_INC_SP_KP 0.0f//8.0f
+#define GM6020_INC_SP_KI 0.0f//2.2f
+#define GM6020_INC_SP_KD 0.0f//0.5f
+#define GM6020_INC_AG_KP 0.0f//1.0f
+#define GM6020_INC_AG_KI 0.0f
+#define GM6020_INC_AG_KD 0.0f//2.0f
 
 
 

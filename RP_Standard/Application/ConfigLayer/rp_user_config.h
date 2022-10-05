@@ -58,12 +58,22 @@ typedef enum {
 	SYS_MODE_CNT,
 } sys_mode_t;
 
-//typedef struct {
-//	struct {
-//		uint8_t reset_start;
-//		uint8_t reset_ok;
-//	}gimbal;
-//} flag_t;
+typedef struct {
+	uint8_t stop_start;
+	uint8_t stop_ok;
+	uint8_t stop_band;
+} chassis_flag_t;
+
+typedef struct {
+	uint8_t reset_start;
+	uint8_t reset_ok;
+} gimbal_flag_t;
+
+typedef struct __flag
+{
+	gimbal_flag_t   gimbal_flag;
+	chassis_flag_t  chassis_flag;
+} flag_t;
 
 typedef struct {
 	remote_mode_t		remote_mode;	// 控制方式
@@ -71,7 +81,7 @@ typedef struct {
 	sys_mode_t			mode;			// 系统模式
 } system_t;
 
-//extern flag_t	flag;
+extern flag_t	flag;
 extern system_t sys;
 
 #endif

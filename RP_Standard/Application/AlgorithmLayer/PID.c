@@ -55,14 +55,14 @@ float PID_Inc_Calc(pid_type_t *pid, float fdb, float set)
 		//output = kp * DError + ki * Error + kd * DDError
 		
 		//pid->Pout = pid->Kp * pid->Dbuf[0];
-		arm_mult_f32(&pid->Kp, &pid->Dbuf[0], &pid->Pout, 1);
+		arm_mult_f32(&pid->I_Kp, &pid->Dbuf[0], &pid->Pout, 1);
 		
 		//pid->Iout = pid->Ki * pid->error[0];
-		arm_mult_f32(&pid->Ki, &pid->error[0], &pid->Iout, 1);
+		arm_mult_f32(&pid->I_Ki, &pid->error[0], &pid->Iout, 1);
 		LimitMax(pid->Iout, pid->max_iout);
 		
 		//pid->Dout = pid->Kd * pid->Dbuf[1];
-		arm_mult_f32(&pid->Kd, &pid->Dbuf[1], &pid->Dout, 1);
+		arm_mult_f32(&pid->I_Kd, &pid->Dbuf[1], &pid->Dout, 1);
 		
 		//pid->out += pid->Pout + pid->Iout + pid->Dout;
 		arm_add_f32(&pid->Pout, &pid->Iout, &PIout, 1);
@@ -71,6 +71,8 @@ float PID_Inc_Calc(pid_type_t *pid, float fdb, float set)
 		
 		LimitMax(pid->out, pid->max_out);
     
+		pid->last_out = pid->out;
+		
     return pid->out;
 }
 
@@ -118,6 +120,8 @@ float PID_Plc_Calc(pid_type_t *pid, float fdb, float set)
 		
 		LimitMax(pid->out, pid->max_out);
     
+		pid->last_out = pid->out;
+		
     return pid->out;
 }
 

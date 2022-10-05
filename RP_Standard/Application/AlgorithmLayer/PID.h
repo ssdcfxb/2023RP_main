@@ -21,6 +21,7 @@ typedef struct __pid_type_t
     float fdb;
 
     float out;
+	  float last_out;
     float Pout;
     float Iout;
     float Dout;

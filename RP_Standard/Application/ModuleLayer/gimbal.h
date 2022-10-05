@@ -49,7 +49,8 @@ typedef struct
 	float    target_yaw_imu_angle;
 	int16_t  target_yaw_motor_angle;
 	float    target_pitch_imu_angle;
-	int16_t  target_pitch_motor_angle;
+	float    target_pitch_motor_angle;
+	float    target_pitch_motor_deltaangle;
 } gimbal_info_t;
 
 typedef struct 

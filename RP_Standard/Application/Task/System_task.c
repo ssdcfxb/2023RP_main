@@ -6,6 +6,14 @@ system_t sys = {
 	.mode = SYS_MODE_NORMAL,
 };
 
+flag_t flag = {
+	.gimbal_flag.reset_start = 1,
+	.gimbal_flag.reset_ok = 0,
+	.chassis_flag.stop_start = 0,
+	.chassis_flag.stop_ok = 0,
+	.chassis_flag.stop_band = 50,
+};
+
 void Start_System_task(void const * argument)
 {
 	for(;;)
