@@ -85,11 +85,16 @@ static void rc_sensor_heart_beat(rc_sensor_t *rc_sen)
 	if(rc_info->offline_cnt > rc_info->offline_max_cnt) {
 		rc_info->offline_cnt = rc_info->offline_max_cnt;
 		rc_sen->work_state = DEV_OFFLINE;
+		flag.chassis_flag.stop_start = 1;
 	} 
 	else {
 		/* ÀëÏß->ÔÚÏß */
 		if(rc_sen->work_state == DEV_OFFLINE)
+		{
 			rc_sen->work_state = DEV_ONLINE;
+			flag.chassis_flag.stop_start = 0;
+			flag.chassis_flag.stop_ok = 0;
+		}
 	}
 }
 

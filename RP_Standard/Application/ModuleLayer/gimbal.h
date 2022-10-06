@@ -19,7 +19,7 @@ typedef enum
 // ÔÆÌ¨pitchÖáÄ£Ê½Ã¶¾Ù
 typedef enum
 {
-	G_P_follow,    // ¸úËæµ×ÅÌ
+//	G_P_follow,    // ¸úËæµ×ÅÌ
 	G_P_gyro,      // ÍÓÂÝÒÇ
 	G_P_machine,   // »úÐµ
 	G_P_keep,      // ±£³Ö
@@ -48,15 +48,27 @@ typedef struct
 	int16_t  measure_pitch_motor_angle;
 	float    target_yaw_imu_angle;
 	int16_t  target_yaw_motor_angle;
+	int16_t  target_yaw_motor_deltaangle;
 	float    target_pitch_imu_angle;
-	float    target_pitch_motor_angle;
-	float    target_pitch_motor_deltaangle;
+	int16_t  target_pitch_motor_angle;
+	int16_t  target_pitch_motor_deltaangle;
 } gimbal_info_t;
+
+typedef struct
+{
+	int16_t  restart_yaw_motor_angle;
+	float    restart_yaw_imu_angle;
+	int16_t  restart_pitch_motor_angle;
+	float    restart_pitch_imu_angle;
+	int16_t  max_pitch_motor_angle; // ¸©
+	int16_t  min_pitch_motor_angle; // Ñö
+} gimbal_conf_t;
 
 typedef struct 
 {
 	gimbal_dev_t    *dev;
 	gimbal_info_t   *info;
+	gimbal_conf_t   *conf;
 	void			(*init)(void);
 	void			(*update)(void);
 	void			(*ctrl)(void);

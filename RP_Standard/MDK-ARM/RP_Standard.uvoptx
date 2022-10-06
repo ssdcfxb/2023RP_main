@@ -159,7 +159,7 @@
           <Type>0</Type>
           <LineNumber>6</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134240938</Address>
+          <Address>134241354</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -169,6 +169,54 @@
           <Filename>..\Application\Task\Chassis_task.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\RP_Standard\../Application/Task/Chassis_task.c\6</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>18</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134241278</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Application\Task\CAN_task.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RP_Standard\../Application/Task/CAN_task.c\18</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>130</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134224140</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\Application\ModuleLayer\chassis.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\RP_Standard\../Application/ModuleLayer/chassis.c\130</Expression>
+        </Bp>
+        <Bp>
+          <Number>3</Number>
+          <Type>0</Type>
+          <LineNumber>116</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>0</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>0</BreakIfRCount>
+          <Filename>..\Application\ModuleLayer\chassis.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -185,47 +233,82 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>i,0x0A</ItemText>
+          <ItemText>gimbal,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>pitch_motor</ItemText>
+          <ItemText>round,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>gimbal,0x0A</ItemText>
+          <ItemText>gim_out,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>round,0x0A</ItemText>
+          <ItemText>set,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>gim_out,0x0A</ItemText>
+          <ItemText>tx_data,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>set,0x0A</ItemText>
+          <ItemText>deadare,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>tx_data,0x0A</ItemText>
+          <ItemText>imu_sensor,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>deadare</ItemText>
+          <ItemText>flag,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>imu_sensor,0x0A</ItemText>
+          <ItemText>yaw_motor,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>pitch_motor,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>12</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>time,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>13</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>now,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>14</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>stop_init,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>15</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>stop_angle</ItemText>
+        </Ww>
+        <Ww>
+          <count>16</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>out,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>17</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>can1_tx_buf,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -257,7 +340,7 @@
         <Ww>
           <count>5</count>
           <WinNumber>2</WinNumber>
-          <ItemText>yaw_motor</ItemText>
+          <ItemText>yaw_motor,0x0A</ItemText>
         </Ww>
       </WatchWindow2>
       <Tracepoint>
@@ -266,7 +349,7 @@
       <DebugFlag>
         <trace>0</trace>
         <periodic>1</periodic>
-        <aLwin>0</aLwin>
+        <aLwin>1</aLwin>
         <aCover>0</aCover>
         <aSer1>0</aSer1>
         <aSer2>0</aSer2>

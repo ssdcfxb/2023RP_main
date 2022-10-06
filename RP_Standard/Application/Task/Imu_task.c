@@ -7,9 +7,7 @@ void Start_imu_task(void const * argument)
 	
 	for(;;)
 	{
-		  taskENTER_CRITICAL();
-		imu_sensor.update(&imu_sensor);
-      taskEXIT_CRITICAL();
+		  
 		osDelay(1);
 	}
 	

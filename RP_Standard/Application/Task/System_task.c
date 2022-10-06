@@ -11,17 +11,34 @@ flag_t flag = {
 	.gimbal_flag.reset_ok = 0,
 	.chassis_flag.stop_start = 0,
 	.chassis_flag.stop_ok = 0,
-	.chassis_flag.stop_band = 50,
 };
+
+void rc_update_info(void)
+{
+	if(sys.state != SYS_STATE_NORMAL) {
+			
+	}
+	else {
+		if (rc_sensor.info->s1 == 3 && rc_sensor.info->s2 == 3)
+		{
+			gimbal.info->yaw_mode = G_Y_follow;
+		}
+		else 
+		{
+			gimbal.info->yaw_mode = G_Y_keep;
+		}
+	}
+}
 
 void Start_System_task(void const * argument)
 {
 	for(;;)
 	{
 		portENTER_CRITICAL();
-		
+		// 更新陀螺仪数据
+		imu_sensor.update(&imu_sensor);
 		// 更新遥控信息
-		//rc_update_info();
+		rc_update_info();
 		
 		/* 遥控离线 */
 		if(rc_sensor.work_state == DEV_OFFLINE) 

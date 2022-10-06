@@ -13,7 +13,7 @@ void Start_CAN_task(void const * argument)
 	{
 		memcpy(tx_data, can1_tx_buf, 16);
 		
-		if (rc_sensor.work_state == DEV_OFFLINE)
+		if (rc_sensor.work_state == DEV_OFFLINE && flag.chassis_flag.stop_ok == 1)
 		{
 			memset(tx_data, 0, 16);
 		}

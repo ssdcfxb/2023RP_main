@@ -86,66 +86,91 @@ void Chassis_GetKeyInfo(void)
 
 void Chassis_GetInfo(void)
 {
-	if(chas_info.remote_mode == RC) {
-		Chassis_GetRcInfo();
-	}
-	else if(chas_info.remote_mode == KEY) {
-		Chassis_GetKeyInfo();
-	}
-}
-
-//// 底盘电机角度环（用于卸力）
-//void Gimbal_Yaw_Angle_PidCalc(chassis_dev_t *chas_dev, chassis_motor_cnt_t MOTORx)
-//{
-//	chas_motor[MOTORx]->pid->angle_out = PID_Plc_Calc(&chas_motor[MOTORx]->pid->angle,
-//                                                  chas_motor[MOTORx]->info->total_angle,  //measure
-//                                                  chas_motor[MOTORx]->info->total_angle); //target
-//	
-//	chas_motor[MOTORx]->pid->speed_out = PID_Inc_Calc(&chas_motor[MOTORx]->pid->speed, 
-//	                                                chas_motor[MOTORx]->info->speed_rpm, //measure
-//                                                  chas_motor[MOTORx]->pid->angle_out); //target
-//	
-//	out[MOTORx] = (int16_t)chas_motor[MOTORx]->pid->speed_out;
-//}
-
-// 底盘电机卸力
-static void Chassis_Stop(chassis_dev_t *chas_dev)
-{
-	if (flag.chassis_flag.stop_start == 1 && flag.chassis_flag.stop_ok == 0)
+	if (flag.gimbal_flag.reset_ok == 0)
 	{
-		for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
+		if (rc_sensor.info->ch0 == 0 \
+			&& rc_sensor.info->ch1 == 0 \
+			&& rc_sensor.info->ch2 == 0 \
+			&& rc_sensor.info->ch3 == 0 \
+		  && flag.gimbal_flag.reset_start == 0)
 		{
-			if (chas_motor[i]->info->speed_rpm > flag.chassis_flag.stop_band
-				|| chas_motor[i]->info->speed_rpm < -flag.chassis_flag.stop_band)
-			{
-				chas_motor[i]->pid->speed.set = 0.0f;
-				chas_motor[i]->pid->speed_out = PID_Inc_Calc(&chas_motor[i]->pid->speed, 
-																										chas_motor[i]->info->speed_rpm, //measure
-																										chas_motor[i]->pid->speed.set); //target
-				out[i] = (int16_t)chas_motor[i]->pid->speed_out;
-			}
-			else
-			{
-				flag.chassis_flag.stop_ok = 1;
-			}
+			flag.gimbal_flag.reset_ok = 1;
 		}
 	}
 	else
 	{
-		for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
-		{
-			chas_motor[i]->pid->speed_out = 0.0f;
-			out[i] = (int16_t)chas_motor[i]->pid->speed_out;
+		if(chas_info.remote_mode == RC) {
+			Chassis_GetRcInfo();
 		}
-		can1_tx_buf[(chas_drv[CHAS_LF]->rx_id - 0x201) * 2] = (out[CHAS_LF] >> 8) & 0xFF;
-		can1_tx_buf[(chas_drv[CHAS_LF]->rx_id - 0x201) * 2 + 1] = (out[CHAS_LF] & 0xFF);
-		can1_tx_buf[(chas_drv[CHAS_RF]->rx_id - 0x201) * 2] = (out[CHAS_RF] >> 8) & 0xFF;
-		can1_tx_buf[(chas_drv[CHAS_RF]->rx_id - 0x201) * 2 + 1] = (out[CHAS_RF] & 0xFF);
-		can1_tx_buf[(chas_drv[CHAS_LB]->rx_id - 0x201) * 2] = (out[CHAS_LB] >> 8) & 0xFF;
-		can1_tx_buf[(chas_drv[CHAS_LB]->rx_id - 0x201) * 2 + 1] = (out[CHAS_LB] & 0xFF);
-		can1_tx_buf[(chas_drv[CHAS_RB]->rx_id - 0x201) * 2] = (out[CHAS_RB] >> 8) & 0xFF;
-		can1_tx_buf[(chas_drv[CHAS_RB]->rx_id - 0x201) * 2 + 1] = (out[CHAS_RB] & 0xFF);
+		else if(chas_info.remote_mode == KEY) {
+			Chassis_GetKeyInfo();
+		}
 	}
+}
+
+// 底盘电机卸力
+static void Chassis_Stop(chassis_dev_t *chas_dev)
+{
+	  static uint32_t time = 0, now = 0, stop_init = 0;
+	  static float stop_angle[4];
+		if (flag.chassis_flag.stop_start == 1 && flag.chassis_flag.stop_ok == 0)
+		{
+			  if (stop_init == 0)
+				{
+					for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
+					{
+					stop_angle[i] = chas_motor[i]->info->total_angle;
+					}
+					time = micros();
+					stop_init = 1;
+				}
+				
+				now = micros();
+				if (now - time > 2000000)
+				{
+					flag.chassis_flag.stop_start = 0;
+					flag.chassis_flag.stop_ok = 1;
+					stop_init = 0;
+					now = 0;
+					time = 0;
+				}
+				
+				for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
+				{
+						chas_motor[i]->pid->angle.set = stop_angle[i];
+					  chas_motor[i]->pid->speed.set = PID_Plc_Calc(&chas_motor[i]->pid->angle, 
+																												chas_motor[i]->info->total_angle, //measure
+																												chas_motor[i]->pid->angle.set); //target
+						chas_motor[i]->pid->speed_out = PID_Inc_Calc(&chas_motor[i]->pid->speed, 
+																												chas_motor[i]->info->speed_rpm, //measure
+																												chas_motor[i]->pid->speed.set); //target
+						out[i] = (int16_t)chas_motor[i]->pid->speed_out;
+				}
+				can1_tx_buf[(chas_drv[CHAS_LF]->rx_id - 0x201) * 2] = (out[CHAS_LF] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_LF]->rx_id - 0x201) * 2 + 1] = (out[CHAS_LF] & 0xFF);
+				can1_tx_buf[(chas_drv[CHAS_RF]->rx_id - 0x201) * 2] = (out[CHAS_RF] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_RF]->rx_id - 0x201) * 2 + 1] = (out[CHAS_RF] & 0xFF);
+				can1_tx_buf[(chas_drv[CHAS_LB]->rx_id - 0x201) * 2] = (out[CHAS_LB] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_LB]->rx_id - 0x201) * 2 + 1] = (out[CHAS_LB] & 0xFF);
+				can1_tx_buf[(chas_drv[CHAS_RB]->rx_id - 0x201) * 2] = (out[CHAS_RB] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_RB]->rx_id - 0x201) * 2 + 1] = (out[CHAS_RB] & 0xFF);
+		}
+		else
+		{
+				for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
+				{
+						chas_motor[i]->pid->speed_out = 0.0f;
+						out[i] = (int16_t)chas_motor[i]->pid->speed_out;
+				}
+				can1_tx_buf[(chas_drv[CHAS_LF]->rx_id - 0x201) * 2] = (out[CHAS_LF] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_LF]->rx_id - 0x201) * 2 + 1] = (out[CHAS_LF] & 0xFF);
+				can1_tx_buf[(chas_drv[CHAS_RF]->rx_id - 0x201) * 2] = (out[CHAS_RF] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_RF]->rx_id - 0x201) * 2 + 1] = (out[CHAS_RF] & 0xFF);
+				can1_tx_buf[(chas_drv[CHAS_LB]->rx_id - 0x201) * 2] = (out[CHAS_LB] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_LB]->rx_id - 0x201) * 2 + 1] = (out[CHAS_LB] & 0xFF);
+				can1_tx_buf[(chas_drv[CHAS_RB]->rx_id - 0x201) * 2] = (out[CHAS_RB] >> 8) & 0xFF;
+				can1_tx_buf[(chas_drv[CHAS_RB]->rx_id - 0x201) * 2 + 1] = (out[CHAS_RB] & 0xFF);
+		}
 }
 
 void Chassis_SelfProtect(void)

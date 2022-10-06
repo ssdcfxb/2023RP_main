@@ -5,6 +5,8 @@
 #include "main.h"
 #include "device.h"
 #include "driver.h"
+#include "chassis.h"
+#include "gimbal.h"
 
 
 void Start_System_task(void const * argument);
