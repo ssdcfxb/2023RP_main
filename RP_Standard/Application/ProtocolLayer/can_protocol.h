@@ -9,5 +9,6 @@
 
 void CAN1_Get_Data(uint32_t identifier, uint8_t *data); //CAN1接收函数
 void CAN2_Get_Data(uint32_t identifier, uint8_t *data); //CAN2接收函数
+void CAN_Send_All(void);
 
 #endif

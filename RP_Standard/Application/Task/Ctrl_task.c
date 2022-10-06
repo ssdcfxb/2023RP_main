@@ -1,6 +1,6 @@
-#include "Chassis_task.h"
+#include "Ctrl_task.h"
 
-void Start_Chassis_task(void const * argument)
+void Start_Ctrl_task(void const * argument)
 {
 	chassis.init();
 	gimbal.init();
@@ -17,6 +17,7 @@ void Start_Chassis_task(void const * argument)
 			gimbal.self_protect();
 		}
 		
+		CAN_Send_All();
 		osDelay(1);
 	}
 }

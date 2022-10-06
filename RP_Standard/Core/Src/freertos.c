@@ -48,12 +48,10 @@
 
 /* USER CODE END Variables */
 osThreadId defaultTaskHandle;
-osThreadId Imu_taskHandle;
 osThreadId LED_taskHandle;
-osThreadId CAN_taskHandle;
 osThreadId Monitor_taskHandle;
 osThreadId System_taskHandle;
-osThreadId Chassis_taskHandle;
+osThreadId Ctrl_taskHandle;
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -61,12 +59,10 @@ osThreadId Chassis_taskHandle;
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void const * argument);
-void Start_imu_task(void const * argument);
 void Start_LED_task(void const * argument);
-void Start_CAN_task(void const * argument);
 void Start_Monitor_task(void const * argument);
 void Start_System_task(void const * argument);
-void Start_Chassis_task(void const * argument);
+void Start_Ctrl_task(void const * argument);
 
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
@@ -117,29 +113,21 @@ void MX_FREERTOS_Init(void) {
   osThreadDef(defaultTask, StartDefaultTask, osPriorityIdle, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
 
-  /* definition and creation of Imu_task */
-  osThreadDef(Imu_task, Start_imu_task, osPriorityHigh, 0, 128);
-  Imu_taskHandle = osThreadCreate(osThread(Imu_task), NULL);
-
   /* definition and creation of LED_task */
   osThreadDef(LED_task, Start_LED_task, osPriorityRealtime, 0, 128);
   LED_taskHandle = osThreadCreate(osThread(LED_task), NULL);
-
-  /* definition and creation of CAN_task */
-  osThreadDef(CAN_task, Start_CAN_task, osPriorityBelowNormal, 0, 128);
-  CAN_taskHandle = osThreadCreate(osThread(CAN_task), NULL);
 
   /* definition and creation of Monitor_task */
   osThreadDef(Monitor_task, Start_Monitor_task, osPriorityAboveNormal, 0, 128);
   Monitor_taskHandle = osThreadCreate(osThread(Monitor_task), NULL);
 
   /* definition and creation of System_task */
-  osThreadDef(System_task, Start_System_task, osPriorityHigh, 0, 128);
+  osThreadDef(System_task, Start_System_task, osPriorityNormal, 0, 128);
   System_taskHandle = osThreadCreate(osThread(System_task), NULL);
 
-  /* definition and creation of Chassis_task */
-  osThreadDef(Chassis_task, Start_Chassis_task, osPriorityHigh, 0, 128);
-  Chassis_taskHandle = osThreadCreate(osThread(Chassis_task), NULL);
+  /* definition and creation of Ctrl_task */
+  osThreadDef(Ctrl_task, Start_Ctrl_task, osPriorityHigh, 0, 512);
+  Ctrl_taskHandle = osThreadCreate(osThread(Ctrl_task), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -165,24 +153,6 @@ void StartDefaultTask(void const * argument)
   /* USER CODE END StartDefaultTask */
 }
 
-/* USER CODE BEGIN Header_Start_imu_task */
-/**
-* @brief Function implementing the Imu_task thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Start_imu_task */
-__weak void Start_imu_task(void const * argument)
-{
-  /* USER CODE BEGIN Start_imu_task */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END Start_imu_task */
-}
-
 /* USER CODE BEGIN Header_Start_LED_task */
 /**
 * @brief Function implementing the LED_task thread.
@@ -199,24 +169,6 @@ __weak void Start_LED_task(void const * argument)
     osDelay(1);
   }
   /* USER CODE END Start_LED_task */
-}
-
-/* USER CODE BEGIN Header_Start_CAN_task */
-/**
-* @brief Function implementing the CAN_task thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Start_CAN_task */
-__weak void Start_CAN_task(void const * argument)
-{
-  /* USER CODE BEGIN Start_CAN_task */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END Start_CAN_task */
 }
 
 /* USER CODE BEGIN Header_Start_Monitor_task */
@@ -255,22 +207,22 @@ __weak void Start_System_task(void const * argument)
   /* USER CODE END Start_System_task */
 }
 
-/* USER CODE BEGIN Header_Start_Chassis_task */
+/* USER CODE BEGIN Header_Start_Ctrl_task */
 /**
-* @brief Function implementing the Chassis_task thread.
+* @brief Function implementing the Ctrl_task thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_Start_Chassis_task */
-__weak void Start_Chassis_task(void const * argument)
+/* USER CODE END Header_Start_Ctrl_task */
+__weak void Start_Ctrl_task(void const * argument)
 {
-  /* USER CODE BEGIN Start_Chassis_task */
+  /* USER CODE BEGIN Start_Ctrl_task */
   /* Infinite loop */
   for(;;)
   {
     osDelay(1);
   }
-  /* USER CODE END Start_Chassis_task */
+  /* USER CODE END Start_Ctrl_task */
 }
 
 /* Private application code --------------------------------------------------*/

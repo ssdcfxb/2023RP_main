@@ -22,6 +22,12 @@ void rc_update_info(void)
 		if (rc_sensor.info->s1 == 3 && rc_sensor.info->s2 == 3)
 		{
 			gimbal.info->yaw_mode = G_Y_follow;
+			gimbal.info->pitch_mode = G_P_machine;
+		}
+		else if (rc_sensor.info->s1 == 3 && rc_sensor.info->s2 == 2)
+		{
+			gimbal.info->yaw_mode = G_Y_gyro;
+			gimbal.info->pitch_mode = G_P_gyro;
 		}
 		else 
 		{
@@ -65,18 +71,6 @@ void Start_System_task(void const * argument)
 				// 可在此处等待云台复位后才允许切换状态
 //				system_state_machine();
 			}
-			/* 遥控错误 */
-//			else if(rc_sensor.errno == DEV_DATA_ERR) {
-//				sys.state = SYS_STATE_RCERR;
-//				//reset CPU
-//				__set_FAULTMASK(1);
-//				NVIC_SystemReset();
-//			} else {
-//				sys.state = SYS_STATE_WRONG;
-//				//reset CPU
-//				__set_FAULTMASK(1);
-//				NVIC_SystemReset();
-//			}
 		}
 		
 		portEXIT_CRITICAL();

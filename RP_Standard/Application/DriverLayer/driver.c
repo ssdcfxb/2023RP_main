@@ -25,6 +25,7 @@ void DRIVER_Init(void)
 	USART2_Init();
 	USART4_Init();
 	USART5_Init();
+	CAN_Filter_Init();
 //	CAN1_Init();
 //	CAN2_Init();	
 }

@@ -112,15 +112,10 @@ void Chassis_GetInfo(void)
 static void Chassis_Stop(chassis_dev_t *chas_dev)
 {
 	  static uint32_t time = 0, now = 0, stop_init = 0;
-	  static float stop_angle[4];
 		if (flag.chassis_flag.stop_start == 1 && flag.chassis_flag.stop_ok == 0)
 		{
 			  if (stop_init == 0)
 				{
-					for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
-					{
-					stop_angle[i] = chas_motor[i]->info->total_angle;
-					}
 					time = micros();
 					stop_init = 1;
 				}
@@ -137,11 +132,8 @@ static void Chassis_Stop(chassis_dev_t *chas_dev)
 				
 				for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
 				{
-						chas_motor[i]->pid->angle.set = stop_angle[i];
-					  chas_motor[i]->pid->speed.set = PID_Plc_Calc(&chas_motor[i]->pid->angle, 
-																												chas_motor[i]->info->total_angle, //measure
-																												chas_motor[i]->pid->angle.set); //target
-						chas_motor[i]->pid->speed_out = PID_Inc_Calc(&chas_motor[i]->pid->speed, 
+					  chas_motor[i]->pid->speed.set = 0.0f;
+						chas_motor[i]->pid->speed_out = PID_Plc_Calc(&chas_motor[i]->pid->speed, 
 																												chas_motor[i]->info->speed_rpm, //measure
 																												chas_motor[i]->pid->speed.set); //target
 						out[i] = (int16_t)chas_motor[i]->pid->speed_out;
@@ -183,7 +175,7 @@ void Chassis_SelfProtect(void)
 // 底盘电机速度环计算
 static void Chassis_Speed_PidCalc(chassis_dev_t *chas_dev, chassis_motor_cnt_t MOTORx)
 {
-		chas_motor[MOTORx]->pid->speed_out = PID_Inc_Calc(&chas_motor[MOTORx]->pid->speed, 
+		chas_motor[MOTORx]->pid->speed_out = PID_Plc_Calc(&chas_motor[MOTORx]->pid->speed, 
 	                                                chas_motor[MOTORx]->info->speed_rpm, //measure
                                                   chas_motor[MOTORx]->pid->speed.set); //target
 		out[MOTORx] = (int16_t)chas_motor[MOTORx]->pid->speed_out;

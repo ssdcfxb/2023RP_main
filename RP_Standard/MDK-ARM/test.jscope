@@ -11,7 +11,7 @@
             <DataFile Name="" />
             <RawFile Name="" />
             <Scope>
-                <Options TimeResolutionUs="1000000" />
+                <Options TimeResolutionUs="2000" />
             </Scope>
         </Configuration>
         <Windows>
@@ -20,10 +20,13 @@
         </Windows>
         <SelectedSymbols>
             <Symbol>
-                <Options Name="speed_out" Address="0x200001FC" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="-10000" YMaxSampled="10000" YAvgSampled="-46" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="400" IsAutoConfig="0" YResolution="500" MaxValue="10000" File="..\Application\DeviceLayer\Motor\motor_3508.c" Scope="0" DrawStyle="0" />
+                <Options Name="pitch" Address="0x200000F8" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="-2147483648" YMaxSampled="-2147483648" YAvgSampled="-2147483648" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="5" MaxValue="-2147483648" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
             </Symbol>
             <Symbol>
-                <Options Name="target" Address="0x20000014" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="-660" YMaxSampled="660" YAvgSampled="54" Offset="8" ShowInGraph="1" ACCoupling="0" YOffset="400" IsAutoConfig="1" YResolution="500" MaxValue="1685" File="..\Application\ModuleLayer\chassis.c" Scope="0" DrawStyle="0" />
+                <Options Name="roll" Address="0x20000100" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="-2147483648" YMaxSampled="-2147483648" YAvgSampled="-2147483648" Offset="8" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="5" MaxValue="-2147483648" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="yaw" Address="0x200000FC" Type="float" TypeID="1" Size="4" GraphColorRed="102" GraphColorGreen="102" GraphColorBlue="178" YMinSampled="0" YMaxSampled="16" YAvgSampled="9" Offset="12" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="5" MaxValue="-2147483648" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
             </Symbol>
         </SelectedSymbols>
     </Project>

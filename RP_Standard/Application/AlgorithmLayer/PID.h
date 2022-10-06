@@ -8,9 +8,6 @@ typedef struct __pid_type_t
     float Kp;
     float Ki;
     float Kd;
-    float I_Kp; // Inc
-    float I_Ki; // Inc
-    float I_Kd; // Inc
 	  float	integral;
 
 	  float max_integral;
