@@ -1,9 +1,9 @@
 #ifndef __PID_CONF_H
 #define __PID_CONF_H
 
-#define SP_MAX_OUT 10000.0f
-#define SP_MAX_INTEGRAL 3000.0f  //Plc
-#define SP_MAX_INC_OUT 3000.0f     //Inc
+#define SP_MAX_OUT 20000.0f
+#define SP_MAX_INTEGRAL 6000.0f  //Plc
+#define SP_MAX_INC_OUT 6000.0f     //Inc
 #define AG_MAX_OUT 10000.0f
 #define AG_MAX_INTEGRAL 3000.0f  //Plc
 #define AG_MAX_INC_OUT 10000.0f
@@ -42,19 +42,19 @@
 #define PITCH_MACHINE_AG_KD 0.0f//8.0f
 
 // gyroģʽ
-#define YAW_GYRO_SP_KP 0.0f//30.0f
-#define YAW_GYRO_SP_KI 0.0f
-#define YAW_GYRO_SP_KD 0.0f//8.0f
-#define YAW_GYRO_AG_KP 0.0f//30.0f
+#define YAW_GYRO_SP_KP 80.0f
+#define YAW_GYRO_SP_KI 1.0f
+#define YAW_GYRO_SP_KD 0.0f
+#define YAW_GYRO_AG_KP 200.0f
 #define YAW_GYRO_AG_KI 0.0f
-#define YAW_GYRO_AG_KD 0.0f//8.0f
+#define YAW_GYRO_AG_KD 0.0f
 
-#define PITCH_GYRO_SP_KP 0.0f//30.0f
-#define PITCH_GYRO_SP_KI 0.0f
-#define PITCH_GYRO_SP_KD 0.0f//8.0f
-#define PITCH_GYRO_AG_KP 0.0f//30.0f
+#define PITCH_GYRO_SP_KP 20.0f
+#define PITCH_GYRO_SP_KI 1.2f
+#define PITCH_GYRO_SP_KD 0.0f
+#define PITCH_GYRO_AG_KP 200.0f
 #define PITCH_GYRO_AG_KI 0.0f
-#define PITCH_GYRO_AG_KD 0.0f//8.0f
+#define PITCH_GYRO_AG_KD 0.0f
 
 
 #endif

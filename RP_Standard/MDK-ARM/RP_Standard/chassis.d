@@ -96,3 +96,4 @@ rp_standard\chassis.o: ../Application/ProtocolLayer/rm_protocol.h
 rp_standard\chassis.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\chassis.o: ../Application/DriverLayer/drv_uart.h
 rp_standard\chassis.o: ../Application/ProtocolLayer/rc_protocol.h
+rp_standard\chassis.o: ..\Application\ModuleLayer\gimbal.h

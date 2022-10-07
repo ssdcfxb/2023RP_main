@@ -7,6 +7,7 @@
 #include "motor_3508.h"
 #include "imu_sensor.h"
 #include "rc_sensor.h"
+#include "gimbal.h"
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
@@ -35,9 +36,15 @@ typedef struct {
 	int16_t measure_cycle_speed; //当前旋转速度
 }chassis_info_t;
 
+typedef struct {
+	float  limit_speed; // 最大转速
+	float  machine_round_kp; // 机械模式底盘跟随角速度系数
+} chassis_conf_t;
+
 typedef struct chassis{
 	chassis_dev_t 	*dev;
 	chassis_info_t	*info;
+	chassis_conf_t  *conf;
 	bool			test_open;
 	void			(*init)(void);
 	void			(*update)(void);

@@ -28,10 +28,14 @@ chassis_info_t 	chas_info = {
 	.remote_mode = RC,
 	.local_mode = CHASSIS_MODE_NORMAL,
 };
-
+chassis_conf_t chas_conf = {
+	.limit_speed = 8000.0f,
+	.machine_round_kp = 3.0f,
+};
 chassis_t chassis = {
 	.dev = &chas_dev,
 	.info = &chas_info,
+	.conf = &chas_conf,
 	.init = Chassis_Init,
 	.test = Chassis_Test,
 	.ctrl = Chassis_Ctrl,
@@ -74,9 +78,30 @@ void Chassis_Init(void)
 
 void Chassis_GetRcInfo(void)
 {
-	chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * 8000.0f / 660.0f;
-	chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * 8000.0f / 660.0f;
-	chassis.info->target_cycle_speed = (float)rc_sensor.info->ch0 * 8000.0f / 660.0f;
+	int16_t target_cycle_speed = 0;
+	if (gimbal.info->yaw_mode == G_Y_follow)
+	{
+		chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
+		chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
+		chassis.info->target_cycle_speed = (float)rc_sensor.info->ch0 * chas_conf.limit_speed / 660.0f;
+	}
+	else if (gimbal.info->yaw_mode == G_Y_gyro)
+	{
+		chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
+		chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
+		target_cycle_speed = gimbal.conf->restart_yaw_motor_angle - yaw_motor.info->ecd;
+		
+		if (target_cycle_speed > HALF_ECD_RANGE)
+		{
+			target_cycle_speed -= ECD_RANGE;
+		}
+		else if (target_cycle_speed < -HALF_ECD_RANGE)
+		{
+			target_cycle_speed += ECD_RANGE;
+		}
+		
+		chassis.info->target_cycle_speed = (float)target_cycle_speed * chas_conf.machine_round_kp;
+	}
 }
 
 void Chassis_GetKeyInfo(void)
@@ -86,19 +111,19 @@ void Chassis_GetKeyInfo(void)
 
 void Chassis_GetInfo(void)
 {
-	if (flag.gimbal_flag.reset_ok == 0)
+	if (flag.gimbal_flag.reset_ok == 1)
 	{
-		if (rc_sensor.info->ch0 == 0 \
-			&& rc_sensor.info->ch1 == 0 \
-			&& rc_sensor.info->ch2 == 0 \
-			&& rc_sensor.info->ch3 == 0 \
-		  && flag.gimbal_flag.reset_start == 0)
-		{
-			flag.gimbal_flag.reset_ok = 1;
-		}
-	}
-	else
-	{
+//		if (rc_sensor.info->ch0 == 0 \
+//			&& rc_sensor.info->ch1 == 0 \
+//			&& rc_sensor.info->ch2 == 0 \
+//			&& rc_sensor.info->ch3 == 0 \
+//		  && flag.gimbal_flag.reset_start == 0)
+//		{
+//			flag.gimbal_flag.reset_ok = 1;
+//		}
+//	}
+//	else
+//	{
 		if(chas_info.remote_mode == RC) {
 			Chassis_GetRcInfo();
 		}
@@ -213,7 +238,7 @@ void Chassis_PidCtrl(void)
 
 void Chassis_RcCtrl(void)
 {
-	int16_t front, right, round;
+	float front, right, round, sum;
 	
 	front = chassis.info->target_front_speed;
 	right = chassis.info->target_right_speed;
@@ -223,6 +248,23 @@ void Chassis_RcCtrl(void)
   chas_motor[CHAS_RF]->pid->speed.set = - front + right + round;
   chas_motor[CHAS_LB]->pid->speed.set = front - right + round;
   chas_motor[CHAS_RB]->pid->speed.set = - front - right + round;
+	
+	arm_abs_f32(&front, &front, 1);
+	arm_abs_f32(&right, &right, 1);
+	arm_abs_f32(&round, &round, 1);
+	
+	// sum = front + right + round;
+	arm_add_f32(&front, &right, &sum, 1);
+	arm_add_f32(&sum, &round, &sum, 1);
+	if (sum > 8000.0f)
+	{
+		for (uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
+		{
+			// chas_motor[i]->pid->speed.set = chas_motor[i]->pid->speed.set / sum * chas_info.limit_speed;
+			chas_motor[i]->pid->speed.set /= sum;
+      arm_mult_f32(&chas_motor[i]->pid->speed.set, &chas_conf.limit_speed, &chas_motor[i]->pid->speed.set, 1);			
+		}
+	}
 }
 
 void Chassis_Ctrl(void)

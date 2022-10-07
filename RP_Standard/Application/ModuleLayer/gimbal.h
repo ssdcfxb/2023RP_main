@@ -46,6 +46,11 @@ typedef struct
 	float    measure_pitch_imu_angle;
 	int16_t  measure_pitch_motor_speed;
 	int16_t  measure_pitch_motor_angle;
+	float    measure_roll_imu_speed;
+	float    measure_roll_imu_angle;
+	
+	float    yaw_real_rate;
+	float    pitch_real_rate;
 	
 	float    target_yaw_imu_angle;
 	float    target_yaw_imu_deltaangle;

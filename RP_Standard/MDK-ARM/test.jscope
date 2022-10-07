@@ -11,7 +11,7 @@
             <DataFile Name="" />
             <RawFile Name="" />
             <Scope>
-                <Options TimeResolutionUs="2000" />
+                <Options TimeResolutionUs="500000" />
             </Scope>
         </Configuration>
         <Windows>
@@ -20,13 +20,25 @@
         </Windows>
         <SelectedSymbols>
             <Symbol>
-                <Options Name="pitch" Address="0x200000F8" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="-2147483648" YMaxSampled="-2147483648" YAvgSampled="-2147483648" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="5" MaxValue="-2147483648" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
+                <Options Name="yaw_out" Address="0x20000084" Type="float" TypeID="1" Size="4" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="0" YMaxSampled="0" YAvgSampled="0" Offset="4" ShowInGraph="0" ACCoupling="0" YOffset="200" IsAutoConfig="1" YResolution="2000" MaxValue="4000" File="..\Application\ModuleLayer\gimbal.c" Scope="0" DrawStyle="0" />
             </Symbol>
             <Symbol>
-                <Options Name="roll" Address="0x20000100" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="-2147483648" YMaxSampled="-2147483648" YAvgSampled="-2147483648" Offset="8" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="5" MaxValue="-2147483648" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
+                <Options Name="yaw" Address="0x20000150" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="-176" YMaxSampled="-109" YAvgSampled="-140" Offset="8" ShowInGraph="0" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="50" MaxValue="200" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
             </Symbol>
             <Symbol>
-                <Options Name="yaw" Address="0x200000FC" Type="float" TypeID="1" Size="4" GraphColorRed="102" GraphColorGreen="102" GraphColorBlue="178" YMinSampled="0" YMaxSampled="16" YAvgSampled="9" Offset="12" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="5" MaxValue="-2147483648" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
+                <Options Name="pitch" Address="0x20000160" Type="float" TypeID="1" Size="4" GraphColorRed="102" GraphColorGreen="102" GraphColorBlue="178" YMinSampled="-72" YMaxSampled="1" YAvgSampled="-27" Offset="12" ShowInGraph="0" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="20" MaxValue="100" File="..\Application\DeviceLayer\Sensor\imu_sensor.c" Scope="0" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="gyroz" Address="0x20000144" Type="short" TypeID="11" Size="2" GraphColorRed="160" GraphColorGreen="32" GraphColorBlue="240" YMinSampled="-3362" YMaxSampled="3746" YAvgSampled="36" Offset="16" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="0" YResolution="2000" MaxValue="4000" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="gyrox" Address="0x20000140" Type="short" TypeID="11" Size="2" GraphColorRed="255" GraphColorGreen="0" GraphColorBlue="0" YMinSampled="-2806" YMaxSampled="2644" YAvgSampled="-89" Offset="18" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="1" YResolution="5000" MaxValue="10000" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="gyroy" Address="0x20000142" Type="short" TypeID="11" Size="2" GraphColorRed="0" GraphColorGreen="191" GraphColorBlue="255" YMinSampled="-4514" YMaxSampled="6118" YAvgSampled="46" Offset="20" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="1" YResolution="5000" MaxValue="10000" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="roll" Address="0x20000154" Type="float" TypeID="1" Size="4" GraphColorRed="0" GraphColorGreen="100" GraphColorBlue="0" YMinSampled="-33" YMaxSampled="11" YAvgSampled="-4" Offset="22" ShowInGraph="0" ACCoupling="0" YOffset="200" IsAutoConfig="1" YResolution="100" MaxValue="200" File="..\Application\ProtocolLayer\imu_protocol.c" Scope="0" DrawStyle="0" />
             </Symbol>
         </SelectedSymbols>
     </Project>
