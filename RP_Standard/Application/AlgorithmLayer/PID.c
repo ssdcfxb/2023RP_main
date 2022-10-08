@@ -44,23 +44,24 @@ float PID_Plc_Calc(pid_type_t *pid, float fdb, float set)
 		arm_sub_f32(&set, &fdb, &pid->error[0], 1);
 		//pid->integral += pid->error[0];
 		arm_add_f32(&pid->error[0], &pid->integral, &pid->integral, 1);
-		LimitMax(pid->integral, pid->max_iout);
+		LimitMax(pid->integral, pid->max_integral);
 		
 		//·Ö±ð¼ÆËãPID
-		//output = kp * Error + ki * Integral + kd * DDError
+		//output = kp * Error + ki * Integral + kd * DError
 		
     //pid->Pout = pid->Kp * pid->error[0];
 		arm_mult_f32(&pid->Kp, &pid->error[0], &pid->Pout, 1);
     //pid->Iout = pid->Ki * pid->integral;
 		arm_mult_f32(&pid->Ki, &pid->integral, &pid->Iout, 1);
+		LimitMax(pid->Iout, pid->max_iout);
 		
 		//pid->Dbuf[0] = (pid->error[0] - 2.0f * pid->error[1] + pid->error[2]);
 		arm_sub_f32(&pid->error[0], &pid->error[1], &pid->Dbuf[1], 1);
 		arm_sub_f32(&pid->error[1], &pid->error[2], &pid->Dbuf[2], 1);
 		arm_sub_f32(&pid->Dbuf[2], &pid->Dbuf[1], &pid->Dbuf[0], 1);
 		
-		//pid->Dout = pid->Kd * pid->Dbuf[0];
-		arm_sub_f32(&pid->Kd, &pid->Dbuf[0], &pid->Dout, 1);
+		//pid->Dout = pid->Kd * pid->Dbuf[1];
+		arm_sub_f32(&pid->Kd, &pid->Dbuf[1], &pid->Dout, 1);
 		
 		//pid->out = pid->Pout + pid->Iout + pid->Dout;
 		arm_add_f32(&pid->Pout, &pid->Iout, &PIout, 1);

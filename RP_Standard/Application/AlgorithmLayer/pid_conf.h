@@ -1,14 +1,15 @@
 #ifndef __PID_CONF_H
 #define __PID_CONF_H
 
-#define SP_MAX_OUT 20000.0f
-#define SP_MAX_INTEGRAL 6000.0f  //Plc
-#define SP_MAX_INC_OUT 6000.0f     //Inc
-#define AG_MAX_OUT 10000.0f
-#define AG_MAX_INTEGRAL 3000.0f  //Plc
-#define AG_MAX_INC_OUT 10000.0f
 
 // M3508电机PID参数
+#define CHAS_SP_MAX_OUT 12000.0f
+#define CHAS_SP_MAX_INTEGRAL 6000.0f
+#define CHAS_SP_MAX_I_OUT 6000.0f
+#define CHAS_AG_MAX_OUT 10000.0f
+#define CHAS_AG_MAX_INTEGRAL 3000.0f
+#define CHAS_AG_MAX_I_OUT 3000.0f
+
 // Plc-Inc
 #define M3508_INC_SP_KP 13.0f
 #define M3508_INC_SP_KI 0.5f
@@ -26,6 +27,13 @@
 
 
 // GM6020电机PID参数
+#define GIM_SP_MAX_OUT 20000.0f
+#define GIM_SP_MAX_INTEGRAL 20000.0f
+#define GIM_SP_MAX_I_OUT 6000.0f
+#define GIM_AG_MAX_OUT 10000.0f
+#define GIM_AG_MAX_INTEGRAL 6000.0f
+#define GIM_AG_MAX_I_OUT 6000.0f
+
 // machine模式
 #define YAW_MACHINE_SP_KP 8.0f//30.0f
 #define YAW_MACHINE_SP_KI 0.0f

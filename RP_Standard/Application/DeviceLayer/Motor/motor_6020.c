@@ -24,18 +24,21 @@ motor_6020_info_t pitch_motor_info = {
 };
 
 pid_t yaw_pid = {
-	.speed.max_iout = SP_MAX_INC_OUT,
-	.speed.max_out = SP_MAX_OUT,
-	.angle.max_integral = AG_MAX_INTEGRAL,
-	.angle.max_out = AG_MAX_OUT,
+	.speed.max_out = GIM_SP_MAX_OUT,
+	.speed.max_integral = GIM_SP_MAX_INTEGRAL,
+	.speed.max_iout = GIM_SP_MAX_I_OUT,
+	.angle.max_out = GIM_AG_MAX_OUT,
+	.angle.max_integral = GIM_AG_MAX_INTEGRAL,
+	.angle.max_iout = GIM_AG_MAX_I_OUT,
 };
 
 pid_t pitch_pid = {
-	.speed.max_iout = SP_MAX_INC_OUT,
-	.speed.max_out = SP_MAX_OUT,
-	.angle.max_integral = AG_MAX_INTEGRAL,
-	.angle.max_out = AG_MAX_OUT,
-	.angle.max_iout = AG_MAX_INC_OUT,
+	.speed.max_out = GIM_SP_MAX_OUT,
+	.speed.max_integral = GIM_SP_MAX_INTEGRAL,
+	.speed.max_iout = GIM_SP_MAX_I_OUT,
+	.angle.max_out = GIM_AG_MAX_OUT,
+	.angle.max_integral = GIM_AG_MAX_INTEGRAL,
+	.angle.max_iout = GIM_AG_MAX_I_OUT,
 };
 
 motor_6020_t yaw_motor = {
