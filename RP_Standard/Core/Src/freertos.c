@@ -122,7 +122,7 @@ void MX_FREERTOS_Init(void) {
   Monitor_taskHandle = osThreadCreate(osThread(Monitor_task), NULL);
 
   /* definition and creation of System_task */
-  osThreadDef(System_task, Start_System_task, osPriorityNormal, 0, 128);
+  osThreadDef(System_task, Start_System_task, osPriorityHigh, 0, 128);
   System_taskHandle = osThreadCreate(osThread(System_task), NULL);
 
   /* definition and creation of Ctrl_task */

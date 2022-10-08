@@ -135,6 +135,9 @@ void Gimbal_GetBaseInfo(void)
 	
 	gimbal.info->yaw_real_rate = gimbal.info->measure_yaw_imu_speed * arm_cos_f32(gimbal.info->measure_pitch_imu_angle) \
 	                           + gimbal.info->measure_roll_imu_speed * arm_sin_f32(gimbal.info->measure_pitch_imu_angle);
+//	gimbal.info->pitch_real_rate = gimbal.info->measure_pitch_imu_speed * arm_cos_f32(gimbal.info->measure_yaw_imu_angle) \
+//	                             + gimbal.info->measure_roll_imu_speed * arm_sin_f32(gimbal.info->measure_pitch_imu_angle);
+	
 	
 }
 

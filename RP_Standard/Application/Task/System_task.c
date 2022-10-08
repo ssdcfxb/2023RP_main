@@ -41,8 +41,6 @@ void Start_System_task(void const * argument)
 	for(;;)
 	{
 		portENTER_CRITICAL();
-		// 更新陀螺仪数据
-		imu_sensor.update(&imu_sensor);
 		// 更新遥控信息
 		rc_update_info();
 		

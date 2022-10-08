@@ -5,7 +5,7 @@
 #include "main.h"
 #include "device.h"
 
-void Start_imu_task(void const * argument);
+void Start_IMU_task(void const * argument);
 
 
 

@@ -25,7 +25,6 @@
 /* Exported functions --------------------------------------------------------*/
 short gyrox, gyroy, gyroz;
 short accx, accy, accz;
-float pitch, yaw, roll;
 void imu_sensor_update(imu_sensor_t *imu_sen)
 {
     imu_sensor_info_t *imu_info = imu_sen->info;
@@ -33,12 +32,8 @@ void imu_sensor_update(imu_sensor_t *imu_sen)
     BMI_Get_RawData(&gyrox, &gyroy, &gyroz, &accx, &accy, &accz);
     BMI_Get_EulerAngle(&imu_info->pitch, &imu_info->roll, &imu_info->yaw, &gyrox, &gyroy, &gyroz, &accx, &accy, &accz);
     
-	pitch = imu_info->pitch;
-	yaw = imu_info->yaw;
-	roll = imu_info->roll;
-	
-	imu_info->rate_pitch = gyrox;
-	imu_info->rate_roll = gyroy;
+	imu_info->rate_pitch = gyroy;
+	imu_info->rate_roll = gyrox;
 	imu_info->rate_yaw = gyroz;
 	
 	imu_sen->check(imu_sen);
