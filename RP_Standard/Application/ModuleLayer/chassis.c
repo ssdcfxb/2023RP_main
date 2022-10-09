@@ -30,7 +30,8 @@ chassis_info_t 	chas_info = {
 };
 chassis_conf_t chas_conf = {
 	.limit_speed = 8000.0f,
-	.machine_round_kp = 0.0f,//4.0f,
+	.machine_round_kp = 4.0f,
+	.gyro_round_speed = 4000.0f,
 };
 chassis_t chassis = {
 	.dev = &chas_dev,
@@ -78,29 +79,71 @@ void Chassis_Init(void)
 
 void Chassis_GetRcInfo(void)
 {
-	int16_t target_cycle_speed = 0;
-	if (gimbal.info->yaw_mode == G_Y_follow)
+	float gyro_target_front_speed = 0.f, gyro_target_right_speed = 0.f;
+	
+	if (chassis.info->local_mode == CHASSIS_MODE_NORMAL)
 	{
-		chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
-		chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
-		chassis.info->target_cycle_speed = (float)rc_sensor.info->ch0 * chas_conf.limit_speed / 660.0f;
-	}
-	else if (gimbal.info->yaw_mode == G_Y_gyro)
+			if (gimbal.info->yaw_mode == G_Y_follow)
+			{
+				chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
+				chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
+				chassis.info->target_cycle_speed = (float)rc_sensor.info->ch0 * chas_conf.limit_speed / 660.0f;
+			}
+			else if (gimbal.info->yaw_mode == G_Y_gyro)
+			{
+				chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
+				chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
+				gimbal.info->yaw_motor_angle_err = gimbal.conf->restart_yaw_motor_angle - yaw_motor.info->ecd;
+				
+				// µ×ÅÌ¾Í½ü¹éÖÐ
+//				if (abs(gimbal.info->yaw_motor_angle_err) > HALF_ECD_RANGE / 2)
+//				{
+//					gimbal.conf->restart_yaw_motor_angle += HALF_ECD_RANGE;
+//					gimbal.conf->restart_yaw_motor_angle %= ECD_RANGE;
+//					gimbal.info->yaw_motor_angle_err = gimbal.conf->restart_yaw_motor_angle - yaw_motor.info->ecd;
+//					if (gimbal.info->yaw_motor_angle_err < -HALF_ECD_RANGE)
+//					{
+//						gimbal.info->yaw_motor_angle_err += ECD_RANGE;
+//					}
+//					else if (gimbal.info->yaw_motor_angle_err > HALF_ECD_RANGE)
+//					{
+//						gimbal.info->yaw_motor_angle_err -= ECD_RANGE;
+//					}
+//				}
+				
+			if (gimbal.info->yaw_motor_angle_err > HALF_ECD_RANGE)
+			{
+				gimbal.info->yaw_motor_angle_err -= ECD_RANGE;
+			}
+			else if (gimbal.info->yaw_motor_angle_err < -HALF_ECD_RANGE)
+			{
+				gimbal.info->yaw_motor_angle_err += ECD_RANGE;
+			}
+			
+				chassis.info->target_cycle_speed = (float)gimbal.info->yaw_motor_angle_err * chas_conf.machine_round_kp;
+			}
+  }
+	else if (chassis.info->local_mode == CHASSIS_MODE_GYRO)
 	{
-		chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
-		chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
-		target_cycle_speed = gimbal.conf->restart_yaw_motor_angle - yaw_motor.info->ecd;
-		
-		if (target_cycle_speed > HALF_ECD_RANGE)
-		{
-			target_cycle_speed -= ECD_RANGE;
-		}
-		else if (target_cycle_speed < -HALF_ECD_RANGE)
-		{
-			target_cycle_speed += ECD_RANGE;
-		}
-		
-		chassis.info->target_cycle_speed = (float)target_cycle_speed * chas_conf.machine_round_kp;
+			chassis.info->target_cycle_speed = chas_conf.gyro_round_speed;
+		  gyro_target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
+		  gyro_target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
+		  gimbal.info->yaw_motor_angle_err = gimbal.conf->restart_yaw_motor_angle - yaw_motor.info->ecd;
+				
+			if (gimbal.info->yaw_motor_angle_err > HALF_ECD_RANGE)
+			{
+				gimbal.info->yaw_motor_angle_err -= ECD_RANGE;
+			}
+			else if (gimbal.info->yaw_motor_angle_err < -HALF_ECD_RANGE)
+			{
+				gimbal.info->yaw_motor_angle_err += ECD_RANGE;
+			}
+			
+			gimbal.info->yaw_rad_err = (float)gimbal.info->yaw_motor_angle_err * GM6020_ECD_TO_ANGLE * ANGLE_TO_RAD;
+			chassis.info->target_front_speed = gyro_target_front_speed * arm_cos_f32(gimbal.info->yaw_rad_err) \
+			                                 - gyro_target_right_speed * arm_sin_f32(gimbal.info->yaw_rad_err);
+			chassis.info->target_right_speed = gyro_target_front_speed * arm_sin_f32(gimbal.info->yaw_rad_err) \
+			                                 + gyro_target_right_speed * arm_cos_f32(gimbal.info->yaw_rad_err);
 	}
 }
 
@@ -113,23 +156,16 @@ void Chassis_GetInfo(void)
 {
 	if (flag.gimbal_flag.reset_ok == 1)
 	{
-//		if (rc_sensor.info->ch0 == 0 \
-//			&& rc_sensor.info->ch1 == 0 \
-//			&& rc_sensor.info->ch2 == 0 \
-//			&& rc_sensor.info->ch3 == 0 \
-//		  && flag.gimbal_flag.reset_start == 0)
-//		{
-//			flag.gimbal_flag.reset_ok = 1;
-//		}
-//	}
-//	else
-//	{
 		if(chas_info.remote_mode == RC) {
 			Chassis_GetRcInfo();
 		}
 		else if(chas_info.remote_mode == KEY) {
 			Chassis_GetKeyInfo();
 		}
+	}
+	else 
+	{
+		chassis.info->local_mode = CHASSIS_MODE_NORMAL;
 	}
 }
 

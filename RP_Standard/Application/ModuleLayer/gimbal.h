@@ -2,6 +2,7 @@
 #define __GIMBAL_H
 
 #include "rp_config.h"
+#include "rp_math.h"
 
 #include "motor_6020.h"
 #include "imu_sensor.h"
@@ -60,6 +61,9 @@ typedef struct
 	float    target_pitch_imu_deltaangle;
 	int16_t  target_pitch_motor_angle;
 	int16_t  target_pitch_motor_deltaangle;
+	
+	int16_t  yaw_motor_angle_err; // 复位前机械角度误差
+	float    yaw_rad_err; // 弧度误差
 } gimbal_info_t;
 
 typedef struct

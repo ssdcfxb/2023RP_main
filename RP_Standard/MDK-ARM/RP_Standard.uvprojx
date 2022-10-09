@@ -517,6 +517,46 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Application/Device/Imu</GroupName>
+          <Files>
+            <File>
+              <FileName>bmi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Imu\bmi.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmi2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Imu\bmi2.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmi2_common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Imu\bmi2_common.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmi2_ois.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Imu\bmi2_ois.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmi270.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Imu\bmi270.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmi270_context.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Imu\bmi270_context.c</FilePath>
+            </File>
+            <File>
+              <FileName>soft_iic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\DeviceLayer\Imu\soft_iic.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>Application/Device</GroupName>
           <Files>
             <File>
@@ -885,46 +925,6 @@
               <FileName>port.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Application/Device/Imu</GroupName>
-          <Files>
-            <File>
-              <FileName>bmi.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\Imu\bmi.c</FilePath>
-            </File>
-            <File>
-              <FileName>bmi2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\Imu\bmi2.c</FilePath>
-            </File>
-            <File>
-              <FileName>bmi2_common.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\Imu\bmi2_common.c</FilePath>
-            </File>
-            <File>
-              <FileName>bmi2_ois.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\Imu\bmi2_ois.c</FilePath>
-            </File>
-            <File>
-              <FileName>bmi270.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\Imu\bmi270.c</FilePath>
-            </File>
-            <File>
-              <FileName>bmi270_context.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\Imu\bmi270_context.c</FilePath>
-            </File>
-            <File>
-              <FileName>soft_iic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Application\DeviceLayer\Imu\soft_iic.c</FilePath>
             </File>
           </Files>
         </Group>

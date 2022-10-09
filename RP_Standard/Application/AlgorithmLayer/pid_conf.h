@@ -35,19 +35,19 @@
 #define GIM_AG_MAX_I_OUT 6000.0f
 
 // machineģʽ
-#define YAW_MACHINE_SP_KP 8.0f//30.0f
-#define YAW_MACHINE_SP_KI 0.0f
-#define YAW_MACHINE_SP_KD 0.0f//8.0f
-#define YAW_MACHINE_AG_KP 3.0f//30.0f
+#define YAW_MACHINE_SP_KP 11.0f//50.0f
+#define YAW_MACHINE_SP_KI 1.2f//2.0f
+#define YAW_MACHINE_SP_KD 0.0f
+#define YAW_MACHINE_AG_KP 8.0f//12.0f
 #define YAW_MACHINE_AG_KI 0.0f
-#define YAW_MACHINE_AG_KD 0.0f//8.0f
+#define YAW_MACHINE_AG_KD 0.0f
 
-#define PITCH_MACHINE_SP_KP 8.0f//30.0f
-#define PITCH_MACHINE_SP_KI 0.0f
-#define PITCH_MACHINE_SP_KD 0.0f//8.0f
-#define PITCH_MACHINE_AG_KP 3.0f//30.0f
+#define PITCH_MACHINE_SP_KP 26.0f
+#define PITCH_MACHINE_SP_KI 1.5f
+#define PITCH_MACHINE_SP_KD 0.0f
+#define PITCH_MACHINE_AG_KP 10.0f
 #define PITCH_MACHINE_AG_KI 0.0f
-#define PITCH_MACHINE_AG_KD 0.0f//8.0f
+#define PITCH_MACHINE_AG_KD 0.0f
 
 // gyroģʽ
 #define YAW_GYRO_SP_KP 80.0f
@@ -57,7 +57,7 @@
 #define YAW_GYRO_AG_KI 0.0f
 #define YAW_GYRO_AG_KD 0.0f
 
-#define PITCH_GYRO_SP_KP 20.0f
+#define PITCH_GYRO_SP_KP 25.0f
 #define PITCH_GYRO_SP_KI 1.2f
 #define PITCH_GYRO_SP_KD 0.0f
 #define PITCH_GYRO_AG_KP 200.0f

@@ -99,4 +99,5 @@ rp_standard\ctrl_task.o: ../Application/AlgorithmLayer/pid.h
 rp_standard\ctrl_task.o: ../Application/AlgorithmLayer/pid_conf.h
 rp_standard\ctrl_task.o: ../Application/DeviceLayer/Motor/motor_6020.h
 rp_standard\ctrl_task.o: ../Application/ModuleLayer/chassis.h
+rp_standard\ctrl_task.o: ../Application/AlgorithmLayer/rp_math.h
 rp_standard\ctrl_task.o: ../Application/ModuleLayer/gimbal.h

@@ -38,6 +38,7 @@ rp_standard\chassis.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 rp_standard\chassis.o: ../Application/ConfigLayer/rp_driver_config.h
 rp_standard\chassis.o: ../Application/ConfigLayer/rp_device_config.h
 rp_standard\chassis.o: ../Application/ConfigLayer/rp_user_config.h
+rp_standard\chassis.o: ../Application/AlgorithmLayer/rp_math.h
 rp_standard\chassis.o: ../Application/DeviceLayer/Motor/motor_3508.h
 rp_standard\chassis.o: ../Application/ProtocolLayer/can_protocol.h
 rp_standard\chassis.o: ../Application/DeviceLayer/device.h

@@ -3,6 +3,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "rp_config.h"
+#include "rp_math.h"
 
 #include "motor_3508.h"
 #include "imu_sensor.h"
@@ -16,7 +17,7 @@ typedef enum {
 	CHASSIS_MODE_BUFF   		= 1, // 打符模式
 	CHASSIS_MODE_RELOAD_BULLET	= 2, // 底盘低速补弹模式
 	CHASSIS_MODE_SZUPUP			= 3, // SZU爬坡模式
-	CHASSIS_MODE_FOLLOW     = 4, // 底盘跟随云台模式（未完成）
+	CHASSIS_MODE_GYRO       = 4, // 小陀螺模式
 } chassis_mode_t;
 
 typedef struct {
@@ -37,8 +38,9 @@ typedef struct {
 }chassis_info_t;
 
 typedef struct {
-	float  limit_speed; // 最大转速
+	float  limit_speed; // 电机最大转速
 	float  machine_round_kp; // 机械模式底盘跟随角速度系数
+	float  gyro_round_speed; // 小陀螺最大转速
 } chassis_conf_t;
 
 typedef struct chassis{
