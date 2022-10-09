@@ -31,6 +31,7 @@ gimbal_info_t 	gim_info = {
 gimbal_conf_t   gim_conf = {
 	.restart_yaw_imu_angle = 0.0f,
 	.restart_pitch_imu_angle = 0.0f,
+	.MID_VALUE = 4777,
 	.restart_yaw_motor_angle = 4777, // 双枪 2100  麦轮 4777
 	.restart_pitch_motor_angle = 6900, // 双枪 6600  麦轮 6900
 	.rc_pitch_motor_offset = 110,
@@ -223,7 +224,7 @@ void Gimbal_MotoReset(void)
 void Gimbal_GyroReset(void)
 {
 	gimbal.info->target_pitch_imu_angle = gim_conf.restart_pitch_imu_angle;
-	gimbal.info->target_yaw_imu_angle = gim_conf.restart_yaw_imu_angle;
+	gimbal.info->target_yaw_imu_angle = gimbal.info->measure_yaw_imu_angle;
 	
 	flag.gimbal_flag.reset_start = 0;
 }
@@ -250,20 +251,33 @@ void Gimbal_RcCtrl(void)
 	{
 			gimbal.info->target_pitch_motor_angle += gimbal.info->target_pitch_motor_deltaangle;
 			
+		
+		  gimbal.info->yaw_motor_angle_err = gim_conf.restart_yaw_motor_angle - gimbal.info->measure_yaw_motor_angle;
+			// yaw轴电机error过零点处理
+			if (gimbal.info->yaw_motor_angle_err > HALF_ECD_RANGE)
+			{
+				gimbal.info->measure_yaw_motor_angle += ECD_RANGE;
+			}
+			else if (gimbal.info->yaw_motor_angle_err < -HALF_ECD_RANGE)
+			{
+				gimbal.info->measure_yaw_motor_angle -= ECD_RANGE;
+			}
 			// yaw轴电机就近归中
-		  gimbal.info->yaw_motor_angle_err = gim_conf.restart_yaw_motor_angle - yaw_motor.info->ecd;
 			if (abs(gimbal.info->yaw_motor_angle_err) > (HALF_ECD_RANGE / 2))
 			{
 				if (gimbal.conf->restart_yaw_motor_angle > HALF_ECD_RANGE)
 				{
 					gimbal.conf->restart_yaw_motor_angle = 681;
+					flag.chassis_flag.forward = 0;
 				}
 				else
 				{
 					gimbal.conf->restart_yaw_motor_angle = 4777;
+					flag.chassis_flag.forward = 1;
 				}
 			}
 			yaw_motor.pid->angle.set = (float)gim_conf.restart_yaw_motor_angle;
+			
 			
 			// pitch轴电机限位
 			if (gimbal.info->target_pitch_motor_angle > gim_conf.max_pitch_motor_angle)

@@ -347,7 +347,7 @@ uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short 
 	if(ax * ay *az == 0)
 	{
 		return 0;
-	}		
+	}
 
 	gx = lsb_to_dps(gx,2000,bmi2_dev.resolution);
 	gy = lsb_to_dps(gy,2000,bmi2_dev.resolution);

@@ -38,9 +38,9 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (..\Application\ConfigLayer\rp_driver_config.h)(0x63383906)
 I (..\Application\ConfigLayer\rp_device_config.h)(0x633D9212)
-I (..\Application\ConfigLayer\rp_user_config.h)(0x633EB2D0)
+I (..\Application\ConfigLayer\rp_user_config.h)(0x6342E673)
 F (..\Application\ConfigLayer\rp_config.h)(0x6191C66A)()
-F (..\Application\ConfigLayer\rp_user_config.h)(0x633EB2D0)()
+F (..\Application\ConfigLayer\rp_user_config.h)(0x6342E673)()
 F (..\Application\ConfigLayer\rp_device_config.h)(0x633D9212)()
 F (..\Application\ConfigLayer\rp_driver_config.h)(0x63383906)()
 F (..\Application\AlgorithmLayer\PID.c)(0x634176F8)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\pid.o --omf_browse rp_standard\pid.crf --depend rp_standard\pid.d)
@@ -220,7 +220,7 @@ I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
 I (../Application/DeviceLayer/Motor/motor_3508.h)(0x633BE2BA)
@@ -314,7 +314,7 @@ I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
 I (../Application/DeviceLayer/Motor/motor_3508.h)(0x633BE2BA)
@@ -330,7 +330,7 @@ I (../Application/AlgorithmLayer/pid_conf.h)(0x63424114)
 I (../Application/DeviceLayer/Motor/motor_6020.h)(0x633BEB18)
 I (../Application/ModuleLayer/chassis.h)(0x63427600)
 I (../Application/AlgorithmLayer/rp_math.h)(0x634290D9)
-I (../Application/ModuleLayer/gimbal.h)(0x63429036)
+I (../Application/ModuleLayer/gimbal.h)(0x6342EABC)
 F (..\Application\Task\Ctrl_task.c)(0x63419F66)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\ctrl_task.o --omf_browse rp_standard\ctrl_task.crf --depend rp_standard\ctrl_task.d)
 I (..\Application\Task\Ctrl_task.h)(0x633EC4D3)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x63186116)
@@ -412,7 +412,7 @@ I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
 I (../Application/DeviceLayer/Motor/motor_3508.h)(0x633BE2BA)
@@ -428,7 +428,7 @@ I (../Application/AlgorithmLayer/pid_conf.h)(0x63424114)
 I (../Application/DeviceLayer/Motor/motor_6020.h)(0x633BEB18)
 I (../Application/ModuleLayer/chassis.h)(0x63427600)
 I (../Application/AlgorithmLayer/rp_math.h)(0x634290D9)
-I (../Application/ModuleLayer/gimbal.h)(0x63429036)
+I (../Application/ModuleLayer/gimbal.h)(0x6342EABC)
 F (..\Application\Task\Monitor_task.c)(0x63419F66)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\monitor_task.o --omf_browse rp_standard\monitor_task.crf --depend rp_standard\monitor_task.d)
 I (..\Application\Task\Monitor_task.h)(0x6336DED0)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x63186116)
@@ -510,7 +510,7 @@ I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
 I (../Application/DeviceLayer/Motor/motor_3508.h)(0x633BE2BA)
@@ -525,7 +525,7 @@ I (../Application/AlgorithmLayer/pid.h)(0x633EF8EA)
 I (../Application/AlgorithmLayer/pid_conf.h)(0x63424114)
 I (../Application/DeviceLayer/Motor/motor_6020.h)(0x633BEB18)
 F (..\Application\Task\Project_log.txt)(0x6341A54A)()
-F (..\Application\ModuleLayer\chassis.c)(0x634291B2)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\chassis.o --omf_browse rp_standard\chassis.crf --depend rp_standard\chassis.d)
+F (..\Application\ModuleLayer\chassis.c)(0x6342EC71)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\chassis.o --omf_browse rp_standard\chassis.crf --depend rp_standard\chassis.d)
 I (..\Application\ModuleLayer\chassis.h)(0x63427600)
 I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x631861C5)
@@ -563,7 +563,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/AlgorithmLayer/rp_math.h)(0x634290D9)
 I (../Application/DeviceLayer/Motor/motor_3508.h)(0x633BE2BA)
 I (../Application/ProtocolLayer/can_protocol.h)(0x633EC324)
@@ -620,9 +620,9 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x63186116
 I (../Application/ProtocolLayer/rm_protocol.h)(0x63427161)
 I (../Application/DriverLayer/drv_uart.h)(0x633859A7)
 I (../Application/ProtocolLayer/rc_protocol.h)(0x6191C66A)
-I (..\Application\ModuleLayer\gimbal.h)(0x63429036)
-F (..\Application\ModuleLayer\gimbal.c)(0x6342B491)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\gimbal.o --omf_browse rp_standard\gimbal.crf --depend rp_standard\gimbal.d)
-I (..\Application\ModuleLayer\gimbal.h)(0x63429036)
+I (..\Application\ModuleLayer\gimbal.h)(0x6342EABC)
+F (..\Application\ModuleLayer\gimbal.c)(0x6342EB35)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\gimbal.o --omf_browse rp_standard\gimbal.crf --depend rp_standard\gimbal.d)
+I (..\Application\ModuleLayer\gimbal.h)(0x6342EABC)
 I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x631861C5)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x634195F9)
@@ -659,7 +659,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/AlgorithmLayer/rp_math.h)(0x634290D9)
 I (../Application/DeviceLayer/Motor/motor_6020.h)(0x633BEB18)
 I (../Application/DeviceLayer/Motor/motor_3508.h)(0x633BE2BA)
@@ -754,7 +754,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/device.h)(0x6336E6E0)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
@@ -848,7 +848,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Imu/bmi.h)(0x6191C66A)
 I (D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\arm_math.h)(0x626F4ADE)
 I (D:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include\arm_math_types.h)(0x626F4ADE)
@@ -915,7 +915,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 F (..\Application\ProtocolLayer\rm_protocol.c)(0x63385926)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\rm_protocol.o --omf_browse rp_standard\rm_protocol.crf --depend rp_standard\rm_protocol.d)
 I (..\Application\ProtocolLayer\rm_protocol.h)(0x63427161)
@@ -955,7 +955,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DriverLayer/drv_can.h)(0x63384C14)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x63186116)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x63186116)
@@ -1012,7 +1012,7 @@ I (../Application/AlgorithmLayer/pid_conf.h)(0x63424114)
 I (../Application/DeviceLayer/Motor/motor_6020.h)(0x633BEB18)
 I (../Application/AlgorithmLayer/rp_math.h)(0x634290D9)
 F (..\Application\ProtocolLayer\rm_protocol.h)(0x63427161)()
-F (..\Application\DeviceLayer\Imu\bmi.c)(0x6342348F)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\bmi.o --omf_browse rp_standard\bmi.crf --depend rp_standard\bmi.d)
+F (..\Application\DeviceLayer\Imu\bmi.c)(0x6342C516)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\bmi.o --omf_browse rp_standard\bmi.crf --depend rp_standard\bmi.d)
 I (..\Application\DeviceLayer\Imu\bmi.h)(0x6191C66A)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h)(0x631861C5)
 I (../Core/Inc/stm32f4xx_hal_conf.h)(0x634195F9)
@@ -1266,7 +1266,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/ProtocolLayer/imu_protocol.h)(0x6191C66A)
 F (..\Application\DeviceLayer\Sensor\rc_sensor.c)(0x633EB76F)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\rc_sensor.o --omf_browse rp_standard\rc_sensor.crf --depend rp_standard\rc_sensor.d)
 I (..\Application\DeviceLayer\Sensor\rc_sensor.h)(0x6191C66A)
@@ -1306,7 +1306,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/AlgorithmLayer/rp_math.h)(0x634290D9)
 I (../Application/DeviceLayer/device.h)(0x6336E6E0)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
@@ -1400,7 +1400,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/ProtocolLayer/can_protocol.h)(0x633EC324)
 I (../Application/DeviceLayer/device.h)(0x6336E6E0)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
@@ -1495,7 +1495,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/ProtocolLayer/can_protocol.h)(0x633EC324)
 I (../Application/DeviceLayer/device.h)(0x6336E6E0)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
@@ -1589,7 +1589,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x631861C5)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
 I (../Application/DeviceLayer/Motor/motor_3508.h)(0x633BE2BA)
@@ -1698,7 +1698,7 @@ I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ProtocolLayer/rm_protocol.h)(0x63427161)
 I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/device.h)(0x6336E6E0)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
@@ -1778,7 +1778,7 @@ I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 F (..\Application\DriverLayer\drv_haltick.c)(0x6191C66A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\drv_haltick.o --omf_browse rp_standard\drv_haltick.crf --depend rp_standard\drv_haltick.d)
@@ -1870,7 +1870,7 @@ I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ProtocolLayer/rm_protocol.h)(0x63427161)
 I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/device.h)(0x6336E6E0)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 I (../Application/DeviceLayer/Sensor/imu_sensor.h)(0x6326C707)
@@ -2434,7 +2434,7 @@ I (../Application/ConfigLayer/rp_config.h)(0x6191C66A)
 I (D:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x6025237C)
 I (../Application/ConfigLayer/rp_driver_config.h)(0x63383906)
 I (../Application/ConfigLayer/rp_device_config.h)(0x633D9212)
-I (../Application/ConfigLayer/rp_user_config.h)(0x633EB2D0)
+I (../Application/ConfigLayer/rp_user_config.h)(0x6342E673)
 I (../Application/DeviceLayer/Sensor/rc_sensor.h)(0x6191C66A)
 F (../Core/Src/stm32f4xx_hal_msp.c)(0x632EF7CF)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Application/DriverLayer -I ../Application/Task -I ../Application/ModuleLayer -I ../Application/DeviceLayer/Imu -I ../Application/DeviceLayer/Motor -I ../Application/DeviceLayer/Sensor -I ../Application/DeviceLayer -I ../Application/ConfigLayer -I ../Application/ProtocolLayer -I ../Application/AlgorithmLayer-I.\RTE\_RP_Standard-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\Include-ID:\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\DSP\PrivateInclude-ID:\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="537" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__CC_ARM -DARM_MATH_CM4 -D__TARGET_FPU_VFP -D__FPU_PRESENT="1U"-o rp_standard\stm32f4xx_hal_msp.o --omf_browse rp_standard\stm32f4xx_hal_msp.crf --depend rp_standard\stm32f4xx_hal_msp.d)
 I (../Core/Inc/main.h)(0x63385FEE)

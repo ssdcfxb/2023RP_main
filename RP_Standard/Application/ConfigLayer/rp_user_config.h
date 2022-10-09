@@ -61,6 +61,7 @@ typedef enum {
 typedef struct {
 	uint8_t stop_start;
 	uint8_t stop_ok;
+	uint8_t forward; // 1:头为正 0:尾为正
 } chassis_flag_t;
 
 typedef struct {

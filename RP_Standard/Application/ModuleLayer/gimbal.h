@@ -68,6 +68,7 @@ typedef struct
 
 typedef struct
 {
+	int16_t  MID_VALUE;
 	int16_t  restart_yaw_motor_angle;
 	float    restart_yaw_imu_angle;
 	int16_t  restart_pitch_motor_angle;
