@@ -1,5 +1,9 @@
-RP_Standard/Core
-RP_Standard/Drivers
-RP_Standard/MDK-ARM
-RP_Standard/Middlewares
+Core/
+Drivers/
+MDK-ARM/
+Middlewares/
+*/*/Core/
+*/*/Drivers/
+*/*/MDK-ARM/
+*/*/Middlewares/
 *.mxproject
