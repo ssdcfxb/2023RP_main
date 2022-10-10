@@ -98,23 +98,23 @@ void Chassis_GetRcInfo(void)
 				// yaw轴电机error过零点处理
 				if (gimbal.info->yaw_motor_angle_err > HALF_ECD_RANGE)
 				{
-					gimbal.info->measure_yaw_motor_angle += ECD_RANGE;
+					gimbal.info->yaw_motor_angle_err -= ECD_RANGE;
 				}
 				else if (gimbal.info->yaw_motor_angle_err < -HALF_ECD_RANGE)
 				{
-					gimbal.info->measure_yaw_motor_angle -= ECD_RANGE;
+					gimbal.info->yaw_motor_angle_err += ECD_RANGE;
 				}
 				// 底盘就近归中
 				if (abs(gimbal.info->yaw_motor_angle_err) > (HALF_ECD_RANGE / 2))
 				{
 					if (gimbal.conf->restart_yaw_motor_angle > HALF_ECD_RANGE)
 					{
-						gimbal.conf->restart_yaw_motor_angle = 681;
+						gimbal.conf->restart_yaw_motor_angle = gimbal.conf->MID_VALUE - HALF_ECD_RANGE;
 					  flag.chassis_flag.forward = 0;
 					}
 					else
 					{
-						gimbal.conf->restart_yaw_motor_angle = 4777;
+						gimbal.conf->restart_yaw_motor_angle = gimbal.conf->MID_VALUE;
 					  flag.chassis_flag.forward = 1;
 					}
 				}
@@ -156,11 +156,11 @@ void Chassis_GetRcInfo(void)
 			chassis.info->target_right_speed = gyro_target_front_speed * arm_sin_f32(gimbal.info->yaw_rad_err) \
 			                                 + gyro_target_right_speed * arm_cos_f32(gimbal.info->yaw_rad_err);
 	}
+	
 	if (flag.chassis_flag.forward == 0)
 	{
-		chassis.info->target_front_speed = -chassis.info->target_front_speed;
-		chassis.info->target_right_speed = -chassis.info->target_right_speed;
-//		chassis.info->target_cycle_speed = -chassis.info->target_cycle_speed;
+			chassis.info->target_front_speed = -chassis.info->target_front_speed;
+			chassis.info->target_right_speed = -chassis.info->target_right_speed;
 	}
 }
 
