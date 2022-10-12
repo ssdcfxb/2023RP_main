@@ -6,6 +6,7 @@
 
 #include "rc_sensor.h"
 #include "imu_sensor.h"
+#include "motor_2006.h"
 #include "motor_3508.h"
 #include "motor_6020.h"
 

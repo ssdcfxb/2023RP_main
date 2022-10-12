@@ -40,7 +40,7 @@ motor_3508_info_t motor_info[] = {
 	},
 };
 
-// 底盘电机PID(Plc-Plc)
+// 电机PID(Plc-Plc)
 pid_t pid[] = {
 	[CHAS_LF] = {
 		.speed.Kp = M3508_SP_KP,
@@ -144,6 +144,26 @@ motor_3508_t chassis_motor[] = {
 	  .heart_beat = Chassis_Motor_Heart_Beat,
 	  .work_state = DEV_OFFLINE,
 	  .id = DEV_ID_CHASSIS_RB,
+	},
+};
+
+drv_can_t fric_motor_driver[] = {
+	[FRIC_L] = {
+	  .hcan = &hcan2,
+	  .rx_id = RM3508_CAN_ID_201,
+	},
+	[FRIC_R] = {
+	  .hcan = &hcan2,
+	  .rx_id = RM3508_CAN_ID_202,
+	},
+};
+
+motor_3508_info_t fric_motor_info[] = {
+	{
+    .offline_max_cnt = 50,
+	},
+	{
+    .offline_max_cnt = 50,
 	},
 };
 

@@ -30,7 +30,7 @@ chassis_info_t 	chas_info = {
 };
 chassis_conf_t chas_conf = {
 	.limit_speed = 8000.0f,
-	.machine_round_kp = 4.0f,
+	.machine_round_kp = 0.0f,//4.0f,
 	.gyro_round_speed = 4000.0f,
 };
 chassis_t chassis = {

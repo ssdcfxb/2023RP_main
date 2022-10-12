@@ -37,6 +37,8 @@ typedef struct __pid_t{
 
 float PID_Inc_Calc(pid_type_t *pid, float fdb, float set);
 float PID_Plc_Calc(pid_type_t *pid, float fdb, float set);
+float PID_Hbt_Calc(pid_type_t *pid, float fdb, float set);
+float PID_plc_Calc(pid_type_t *pid, float fdb, float set);
 
 extern void PID_Init(pid_type_t *pid);
 

@@ -65,4 +65,13 @@
 #define PITCH_GYRO_AG_KD 0.0f
 
 
+// M2006电机pid参数
+#define TP_SP_MAX_OUT 10000.0f
+#define TP_SP_MAX_INTEGRAL 6000.0f
+#define TP_SP_MAX_I_OUT 6000.0f
+#define TP_AG_MAX_OUT 10000.0f
+#define TP_AG_MAX_INTEGRAL 3000.0f
+#define TP_AG_MAX_I_OUT 3000.0f
+
+
 #endif

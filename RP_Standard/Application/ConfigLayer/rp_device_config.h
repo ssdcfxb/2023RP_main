@@ -30,7 +30,8 @@ typedef enum {
 	DEV_ID_CHASSIS_RB = 5,
 	DEV_ID_GIMBAL_YAW = 6,
 	DEV_ID_GIMBAL_PITCH = 7,
-	DEV_ID_CNT = 8,
+	DEV_ID_TURNPLATE = 8,
+	DEV_ID_CNT = 9,
 } dev_id_t;
 
 /**
@@ -44,6 +45,16 @@ typedef enum {
 	CHAS_RB,
 	CHAS_MOTOR_CNT,
 } chassis_motor_cnt_t;
+
+/**
+ *	@brief	摩擦轮电机设备索引
+ *	@class	device
+ */
+typedef enum {
+	FRIC_L,
+	FRIC_R,
+	FRIC_MOTOR_CNT,
+} friction_motor_cnt_t;
 
 /**
  *	@brief	设备工作状态(通用)

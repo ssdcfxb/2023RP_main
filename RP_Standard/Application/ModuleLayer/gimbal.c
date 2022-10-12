@@ -13,6 +13,9 @@ void Gimbal_Init(void);
 void Gimbal_Ctrl(void);
 void Gimbal_SelfProtect(void);
 
+float speed_output;
+float speed_target;
+
 // µ×ÅÌÄ£¿é´«¸ĞÆ÷
 gimbal_dev_t		gim_dev = {
 	.yaw_motor = &yaw_motor,
@@ -357,6 +360,8 @@ void Gimbal_Yaw_Angle_PidCalc(motor_6020_t *motor)
 		}
 		motor->pid->angle_out = PID_Plc_Calc(&motor->pid->angle, gimbal.info->measure_yaw_imu_angle, gimbal.info->target_yaw_imu_angle);
 		motor->pid->speed_out = PID_Plc_Calc(&motor->pid->speed, gimbal.info->measure_yaw_imu_speed, motor->pid->angle_out);
+		speed_output = motor->pid->speed_out;
+		speed_target = motor->pid->angle_out;
 	}
 	
 	gim_out[motor->driver->rx_id - 0x205] = (int16_t)motor->pid->speed_out;
