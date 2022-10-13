@@ -31,7 +31,9 @@ typedef enum {
 	DEV_ID_GIMBAL_YAW = 6,
 	DEV_ID_GIMBAL_PITCH = 7,
 	DEV_ID_TURNPLATE = 8,
-	DEV_ID_CNT = 9,
+	DEV_ID_SHOOT_L = 9,
+	DEV_ID_SHOOT_R = 10,
+	DEV_ID_CNT = 11,
 } dev_id_t;
 
 /**
@@ -51,10 +53,10 @@ typedef enum {
  *	@class	device
  */
 typedef enum {
-	FRIC_L,
-	FRIC_R,
-	FRIC_MOTOR_CNT,
-} friction_motor_cnt_t;
+	SHOOT_L,
+	SHOOT_R,
+	SHOOT_MOTOR_CNT,
+} shoot_motor_cnt_t;
 
 /**
  *	@brief	设备工作状态(通用)

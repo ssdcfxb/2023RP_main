@@ -4,7 +4,7 @@
 static void Motor_Init(motor_3508_t *motor);
 static void UpdateMotorData(motor_3508_t *motor, uint8_t* data);
 static void Check_Motor_Data(motor_3508_t *motor);
-static void Chassis_Motor_Heart_Beat(motor_3508_t *motor);
+static void M3508_Heart_Beat(motor_3508_t *motor);
 
 drv_can_t motor_driver[] = {
 	[CHAS_LF] = {
@@ -43,57 +43,57 @@ motor_3508_info_t motor_info[] = {
 // µç»úPID(Plc-Plc)
 pid_t pid[] = {
 	[CHAS_LF] = {
-		.speed.Kp = M3508_SP_KP,
-		.speed.Ki = M3508_SP_KI,
-		.speed.Kd = M3508_SP_KD,
+		.speed.Kp = CHAS_SP_KP,
+		.speed.Ki = CHAS_SP_KI,
+		.speed.Kd = CHAS_SP_KD,
 		.speed.max_out = CHAS_SP_MAX_OUT,
 		.speed.max_integral = CHAS_SP_MAX_INTEGRAL,
 		.speed.max_iout = CHAS_SP_MAX_I_OUT,
-		.angle.Kp = M3508_AG_KP,
-		.angle.Ki = M3508_AG_KI,
-		.angle.Kd = M3508_AG_KD,
+		.angle.Kp = CHAS_AG_KP,
+		.angle.Ki = CHAS_AG_KI,
+		.angle.Kd = CHAS_AG_KD,
 		.angle.max_out = CHAS_AG_MAX_OUT,
 		.angle.max_integral = CHAS_AG_MAX_INTEGRAL,
 		.angle.max_iout = CHAS_AG_MAX_I_OUT,
 	},
 	[CHAS_RF] = {
-		.speed.Kp = M3508_SP_KP,
-		.speed.Ki = M3508_SP_KI,
-		.speed.Kd = M3508_SP_KD,
+		.speed.Kp = CHAS_SP_KP,
+		.speed.Ki = CHAS_SP_KI,
+		.speed.Kd = CHAS_SP_KD,
 		.speed.max_out = CHAS_SP_MAX_OUT,
 		.speed.max_integral = CHAS_SP_MAX_INTEGRAL,
 		.speed.max_iout = CHAS_SP_MAX_I_OUT,
-		.angle.Kp = M3508_AG_KP,
-		.angle.Ki = M3508_AG_KI,
-		.angle.Kd = M3508_AG_KD,
+		.angle.Kp = CHAS_AG_KP,
+		.angle.Ki = CHAS_AG_KI,
+		.angle.Kd = CHAS_AG_KD,
 		.angle.max_out = CHAS_AG_MAX_OUT,
 		.angle.max_integral = CHAS_AG_MAX_INTEGRAL,
 		.angle.max_iout = CHAS_AG_MAX_I_OUT,
 	},
 	[CHAS_LB] = {
-		.speed.Kp = M3508_SP_KP,
-		.speed.Ki = M3508_SP_KI,
-		.speed.Kd = M3508_SP_KD,
+		.speed.Kp = CHAS_SP_KP,
+		.speed.Ki = CHAS_SP_KI,
+		.speed.Kd = CHAS_SP_KD,
 		.speed.max_out = CHAS_SP_MAX_OUT,
 		.speed.max_integral = CHAS_SP_MAX_INTEGRAL,
 		.speed.max_iout = CHAS_SP_MAX_I_OUT,
-		.angle.Kp = M3508_AG_KP,
-		.angle.Ki = M3508_AG_KI,
-		.angle.Kd = M3508_AG_KD,
+		.angle.Kp = CHAS_AG_KP,
+		.angle.Ki = CHAS_AG_KI,
+		.angle.Kd = CHAS_AG_KD,
 		.angle.max_out = CHAS_AG_MAX_OUT,
 		.angle.max_integral = CHAS_AG_MAX_INTEGRAL,
 		.angle.max_iout = CHAS_AG_MAX_I_OUT,
 	},
 	[CHAS_RB] = {
-		.speed.Kp = M3508_SP_KP,
-		.speed.Ki = M3508_SP_KI,
-		.speed.Kd = M3508_SP_KD,
+		.speed.Kp = CHAS_SP_KP,
+		.speed.Ki = CHAS_SP_KI,
+		.speed.Kd = CHAS_SP_KD,
 		.speed.max_out = CHAS_SP_MAX_OUT,
 		.speed.max_integral = CHAS_SP_MAX_INTEGRAL,
 		.speed.max_iout = CHAS_SP_MAX_I_OUT,
-		.angle.Kp = M3508_AG_KP,
-		.angle.Ki = M3508_AG_KI,
-		.angle.Kd = M3508_AG_KD,
+		.angle.Kp = CHAS_AG_KP,
+		.angle.Ki = CHAS_AG_KI,
+		.angle.Kd = CHAS_AG_KD,
 		.angle.max_out = CHAS_AG_MAX_OUT,
 		.angle.max_integral = CHAS_AG_MAX_INTEGRAL,
 		.angle.max_iout = CHAS_AG_MAX_I_OUT,
@@ -108,7 +108,7 @@ motor_3508_t chassis_motor[] = {
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
-	  .heart_beat = Chassis_Motor_Heart_Beat,
+	  .heart_beat = M3508_Heart_Beat,
 	  .work_state = DEV_OFFLINE,
 	  .id = DEV_ID_CHASSIS_LF,
 	},
@@ -119,7 +119,7 @@ motor_3508_t chassis_motor[] = {
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
-	  .heart_beat = Chassis_Motor_Heart_Beat,
+	  .heart_beat = M3508_Heart_Beat,
 	  .work_state = DEV_OFFLINE,
 	  .id = DEV_ID_CHASSIS_RF,
 	},
@@ -130,7 +130,7 @@ motor_3508_t chassis_motor[] = {
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
-	  .heart_beat = Chassis_Motor_Heart_Beat,
+	  .heart_beat = M3508_Heart_Beat,
 	  .work_state = DEV_OFFLINE,
 	  .id = DEV_ID_CHASSIS_LB,
 	},
@@ -141,24 +141,24 @@ motor_3508_t chassis_motor[] = {
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
-	  .heart_beat = Chassis_Motor_Heart_Beat,
+	  .heart_beat = M3508_Heart_Beat,
 	  .work_state = DEV_OFFLINE,
 	  .id = DEV_ID_CHASSIS_RB,
 	},
 };
 
-drv_can_t fric_motor_driver[] = {
-	[FRIC_L] = {
+drv_can_t shoot_motor_driver[] = {
+	[SHOOT_L] = {
 	  .hcan = &hcan2,
 	  .rx_id = RM3508_CAN_ID_201,
 	},
-	[FRIC_R] = {
+	[SHOOT_R] = {
 	  .hcan = &hcan2,
 	  .rx_id = RM3508_CAN_ID_202,
 	},
 };
 
-motor_3508_info_t fric_motor_info[] = {
+motor_3508_info_t shoot_motor_info[] = {
 	{
     .offline_max_cnt = 50,
 	},
@@ -167,6 +167,61 @@ motor_3508_info_t fric_motor_info[] = {
 	},
 };
 
+pid_t shoot_pid[] = {
+	[SHOOT_L] = {
+	  .speed.Kp = SHOOT_SP_KP,
+		.speed.Ki = SHOOT_SP_KI,
+		.speed.Kd = SHOOT_SP_KD,
+		.speed.max_out = SHOOT_SP_MAX_OUT,
+		.speed.max_integral = SHOOT_SP_MAX_INTEGRAL,
+		.speed.max_iout = SHOOT_SP_MAX_I_OUT,
+		.angle.Kp = SHOOT_AG_KP,
+		.angle.Ki = SHOOT_AG_KI,
+		.angle.Kd = SHOOT_AG_KD,
+		.angle.max_out = SHOOT_AG_MAX_OUT,
+		.angle.max_integral = SHOOT_AG_MAX_INTEGRAL,
+		.angle.max_iout = SHOOT_AG_MAX_I_OUT,
+	},
+	[SHOOT_R] = {
+	  .speed.Kp = SHOOT_SP_KP,
+		.speed.Ki = SHOOT_SP_KI,
+		.speed.Kd = SHOOT_SP_KD,
+		.speed.max_out = SHOOT_SP_MAX_OUT,
+		.speed.max_integral = SHOOT_SP_MAX_INTEGRAL,
+		.speed.max_iout = SHOOT_SP_MAX_I_OUT,
+		.angle.Kp = SHOOT_AG_KP,
+		.angle.Ki = SHOOT_AG_KI,
+		.angle.Kd = SHOOT_AG_KD,
+		.angle.max_out = SHOOT_AG_MAX_OUT,
+		.angle.max_integral = SHOOT_AG_MAX_INTEGRAL,
+		.angle.max_iout = SHOOT_AG_MAX_I_OUT,
+	},
+};
+
+motor_3508_t shoot_motor[] = {
+	[SHOOT_L] = {
+    .info = &shoot_motor_info[SHOOT_L],
+	  .driver = &shoot_motor_driver[SHOOT_L],
+		.pid = &shoot_pid[SHOOT_L],
+    .init = Motor_Init,
+	  .update = UpdateMotorData,
+	  .check = Check_Motor_Data,
+	  .heart_beat = M3508_Heart_Beat,
+	  .work_state = DEV_OFFLINE,
+	  .id = DEV_ID_SHOOT_L,
+	},
+	[SHOOT_R] = {
+    .info = &shoot_motor_info[SHOOT_R],
+	  .driver = &shoot_motor_driver[SHOOT_R],
+		.pid = &shoot_pid[SHOOT_R],
+    .init = Motor_Init,
+	  .update = UpdateMotorData,
+	  .check = Check_Motor_Data,
+	  .heart_beat = M3508_Heart_Beat,
+	  .work_state = DEV_OFFLINE,
+	  .id = DEV_ID_SHOOT_R,
+	},
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 static void Motor_Init(motor_3508_t *motor)
@@ -227,7 +282,7 @@ static void Check_Motor_Data(motor_3508_t *motor)
 		motor->info->offline_cnt = 0;
 }
 
-static void Chassis_Motor_Heart_Beat(motor_3508_t *motor)
+static void M3508_Heart_Beat(motor_3508_t *motor)
 {
 	if (motor->info == NULL || motor == NULL)
 	{
@@ -250,4 +305,3 @@ static void Chassis_Motor_Heart_Beat(motor_3508_t *motor)
 			motor->work_state = DEV_ONLINE;
 	}
 }
-

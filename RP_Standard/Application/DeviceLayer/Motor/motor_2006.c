@@ -4,7 +4,7 @@
 static void Motor_Init(motor_2006_t *motor);
 static void UpdateMotorData(motor_2006_t *motor, uint8_t* data);
 static void CheckMotorData(motor_2006_t *motor);
-static void TurnplateMotorHeartBeat(motor_2006_t *motor);
+static void M2006_Heart_Beat(motor_2006_t *motor);
 
 drv_can_t turnpalte_motor_driver = {
 	.hcan = &hcan2,
@@ -16,22 +16,22 @@ motor_2006_info_t turnpalte_motor_info = {
 };
 	
 pid_t turnpalte_pid = {
-	.speed.max_out = TP_SP_MAX_OUT,
-	.speed.max_integral = TP_SP_MAX_INTEGRAL,
-	.speed.max_iout = TP_SP_MAX_I_OUT,
-	.angle.max_out = TP_AG_MAX_OUT,
-	.angle.max_integral = TP_AG_MAX_INTEGRAL,
-	.angle.max_iout = TP_AG_MAX_I_OUT,
+	.speed.max_out = DIAL_SP_MAX_OUT,
+	.speed.max_integral = DIAL_SP_MAX_INTEGRAL,
+	.speed.max_iout = DIAL_SP_MAX_I_OUT,
+	.angle.max_out = DIAL_AG_MAX_OUT,
+	.angle.max_integral = DIAL_AG_MAX_INTEGRAL,
+	.angle.max_iout = DIAL_AG_MAX_I_OUT,
 };
 
-motor_2006_t turnplate_motor = {
+motor_2006_t dial_motor = {
 	.info = &turnpalte_motor_info,
 	.driver = &turnpalte_motor_driver,
 	.pid = &turnpalte_pid,
 	.init = Motor_Init,
 	.update = UpdateMotorData,
 	.check = CheckMotorData,
-	.heart_beat = TurnplateMotorHeartBeat,
+	.heart_beat = M2006_Heart_Beat,
 	.work_state = DEV_OFFLINE,
 	.id = DEV_ID_TURNPLATE,
 };
@@ -96,7 +96,7 @@ static void CheckMotorData(motor_2006_t *motor)
 		motor->info->offline_cnt = 0;
 }
 
-static void TurnplateMotorHeartBeat(motor_2006_t *motor)
+static void M2006_Heart_Beat(motor_2006_t *motor)
 {
 	if (motor->info == NULL || motor == NULL)
 	{

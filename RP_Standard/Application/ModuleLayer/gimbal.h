@@ -11,7 +11,6 @@
 // 云台yaw轴模式枚举
 typedef enum
 {
-	G_Y_follow,    // 跟随底盘
 	G_Y_gyro,      // 陀螺仪
 	G_Y_machine,   // 机械
 	G_Y_keep,      // 保持
@@ -20,11 +19,18 @@ typedef enum
 // 云台pitch轴模式枚举
 typedef enum
 {
-//	G_P_follow,    // 跟随底盘
 	G_P_gyro,      // 陀螺仪
 	G_P_machine,   // 机械
 	G_P_keep,      // 保持
 } gimbal_pitch_mode_e;
+
+// 云台模式枚举
+typedef enum
+{
+	gim_gyro,      // 陀螺仪
+	gim_machine,   // 机械
+	gim_keep,      // 保持
+} gimbal_mode_e;
 
 typedef struct 
 {
@@ -37,6 +43,7 @@ typedef struct
 typedef struct
 {
 	remote_mode_t		     remote_mode;
+	gimbal_mode_e        gimbal_mode;
 	gimbal_yaw_mode_e    yaw_mode;
 	gimbal_pitch_mode_e  pitch_mode;
 	float    measure_yaw_imu_speed;
@@ -90,7 +97,6 @@ typedef struct
 	gimbal_info_t   *info;
 	gimbal_conf_t   *conf;
 	void			(*init)(void);
-	void			(*update)(void);
 	void			(*ctrl)(void);
 	void			(*self_protect)(void);
 } gimbal_t;

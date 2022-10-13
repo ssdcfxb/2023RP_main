@@ -10,21 +10,35 @@
 #define CHAS_AG_MAX_INTEGRAL 3000.0f
 #define CHAS_AG_MAX_I_OUT 3000.0f
 
-// Plc-Inc
-#define M3508_INC_SP_KP 13.0f
-#define M3508_INC_SP_KI 0.5f
-#define M3508_INC_SP_KD 0.5f
-#define M3508_INC_AG_KP 60.0f
-#define M3508_INC_AG_KI 0.0f
-#define M3508_INC_AG_KD 1.0f
-// Plc-Plc
-#define M3508_SP_KP 10.0f
-#define M3508_SP_KI 0.33f
-#define M3508_SP_KD 0.0f
-#define M3508_AG_KP 25.0f
-#define M3508_AG_KI 0.0f
-#define M3508_AG_KD 5.0f
+#define SHOOT_SP_MAX_OUT 12000.0f
+#define SHOOT_SP_MAX_INTEGRAL 6000.0f
+#define SHOOT_SP_MAX_I_OUT 6000.0f
+#define SHOOT_AG_MAX_OUT 10000.0f
+#define SHOOT_AG_MAX_INTEGRAL 3000.0f
+#define SHOOT_AG_MAX_I_OUT 3000.0f
 
+// Plc-Inc
+//#define M3508_INC_SP_KP 13.0f
+//#define M3508_INC_SP_KI 0.5f
+//#define M3508_INC_SP_KD 0.5f
+//#define M3508_INC_AG_KP 60.0f
+//#define M3508_INC_AG_KI 0.0f
+//#define M3508_INC_AG_KD 1.0f
+
+// Plc-Plc
+#define CHAS_SP_KP 10.0f
+#define CHAS_SP_KI 0.33f
+#define CHAS_SP_KD 0.0f
+#define CHAS_AG_KP 25.0f
+#define CHAS_AG_KI 0.0f
+#define CHAS_AG_KD 5.0f
+
+#define SHOOT_SP_KP 0.0f
+#define SHOOT_SP_KI 0.0f
+#define SHOOT_SP_KD 0.0f
+#define SHOOT_AG_KP 0.0f
+#define SHOOT_AG_KI 0.0f
+#define SHOOT_AG_KD 0.0f
 
 // GM6020电机PID参数
 #define GIM_SP_MAX_OUT 20000.0f
@@ -66,12 +80,19 @@
 
 
 // M2006电机pid参数
-#define TP_SP_MAX_OUT 10000.0f
-#define TP_SP_MAX_INTEGRAL 6000.0f
-#define TP_SP_MAX_I_OUT 6000.0f
-#define TP_AG_MAX_OUT 10000.0f
-#define TP_AG_MAX_INTEGRAL 3000.0f
-#define TP_AG_MAX_I_OUT 3000.0f
+#define DIAL_SP_MAX_OUT 10000.0f
+#define DIAL_SP_MAX_INTEGRAL 6000.0f
+#define DIAL_SP_MAX_I_OUT 6000.0f
+#define DIAL_AG_MAX_OUT 10000.0f
+#define DIAL_AG_MAX_INTEGRAL 3000.0f
+#define DIAL_AG_MAX_I_OUT 3000.0f
+
+#define DIAL_SP_KP 0.0f
+#define DIAL_SP_KI 0.0f
+#define DIAL_SP_KD 0.0f
+#define DIAL_AG_KP 0.0f
+#define DIAL_AG_KI 0.0f
+#define DIAL_AG_KD 0.0f
 
 
 #endif

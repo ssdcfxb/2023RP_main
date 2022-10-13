@@ -16,7 +16,7 @@ void Gimbal_SelfProtect(void);
 float speed_output;
 float speed_target;
 
-// 底盘模块传感器
+// 云台设备
 gimbal_dev_t		gim_dev = {
 	.yaw_motor = &yaw_motor,
 	.pitch_motor = &pitch_motor,
@@ -24,10 +24,10 @@ gimbal_dev_t		gim_dev = {
 	.rc_sensor = &rc_sensor,
 };
 
-// 底盘模块信息
+// 云台模块信息
 gimbal_info_t 	gim_info = {
 	.remote_mode = RC,
-	.yaw_mode = G_Y_follow,
+	.yaw_mode = G_Y_machine,
 	.pitch_mode = G_P_machine,
 };
 
@@ -79,7 +79,7 @@ void PID_ParamsInit(motor_6020_t *motor)
 {
 	if (motor->id == DEV_ID_GIMBAL_YAW)
 	{
-		if (gimbal.info->yaw_mode == G_Y_follow)
+		if (gimbal.info->yaw_mode == G_Y_machine)
 		{
 			motor->pid->speed.Kp = yaw_PID[0];//YAW_MACHINE_SP_KP;
 			motor->pid->speed.Ki = yaw_PID[1];//YAW_MACHINE_SP_KI;
@@ -236,7 +236,7 @@ void Gimbal_Reset(void)
 {
 	if (flag.gimbal_flag.reset_start == 1 && flag.gimbal_flag.reset_ok == 0)
 	{
-		if (gimbal.info->yaw_mode == G_Y_follow)
+		if (gimbal.info->yaw_mode == G_Y_machine)
 		{
 			Gimbal_MotoReset();
 		}
@@ -250,7 +250,7 @@ void Gimbal_Reset(void)
 void Gimbal_RcCtrl(void)
 {
 	// 机械模式
-	if (gimbal.info->yaw_mode == G_Y_follow)
+	if (gimbal.info->yaw_mode == G_Y_machine)
 	{
 			gimbal.info->target_pitch_motor_angle += gimbal.info->target_pitch_motor_deltaangle;
 			
@@ -333,7 +333,7 @@ void Gimbal_KeyCtrl(void)
 
 void Gimbal_Yaw_Angle_PidCalc(motor_6020_t *motor)
 {
-	if (gimbal.info->yaw_mode == G_Y_follow)
+	if (gimbal.info->yaw_mode == G_Y_machine)
 	{
 		// yaw轴电机error过零点处理
 		if (gimbal.info->target_yaw_motor_angle - gimbal.info->measure_yaw_motor_angle > HALF_ECD_RANGE)

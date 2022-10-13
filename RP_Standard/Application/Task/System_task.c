@@ -19,16 +19,18 @@ void rc_update_info(void)
 			
 	}
 	else {
-		if (rc_sensor.info->s1 == 3 && rc_sensor.info->s2 == 3)
+		if (rc_sensor.info->s1 == 3)
 		{
-			gimbal.info->yaw_mode = G_Y_follow;
+			gimbal.info->yaw_mode = G_Y_machine;
 			gimbal.info->pitch_mode = G_P_machine;
+			gimbal.info->gimbal_mode = gim_machine;
 			chassis.info->local_mode = CHASSIS_MODE_NORMAL;
 		}
-		else if (rc_sensor.info->s1 == 2 && rc_sensor.info->s2 == 3)
+		else if (rc_sensor.info->s1 == 2)
 		{
 			gimbal.info->yaw_mode = G_Y_gyro;
 			gimbal.info->pitch_mode = G_P_gyro;
+			gimbal.info->gimbal_mode = gim_gyro;
 			if (rc_sensor.info->thumbwheel < -600)
 			{
 				chassis.info->local_mode = CHASSIS_MODE_GYRO;
@@ -41,6 +43,7 @@ void rc_update_info(void)
 		else 
 		{
 			gimbal.info->yaw_mode = G_Y_keep;
+			gimbal.info->gimbal_mode = gim_keep;
 			chassis.info->local_mode = CHASSIS_MODE_NORMAL;
 		}
 	}

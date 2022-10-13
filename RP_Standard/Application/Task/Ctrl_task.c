@@ -4,6 +4,7 @@ void Start_Ctrl_task(void const * argument)
 {
 	chassis.init();
 	gimbal.init();
+	shoot.init();
 	for(;;)
 	{
 		if(sys.state == SYS_STATE_NORMAL) 

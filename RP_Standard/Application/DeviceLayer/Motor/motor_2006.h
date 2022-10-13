@@ -38,6 +38,6 @@ typedef struct __motor_2006_t
 
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
-extern motor_2006_t turnplate_motor;
+extern motor_2006_t dial_motor;
 
 #endif

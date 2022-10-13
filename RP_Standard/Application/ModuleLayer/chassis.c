@@ -83,7 +83,7 @@ void Chassis_GetRcInfo(void)
 	
 	if (chassis.info->local_mode == CHASSIS_MODE_NORMAL)
 	{
-			if (gimbal.info->yaw_mode == G_Y_follow)
+			if (gimbal.info->yaw_mode == G_Y_machine)
 			{
 				chassis.info->target_front_speed = (float)rc_sensor.info->ch3 * chas_conf.limit_speed / 660.0f;
 				chassis.info->target_right_speed = (float)rc_sensor.info->ch2 * chas_conf.limit_speed / 660.0f;
