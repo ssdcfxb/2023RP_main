@@ -9,6 +9,7 @@
 
 #include "chassis.h"
 #include "gimbal.h"
+#include "shoot.h"
 
 void Start_Ctrl_task(void const * argument);
 

@@ -76,14 +76,14 @@ void CAN2_Get_Data(uint32_t identifier, uint8_t *data)
 	{
 		case RM3508_CAN_ID_201:
 		{
-			shoot_motor[FRIC_L].update(&chassis_motor[FRIC_L], data);
-	    shoot_motor[FRIC_L].check(&chassis_motor[FRIC_L]);
+			fric_motor[FRIC_L].update(&fric_motor[FRIC_L], data);
+	    fric_motor[FRIC_L].check(&fric_motor[FRIC_L]);
 		  break;
 		}
 		case RM3508_CAN_ID_202:
 		{
-			shoot_motor[FRIC_R].update(&chassis_motor[FRIC_R], data);
-	    shoot_motor[FRIC_R].check(&chassis_motor[FRIC_R]);
+			fric_motor[FRIC_R].update(&fric_motor[FRIC_R], data);
+	    fric_motor[FRIC_R].check(&fric_motor[FRIC_R]);
 		  break;
 		}
 		case RM2006_CAN_ID_203:

@@ -53,10 +53,10 @@ typedef enum {
  *	@class	device
  */
 typedef enum {
-	SHOOT_L,
-	SHOOT_R,
-	SHOOT_MOTOR_CNT,
-} shoot_motor_cnt_t;
+	FRIC_L,
+	FRIC_R,
+	FRIC_MOTOR_CNT,
+} fric_motor_cnt_t;
 
 /**
  *	@brief	设备工作状态(通用)

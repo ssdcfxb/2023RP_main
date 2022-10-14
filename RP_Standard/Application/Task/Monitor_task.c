@@ -15,8 +15,8 @@ void Start_Monitor_task(void const * argument)
 		{
 			chassis_motor[i].heart_beat(&chassis_motor[i]);
 		}
-		shoot_motor[0].heart_beat(&shoot_motor[0]);
-		shoot_motor[1].heart_beat(&shoot_motor[1]);
+		fric_motor[0].heart_beat(&fric_motor[0]);
+		fric_motor[1].heart_beat(&fric_motor[1]);
 		dial_motor.heart_beat(&dial_motor);
 		yaw_motor.heart_beat(&yaw_motor);
 		pitch_motor.heart_beat(&pitch_motor);

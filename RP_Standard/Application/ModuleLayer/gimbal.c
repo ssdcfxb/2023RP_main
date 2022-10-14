@@ -7,7 +7,7 @@ motor_6020_info_t	*gim_motor_info[2];
 int16_t            gim_out[2];
 
 float yaw_PID[6] = {11.0f, 1.2f, 0.f, 8.f, 0.f, 0.f};
-float pitch_PID[6] = {26.0f, 1.5f, 0.0f, 10.0f, 0.0f, 0.0f};
+float pitch_PID[6] = {20.0f, 1.3f, 0.0f, 8.0f, 0.0f, 0.0f};
 
 void Gimbal_Init(void);
 void Gimbal_Ctrl(void);

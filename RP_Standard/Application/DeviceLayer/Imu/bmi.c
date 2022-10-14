@@ -383,9 +383,9 @@ uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short 
 	gz = gz + Kp*ez + ezInt; 
 	
 	q0temp=q0;  
-    q1temp=q1;  
-    q2temp=q2;  
-    q3temp=q3; 
+	q1temp=q1;  
+	q2temp=q2;  
+	q3temp=q3; 
 	
 	q0 = q0temp + (-q1temp*gx - q2temp*gy -q3temp*gz)*halfT;
 	q1 = q1temp + (q0temp*gx + q2temp*gz -q3temp*gy)*halfT;

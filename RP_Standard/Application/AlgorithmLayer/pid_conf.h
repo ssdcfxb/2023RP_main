@@ -33,10 +33,10 @@
 #define CHAS_AG_KI 0.0f
 #define CHAS_AG_KD 5.0f
 
-#define SHOOT_SP_KP 0.0f
+#define SHOOT_SP_KP 5.0f
 #define SHOOT_SP_KI 0.0f
 #define SHOOT_SP_KD 0.0f
-#define SHOOT_AG_KP 0.0f
+#define SHOOT_AG_KP 5.0f
 #define SHOOT_AG_KI 0.0f
 #define SHOOT_AG_KD 0.0f
 
@@ -56,10 +56,10 @@
 #define YAW_MACHINE_AG_KI 0.0f
 #define YAW_MACHINE_AG_KD 0.0f
 
-#define PITCH_MACHINE_SP_KP 26.0f
-#define PITCH_MACHINE_SP_KI 1.5f
+#define PITCH_MACHINE_SP_KP 20.0f
+#define PITCH_MACHINE_SP_KI 1.3f
 #define PITCH_MACHINE_SP_KD 0.0f
-#define PITCH_MACHINE_AG_KP 10.0f
+#define PITCH_MACHINE_AG_KP 8.0f
 #define PITCH_MACHINE_AG_KI 0.0f
 #define PITCH_MACHINE_AG_KD 0.0f
 
@@ -81,16 +81,16 @@
 
 // M2006电机pid参数
 #define DIAL_SP_MAX_OUT 10000.0f
-#define DIAL_SP_MAX_INTEGRAL 6000.0f
+#define DIAL_SP_MAX_INTEGRAL 10000.0f
 #define DIAL_SP_MAX_I_OUT 6000.0f
 #define DIAL_AG_MAX_OUT 10000.0f
 #define DIAL_AG_MAX_INTEGRAL 3000.0f
 #define DIAL_AG_MAX_I_OUT 3000.0f
 
-#define DIAL_SP_KP 0.0f
-#define DIAL_SP_KI 0.0f
+#define DIAL_SP_KP 17.0f
+#define DIAL_SP_KI 1.2f
 #define DIAL_SP_KD 0.0f
-#define DIAL_AG_KP 0.0f
+#define DIAL_AG_KP 50.0f
 #define DIAL_AG_KI 0.0f
 #define DIAL_AG_KD 0.0f
 

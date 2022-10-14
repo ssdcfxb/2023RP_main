@@ -6,28 +6,34 @@ static void UpdateMotorData(motor_2006_t *motor, uint8_t* data);
 static void CheckMotorData(motor_2006_t *motor);
 static void M2006_Heart_Beat(motor_2006_t *motor);
 
-drv_can_t turnpalte_motor_driver = {
+drv_can_t dial_motor_driver = {
 	.hcan = &hcan2,
 	.rx_id = RM2006_CAN_ID_203,
 };
 
-motor_2006_info_t turnpalte_motor_info = {
+motor_2006_info_t dial_motor_info = {
 	.offline_max_cnt = 50,
 };
 	
-pid_t turnpalte_pid = {
+pid_t dial_pid = {
+	.speed.Kp = DIAL_SP_KP,
+	.speed.Ki = DIAL_SP_KI,
+	.speed.Kd = DIAL_SP_KD,
 	.speed.max_out = DIAL_SP_MAX_OUT,
 	.speed.max_integral = DIAL_SP_MAX_INTEGRAL,
 	.speed.max_iout = DIAL_SP_MAX_I_OUT,
+	.angle.Kp = DIAL_AG_KP,
+	.angle.Ki = DIAL_AG_KI,
+	.angle.Kd = DIAL_AG_KD,
 	.angle.max_out = DIAL_AG_MAX_OUT,
 	.angle.max_integral = DIAL_AG_MAX_INTEGRAL,
 	.angle.max_iout = DIAL_AG_MAX_I_OUT,
 };
 
 motor_2006_t dial_motor = {
-	.info = &turnpalte_motor_info,
-	.driver = &turnpalte_motor_driver,
-	.pid = &turnpalte_pid,
+	.info = &dial_motor_info,
+	.driver = &dial_motor_driver,
+	.pid = &dial_pid,
 	.init = Motor_Init,
 	.update = UpdateMotorData,
 	.check = CheckMotorData,
@@ -90,7 +96,7 @@ static void CheckMotorData(motor_2006_t *motor)
 	
 	  motor->info->last_ecd = motor->info->ecd;
 		motor->info->total_ecd += motor->info->delta_ecd;
-		motor->info->angle = motor->info->ecd * M2006_ECD_TO_ANGLE;
+		motor->info->angle = (motor->info->total_ecd % 294876) * M2006_ECD_TO_ANGLE;
 		motor->info->total_angle = motor->info->total_ecd * M2006_ECD_TO_ANGLE;
 		
 		motor->info->offline_cnt = 0;

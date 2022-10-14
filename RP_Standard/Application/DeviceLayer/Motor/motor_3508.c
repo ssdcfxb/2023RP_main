@@ -147,18 +147,18 @@ motor_3508_t chassis_motor[] = {
 	},
 };
 
-drv_can_t shoot_motor_driver[] = {
-	[SHOOT_L] = {
+drv_can_t fric_motor_driver[] = {
+	[FRIC_L] = {
 	  .hcan = &hcan2,
 	  .rx_id = RM3508_CAN_ID_201,
 	},
-	[SHOOT_R] = {
+	[FRIC_R] = {
 	  .hcan = &hcan2,
 	  .rx_id = RM3508_CAN_ID_202,
 	},
 };
 
-motor_3508_info_t shoot_motor_info[] = {
+motor_3508_info_t fric_motor_info[] = {
 	{
     .offline_max_cnt = 50,
 	},
@@ -167,8 +167,8 @@ motor_3508_info_t shoot_motor_info[] = {
 	},
 };
 
-pid_t shoot_pid[] = {
-	[SHOOT_L] = {
+pid_t fric_pid[] = {
+	[FRIC_L] = {
 	  .speed.Kp = SHOOT_SP_KP,
 		.speed.Ki = SHOOT_SP_KI,
 		.speed.Kd = SHOOT_SP_KD,
@@ -182,7 +182,7 @@ pid_t shoot_pid[] = {
 		.angle.max_integral = SHOOT_AG_MAX_INTEGRAL,
 		.angle.max_iout = SHOOT_AG_MAX_I_OUT,
 	},
-	[SHOOT_R] = {
+	[FRIC_R] = {
 	  .speed.Kp = SHOOT_SP_KP,
 		.speed.Ki = SHOOT_SP_KI,
 		.speed.Kd = SHOOT_SP_KD,
@@ -198,11 +198,11 @@ pid_t shoot_pid[] = {
 	},
 };
 
-motor_3508_t shoot_motor[] = {
-	[SHOOT_L] = {
-    .info = &shoot_motor_info[SHOOT_L],
-	  .driver = &shoot_motor_driver[SHOOT_L],
-		.pid = &shoot_pid[SHOOT_L],
+motor_3508_t fric_motor[] = {
+	[FRIC_L] = {
+    .info = &fric_motor_info[FRIC_L],
+	  .driver = &fric_motor_driver[FRIC_L],
+		.pid = &fric_pid[FRIC_L],
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,
@@ -210,10 +210,10 @@ motor_3508_t shoot_motor[] = {
 	  .work_state = DEV_OFFLINE,
 	  .id = DEV_ID_SHOOT_L,
 	},
-	[SHOOT_R] = {
-    .info = &shoot_motor_info[SHOOT_R],
-	  .driver = &shoot_motor_driver[SHOOT_R],
-		.pid = &shoot_pid[SHOOT_R],
+	[FRIC_R] = {
+    .info = &fric_motor_info[FRIC_R],
+	  .driver = &fric_motor_driver[FRIC_R],
+		.pid = &fric_pid[FRIC_R],
     .init = Motor_Init,
 	  .update = UpdateMotorData,
 	  .check = Check_Motor_Data,

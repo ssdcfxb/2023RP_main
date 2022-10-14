@@ -39,6 +39,6 @@ typedef struct __motor_3508_t
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 extern motor_3508_t chassis_motor[CHAS_MOTOR_CNT];
-extern motor_3508_t shoot_motor[FRIC_MOTOR_CNT];
+extern motor_3508_t fric_motor[FRIC_MOTOR_CNT];
 
 #endif

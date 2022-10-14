@@ -8,84 +8,87 @@
 #include "motor_3508.h"
 #include "motor_2006.h"
 
-//// 摩擦轮模式枚举
-//typedef enum
-//{
-//	G_Y_gyro,      // 陀螺仪
-//	G_Y_machine,   // 机械
-//	G_Y_keep,      // 保持
-//} shoot_mode_e;
-
-//// 拨盘模式枚举
-//typedef enum
-//{
-//	G_P_gyro,      // 陀螺仪
-//	G_P_machine,   // 机械
-//	G_P_keep,      // 保持
-//} dial_mode_e;
-
-// 发射机构模式枚举
+// 摩擦轮状态枚举
 typedef enum
 {
-	Shoot_Keep,     // 连发
-	Shoot_Single,   // 单发
-	Shoot_Reset,    // 复位
-} launcher_mode_e;
+	On_Fric,        // 开启
+	Off_Fric,       // 关闭
+	WaitCommond_Fric // 等待指令
+} fric_status_e;
+
+// 拨盘状态枚举
+typedef enum
+{
+	Reload_Dial,   // 补弹
+	F_Lock_Dial,   // 正向卡弹
+	Unload_Dial,   // 退弹
+	B_Lock_Dial,   // 反向卡弹
+	WaitCommond_Dial // 等待指令
+} dial_status_e;
+
+// 发射机构指令枚举
+typedef enum
+{
+	Fric_Toggle,    // 开关摩擦轮
+	Magz_Open,      // 开弹仓
+	Func_Reset,     // 功能复位
+	Keep_Shoot,     // 连发
+	Single_Shoot,   // 单发
+	WaitCommond_L // 等待指令
+} launcher_commond_e;
 
 typedef struct 
 {
-	motor_3508_t  *shoot_left;
-	motor_3508_t  *shoot_right;
+	motor_3508_t  *fric_left;
+	motor_3508_t  *fric_right;
 	motor_2006_t  *dial_motor;
 	rc_sensor_t		*rc_sensor;
 } shoot_dev_t;
 
 typedef struct
 {
-	remote_mode_t		 remote_mode;
-	launcher_mode_e  launcher_mode;
-//	shoot_mode_e     shoot_mode;
-//	dial_mode_e      dial_mode;
+	remote_mode_t		    remote_mode;
 	int16_t  measure_left_speed;
 	int16_t  measure_right_speed;
 	int16_t  measure_dial_speed;
-	int16_t  measure_dial_angle;
+	float    measure_dial_angle;
 	
-	int16_t  target_left_speed;
-	int16_t  target_right_speed;
-	int16_t  target_dial_speed;
-	int16_t  target_dial_angle;
+	float  target_left_speed;
+	float  target_right_speed;
+	float  target_dial_speed;
+	float  target_dial_angle;
 	
+	uint8_t  init_s2;
+	uint8_t  last_s2;
+	
+	dev_work_state_t  rc_work_state;
 } shoot_info_t;
 
 typedef struct
 {
-	int16_t  MID_VALUE;
-	int16_t  restart_yaw_motor_angle;
-	float    restart_yaw_imu_angle;
-	int16_t  restart_pitch_motor_angle;
-	float    restart_pitch_imu_angle;
-	
-	int16_t  rc_pitch_motor_offset;
-	float    rc_yaw_imu_offset;
-	float    rc_pitch_imu_offset;
-	
-	float    max_pitch_imu_angle; // 俯
-	float    min_pitch_imu_angle; // 仰
-	int16_t  max_pitch_motor_angle; // 俯
-	int16_t  min_pitch_motor_angle; // 仰
+ 	launcher_commond_e  launcher_commond;
+	fric_status_e       fric_status;
+	dial_status_e       dial_status;
+} shoot_work_info_t;
+
+typedef struct
+{
+	float  fric_speed;
+	float  dial_speed;
 } shoot_conf_t;
 
 typedef struct 
 {
-	shoot_dev_t    *dev;
-	shoot_info_t   *info;
-	shoot_conf_t   *conf;
+	shoot_dev_t        *dev;
+	shoot_info_t       *info;
+	shoot_work_info_t  *work_info;
+	shoot_conf_t       *conf;
 	void			(*init)(void);
 	void			(*ctrl)(void);
 	void			(*self_protect)(void);
 } launcher_t;
 
+extern launcher_t launcher;
 
 //void Shoot_GetInfo(void);
 //void Shoot_Stop(void);
