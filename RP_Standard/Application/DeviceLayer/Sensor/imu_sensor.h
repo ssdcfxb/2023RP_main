@@ -12,9 +12,12 @@ typedef struct imu_sensor_info_struct {
 	float yaw;
 	float pitch;
 	float roll;
-	short rate_yaw;
-	short rate_pitch;
-	short rate_roll;
+	float rate_yaw;
+	float rate_pitch;
+	float rate_roll;
+	float ave_rate_yaw;
+	float ave_rate_pitch;
+	float ave_rate_roll;
 	float rate_yaw_offset;
 	float rate_pitch_offset;
 	

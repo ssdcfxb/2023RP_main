@@ -324,73 +324,90 @@ void BMI_Get_ACC(short *aax,short *aay,short *aaz)
     @halfT
         解算周期的一半，比如1ms解算1次则halfT为0.0005f
 */
-float Kp = 0.1f;    
-float Ki = 0.f;
-float halfT = 0.0005f;
-
+float Kp = 0.5f;//4
 float norm;
+float halfT = 0.0005f;
 float vx, vy, vz;
 float ex, ey, ez;
-float gx,gy,gz,ax,ay,az;	 
-float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;
-float exInt,eyInt,ezInt;
-float q0temp,q1temp,q2temp,q3temp; 
-uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short *ggy,short *ggz,short *aax,short *aay,short *aaz)
-{ 
-	gx =*ggx ;
-	gy =*ggy ;
-	gz = (int16_t)(*ggz /3) *3 ;    // 死区处理，减小yaw漂移速度
-	ax =*aax;
-	ay =*aay;
-	az =*aaz;
+float gx,gy,gz,ax,ay,az;
+float q0_init = 1.0f, q1_init = 0.0f, q2_init = 0.0f, q3_init = 0.0f;  //将云台摆到yaw、pitch都为零时即初始值
+float q0 = 1.0f, q1 = 0.0f, q2 = 0.0f, q3 = 0.0f;  //将云台摆到yaw、pitch都为零时即初始值
+float q0temp,q1temp,q2temp,q3temp;
+float gx_, gy_, gz_;
+float q0_, q1_, q2_, q3_;
+float q0temp_,q1temp_,q2temp_,q3temp_;
+float a_sum;
+/**
+  * @brief  不带_的为涉及加速度计的，带_的为不涉及加速度计的，用于差分计算速度
+  * @param  
+  * @retval 
+  */
+uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,\
+                           float *pitch_,float *roll_,float *yaw_,\
+													 float *ggx,float *ggy,float *ggz,\
+													 float *aax,float *aay,float *aaz)
+{
+	/* 陀螺仪值赋值 */
+	gx = *ggx;
+	gy = *ggy;
+	gz = *ggz;
 	
-	if(ax * ay *az == 0)
-	{
-		return 0;
-	}
-
+	/* 加速度计值赋值 */
+	ax = *aax;
+	ay = *aay;
+	az = *aaz;
+	
+	/* 陀螺仪数据单位转换（to度每秒） */
 	gx = lsb_to_dps(gx,2000,bmi2_dev.resolution);
 	gy = lsb_to_dps(gy,2000,bmi2_dev.resolution);
 	gz = lsb_to_dps(gz,2000,bmi2_dev.resolution);
 	
-	gx = gx * 0.0174f;
-	gy = gy * 0.0174f;
-	gz = gz * 0.0174f;
+	/* 陀螺仪数据单位转换（to弧度每秒） */
+	gx = gx * (double)0.017453;
+	gy = gy * (double)0.017453;
+	gz = gz * (double)0.017453;
+	
+	/* 备份给速度解算用 */
+	gx_ = gx;
+	gy_ = gy;
+	gz_ = gz;
+	
+	/* 角度解算start */
+	/* 加速度计数据检查 */
+	if(ax * ay *az != 0)
+	{
+		/* 加速度计数据单位转换（to米每二次方秒） */
+		ax = lsb_to_mps2(ax,2,bmi2_dev.resolution);
+		ay = lsb_to_mps2(ay,2,bmi2_dev.resolution);
+		az = lsb_to_mps2(az,2,bmi2_dev.resolution);
 
-	ax = lsb_to_mps2(ax,2,bmi2_dev.resolution);
-	ay = lsb_to_mps2(ay,2,bmi2_dev.resolution);
-	az = lsb_to_mps2(az,2,bmi2_dev.resolution);	
-
-	norm = inVSqrt(ax*ax + ay*ay + az*az);
-	ax = ax *norm;
-	ay = ay *norm;
-	az = az *norm;
+		norm = inVSqrt(ax*ax + ay*ay + az*az);
+		ax = ax *norm;
+		ay = ay *norm;
+		az = az *norm;
+		
+		vx = 2*(q1*q3 - q0*q2);//-sin(Pitch) cos(K,i)
+		vy = 2*(q0*q1 + q2*q3);//sin(Roll)cos(Pitch) cos(K,j)
+		vz = q0*q0 - q1*q1 - q2*q2 + q3*q3;//cos(Roll)cos(Pitch) cos(K,k)
+		
+		ex = (ay*vz - az*vy) ;
+		ey = (az*vx - ax*vz) ;//切线方向加速度
+		ez = (ax*vy - ay*vx) ;
+		
+		gx = gx + Kp*ex;
+		gy = gy + Kp*ey;
+		gz = gz + Kp*ez;
+	}
 	
-	vx = 2*(q1*q3 - q0*q2); 
-	vy = 2*(q0*q1 + q2*q3);
-	vz = q0*q0 - q1*q1 - q2*q2 + q3*q3;
-	
-	ex = (ay*vz - az*vy) ;   
-	ey = (az*vx - ax*vz) ;
-	ez = (ax*vy - ay*vx) ;
-	
-	exInt = exInt + ex * Ki;   
-	eyInt = eyInt + ey * Ki;
-	ezInt = ezInt + ez * Ki;
-	
-	gx = gx + Kp*ex + exInt;
-	gy = gy + Kp*ey + eyInt;
-	gz = gz + Kp*ez + ezInt; 
-	
-	q0temp=q0;  
-	q1temp=q1;  
-	q2temp=q2;  
-	q3temp=q3; 
+	q0temp=q0;
+  q1temp=q1;
+  q2temp=q2;
+  q3temp=q3;
 	
 	q0 = q0temp + (-q1temp*gx - q2temp*gy -q3temp*gz)*halfT;
-	q1 = q1temp + (q0temp*gx + q2temp*gz -q3temp*gy)*halfT;
-	q2 = q2temp + (q0temp*gy - q1temp*gz +q3temp*gx)*halfT;
-	q3 = q3temp + (q0temp*gz + q1temp*gy -q2temp*gx)*halfT;
+	q1 = q1temp + ( q0temp*gx + q2temp*gz -q3temp*gy)*halfT;
+	q2 = q2temp + ( q0temp*gy - q1temp*gz +q3temp*gx)*halfT;
+	q3 = q3temp + ( q0temp*gz + q1temp*gy -q2temp*gx)*halfT;
 	
 	norm = inVSqrt(q0*q0 + q1*q1 + q2*q2 + q3*q3);
 	q0 = q0 * norm;
@@ -398,9 +415,32 @@ uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short 
 	q2 = q2 * norm;
 	q3 = q3 * norm;
 	
-	*roll = atan2(2 * q2 * q3 + 2 * q0 * q1,q0*q0 - q1 * q1 -  q2 * q2 + q3 *q3)* 57.3f;
-	*pitch = -asin( 2 * q1 * q3 -2 * q0* q2)*57.3f;
-	*yaw =  atan2(2*(q1*q2 + q0*q3),q0*q0 +q1*q1-q2*q2 -q3*q3)*57.3f ;
+	*roll = atan2(2 * q2 * q3 + 2 * q0 * q1,q0*q0 - q1 * q1 -  q2 * q2 + q3 *q3)* 57.295773f;
+	*pitch = -asin( 2 * q1 * q3 -2 * q0* q2)*57.295773f;
+	*yaw =  atan2(2*(q1*q2 + q0*q3),q0*q0 +q1*q1-q2*q2 -q3*q3)*57.295773f;
+	/* 角度解算end */
+
+	/* 速度解算begin */
+	q0temp_ = q0_init;
+	q1temp_ = q1_init;
+	q2temp_ = q2_init;
+	q3temp_ = q3_init;
+	
+	q0_ = q0temp_ + (-q1temp_*gx_ - q2temp_*gy_ -q3temp_*gz_)*halfT;
+	q1_ = q1temp_ + ( q0temp_*gx_ + q2temp_*gz_ -q3temp_*gy_)*halfT;
+	q2_ = q2temp_ + ( q0temp_*gy_ - q1temp_*gz_ +q3temp_*gx_)*halfT;
+	q3_ = q3temp_ + ( q0temp_*gz_ + q1temp_*gy_ -q2temp_*gx_)*halfT;
+	
+	norm = inVSqrt(q0_*q0_ + q1_*q1_ + q2_*q2_ + q3_*q3_);
+	q0_ = q0_ * norm;
+	q1_ = q1_ * norm;
+	q2_ = q2_ * norm;
+	q3_ = q3_ * norm;
+	
+	*roll_ = atan2(2 * q2_ * q3_ + 2 * q0_ * q1_,q0_*q0_ - q1_ * q1_ -  q2_ * q2_ + q3_ *q3_)* 57.295773f;
+	*pitch_ = -asin( 2 * q1_ * q3_ -2 * q0_ * q2_)*57.295773f;
+	*yaw_ =  atan2(2*(q1_*q2_ + q0_*q3_),q0_*q0_ +q1_*q1_-q2_*q2_ -q3_*q3_)*57.295773f;
+	/* 速度解算end */
 	
 	return 0;
 }

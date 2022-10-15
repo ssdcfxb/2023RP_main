@@ -26,11 +26,14 @@
 /* 数值函数 */
 #define constrain(x, min, max)	((x>max)?max:(x<min?min:x))
 #define abs(x) 					((x)>0? (x):(-(x)))
+#define one(x)					((x)>0? (1):(-1))
 /* 斜坡函数 */
 int16_t RampInt(int16_t final, int16_t now, int16_t ramp);
 float RampFloat(float final, float now, float ramp);
 /* 死区函数 */
 float DeathZoom(float input, float center, float death);
+/* 低通滤波 */
+float lowpass(float X_last, float X_new, float K);
 
 #endif
 

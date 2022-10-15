@@ -19,6 +19,18 @@
 /* Exported variables --------------------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /* Exported functions --------------------------------------------------------*/
+
+/**
+  * @brief  µÍÍ¨ÂË²¨
+  * @param  
+  * @retval 
+  */
+float lowpass(float X_last, float X_new, float K)
+{
+	return (X_last + (X_new - X_last) * K);
+}
+
+
 int16_t RampInt(int16_t final, int16_t now, int16_t ramp)
 {
 	int32_t buffer = 0;

@@ -41,7 +41,10 @@ void BMI_Get_RawData(short *ggx,short *ggy,short *ggz,short *aax,short *aay,shor
 void BMI_Get_AUX(short *au1,short *au2,short *au3,short *au4);
 void BMI_Get_GRO(short *gx,short *gy,short *gz);
 void BMI_Get_ACC(short *ax,short *ay,short *az);
-uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,short *ggx,short *ggy,short *ggz,short *aax,short *aay,short *aaz);
+uint8_t BMI_Get_EulerAngle(float *pitch,float *roll,float *yaw,\
+													 float *pitch_,float *roll_,float *yaw_,\
+													 float *ggx,float *ggy,float *ggz,\
+													 float *aax,float *aay,float *aaz);
 int8_t BMI_Init(void);
 
 #endif

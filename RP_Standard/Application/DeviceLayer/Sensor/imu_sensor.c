@@ -48,8 +48,8 @@ static void imu_sensor_check(imu_sensor_t *imu_sen)
 	imu_sensor_info_t *imu_info = imu_sen->info;
 	// ¼ÓÈëÂË²¨Ëã·¨
 	
-	imu_info->rate_yaw -= imu_info->rate_yaw_offset;
-	imu_info->rate_pitch -= imu_info->rate_pitch_offset;
+//	imu_info->rate_yaw -= imu_info->rate_yaw_offset;
+//	imu_info->rate_pitch -= imu_info->rate_pitch_offset;
 	
 	imu_info->offline_cnt = 0;
 }
