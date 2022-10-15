@@ -23,11 +23,15 @@ shoot_work_info_t  shoot_work_info = {
 	.fric_status = WaitCommond_Fric,
 	.dial_status = WaitCommond_Dial,
 	.launcher_commond = WaitCommond_L,
+	.lock_cnt = 0,
 };
 
 shoot_conf_t   shoot_conf = {
 	.fric_speed = 2000.0f,
 	.dial_speed = -1500.0f,
+	.lock_angle_check = 1.5f,
+	.lock_cnt = 50,
+	.F_Lock_Angle = 30.0f,
 };
 
 launcher_t launcher = {
@@ -96,6 +100,12 @@ void Shoot_GetRcState(void)
 				else if (rc_sensor.info->s2 == 1)
 				{
 					launcher.work_info->launcher_commond = Keep_Shoot;
+					if (launcher.info->last_s2 != rc_sensor.info->s2)
+					{
+						launcher.work_info->dial_status = Reload_Dial;
+						//launcher.info->target_dial_angle = 45.0f + launcher.info->measure_dial_angle
+						arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+					}
 				}
 			}
 			else if (gimbal.info->gimbal_mode == gim_machine)
@@ -111,6 +121,12 @@ void Shoot_GetRcState(void)
 				else if (rc_sensor.info->s2 == 1)
 				{
 					launcher.work_info->launcher_commond = Single_Shoot;
+					if (launcher.info->last_s2 != rc_sensor.info->s2)
+					{
+						launcher.work_info->dial_status = Reload_Dial;
+						//launcher.info->target_dial_angle = 45.0f + launcher.info->measure_dial_angle
+						arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+					}
 				}
 			}
 		}
@@ -152,9 +168,69 @@ void Fric_StepCheck(void)
 
 void Dial_StatusCheck(void)
 {
-	if (dial_motor.pid->speed_out < -300.0f && launcher.info->measure_dial_speed > -50.0f)
+	if (launcher.work_info->dial_status == Reload_Dial)
 	{
-		
+		if (launcher.info->measure_dial_angle < launcher.info->target_dial_angle + launcher.conf->lock_angle_check)
+		{
+			if (launcher.work_info->launcher_commond == Keep_Shoot)
+			{
+				//launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle
+				arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+			}
+			else if (launcher.work_info->launcher_commond == Single_Shoot)
+			{
+				launcher.work_info->dial_status = WaitCommond_Dial;
+			}
+		}
+		else 
+		{
+			if (abs(launcher.info->measure_dial_speed) < 5)
+			{
+				launcher.work_info->lock_cnt ++;
+				if (launcher.work_info->lock_cnt > launcher.conf->lock_cnt)
+				{
+					launcher.work_info->dial_status = F_Lock_Dial;
+					//launcher.info->target_dial_angle = launcher.conf->F_Lock_Angle + launcher.info->measure_dial_angle
+					arm_add_f32(&launcher.info->measure_dial_angle, &launcher.conf->F_Lock_Angle, &launcher.info->target_dial_angle, 1);
+					launcher.work_info->lock_cnt = 0;
+				}
+			}
+			else 
+			{
+				launcher.work_info->lock_cnt = 0;
+			}
+		}
+	}
+	else if (launcher.work_info->dial_status == F_Lock_Dial)
+	{
+		if (launcher.info->measure_dial_angle > launcher.info->target_dial_angle - launcher.conf->lock_angle_check)
+		{
+			//launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle
+			arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+			launcher.work_info->dial_status = Reload_Dial;
+		}
+		else 
+		{
+			if (abs(launcher.info->measure_dial_speed) < 5)
+			{
+				launcher.work_info->lock_cnt ++;
+				if (launcher.work_info->lock_cnt > launcher.conf->lock_cnt)
+				{
+					launcher.work_info->dial_status = Reload_Dial;
+					//launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle
+					arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+					launcher.work_info->lock_cnt = 0;
+				}
+			}
+			else 
+			{
+				launcher.work_info->lock_cnt = 0;
+			}
+		}
+	}
+	else
+	{
+		launcher.work_info->dial_status = WaitCommond_Dial;
 	}
 }
 
@@ -163,16 +239,6 @@ void Get_LauncherStatus(void)
 	Fric_StepCheck();
 	
 	Dial_StatusCheck();
-	
-//	if (launcher.work_info->launcher_commond == Single_Shoot)
-//	{
-//		if (launcher.work_info->dial_status != WaitCommond_Dial)
-//		{
-//			launcher.work_info->dial_status = Reload_Dial;
-//		}
-//		
-//	}
-	
 	
 }
 
@@ -217,22 +283,8 @@ void Fric_Ctrl(void)
 
 void Dial_Ctrl(void)
 {
-	if (launcher.work_info->launcher_commond == Keep_Shoot)
+	if (launcher.work_info->dial_status != WaitCommond_Dial)
 	{
-		launcher.info->target_dial_speed = launcher.conf->dial_speed;
-		
-		dial_motor.pid->speed_out = PID_Plc_Calc(&dial_motor.pid->speed, 
-																						 launcher.info->measure_dial_speed, 
-																						 launcher.info->target_dial_speed);
-	}
-	else if (launcher.work_info->launcher_commond == Single_Shoot)
-	{
-		if (launcher.info->last_s2 != rc_sensor.info->s2)
-		{
-			//launcher.info->target_dial_angle = 45.0f + launcher.info->measure_dial_angle
-			arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
-		}
-		
 		// 过零点处理
 		if (launcher.info->target_dial_angle < -360.0f)
 		{
@@ -350,4 +402,3 @@ void Shoot_SelfProtect(void)
 	Shoot_Stop();
 	Shoot_GetInfo();
 }
-

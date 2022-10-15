@@ -33,8 +33,8 @@
 #define CHAS_AG_KI 0.0f
 #define CHAS_AG_KD 5.0f
 
-#define SHOOT_SP_KP 5.0f
-#define SHOOT_SP_KI 0.0f
+#define SHOOT_SP_KP 15.0f
+#define SHOOT_SP_KI 0.5f
 #define SHOOT_SP_KD 0.0f
 #define SHOOT_AG_KP 5.0f
 #define SHOOT_AG_KI 0.0f
@@ -90,7 +90,7 @@
 #define DIAL_SP_KP 17.0f
 #define DIAL_SP_KI 1.2f
 #define DIAL_SP_KD 0.0f
-#define DIAL_AG_KP 50.0f
+#define DIAL_AG_KP 200.0f
 #define DIAL_AG_KI 0.0f
 #define DIAL_AG_KD 0.0f
 

@@ -2,6 +2,7 @@
 #define __SHOOT_H
 
 #include "rp_config.h"
+#include "rp_math.h"
 
 #include "gimbal.h"
 #include "rc_sensor.h"
@@ -21,8 +22,8 @@ typedef enum
 {
 	Reload_Dial,   // 补弹
 	F_Lock_Dial,   // 正向卡弹
-	Unload_Dial,   // 退弹
-	B_Lock_Dial,   // 反向卡弹
+//	Unload_Dial,   // 退弹
+//	B_Lock_Dial ,  // 反向卡弹
 	WaitCommond_Dial // 等待指令
 } dial_status_e;
 
@@ -58,6 +59,8 @@ typedef struct
 	float  target_dial_speed;
 	float  target_dial_angle;
 	
+	
+	
 	uint8_t  init_s2;
 	uint8_t  last_s2;
 	
@@ -69,12 +72,16 @@ typedef struct
  	launcher_commond_e  launcher_commond;
 	fric_status_e       fric_status;
 	dial_status_e       dial_status;
+	uint16_t            lock_cnt;
 } shoot_work_info_t;
 
 typedef struct
 {
-	float  fric_speed;
-	float  dial_speed;
+	float    fric_speed;
+	float    dial_speed;
+	float    lock_angle_check;
+	int16_t  lock_cnt;
+	float    F_Lock_Angle;
 } shoot_conf_t;
 
 typedef struct 
