@@ -172,6 +172,7 @@ void Fric_StepCheck(void)
 	}
 }
 
+// ²¦ÅÌ¶Â×ª¼ì²â
 void Dial_StatusCheck(void)
 {
 	if (launcher.work_info->dial_status == Reload_Dial)
