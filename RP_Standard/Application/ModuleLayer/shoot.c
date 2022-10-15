@@ -131,6 +131,12 @@ void Shoot_GetRcState(void)
 			}
 		}
 	}
+	else 
+	{
+		launcher.work_info->launcher_commond = WaitCommond_L;
+		launcher.work_info->fric_status = WaitCommond_Fric;
+		launcher.work_info->dial_status = WaitCommond_Dial;
+	}
 }
 
 void Shoot_GetCtrlInfo(void)
