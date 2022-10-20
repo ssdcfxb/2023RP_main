@@ -128,11 +128,11 @@ void Gimbal_GetBaseInfo(void)
 	gimbal.info->measure_pitch_motor_angle = pitch_motor.info->ecd;
 	gimbal.info->measure_pitch_motor_speed = pitch_motor.info->speed_rpm;
 	
-	gimbal.info->measure_yaw_imu_speed = imu_sensor.info->rate_yaw;
+	gimbal.info->measure_yaw_imu_speed = imu_sensor.info->ave_rate_yaw;
 	gimbal.info->measure_yaw_imu_angle = imu_sensor.info->yaw;
-	gimbal.info->measure_pitch_imu_speed = imu_sensor.info->rate_pitch;
+	gimbal.info->measure_pitch_imu_speed = imu_sensor.info->ave_rate_pitch;
 	gimbal.info->measure_pitch_imu_angle = imu_sensor.info->pitch;
-	gimbal.info->measure_roll_imu_speed = imu_sensor.info->rate_roll;
+	gimbal.info->measure_roll_imu_speed = imu_sensor.info->ave_rate_roll;
 	gimbal.info->measure_roll_imu_angle = imu_sensor.info->roll;
 	
 	gimbal.info->yaw_real_rate = gimbal.info->measure_yaw_imu_speed * arm_cos_f32(gimbal.info->measure_pitch_imu_angle * ANGLE_TO_RAD) \
