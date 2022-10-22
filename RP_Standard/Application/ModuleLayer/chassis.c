@@ -315,16 +315,12 @@ void Chassis_RcCtrl(void)
 	arm_abs_f32(&right, &right, 1);
 	arm_abs_f32(&round, &round, 1);
 	
-	// sum = front + right + round;
-	arm_add_f32(&front, &right, &sum, 1);
-	arm_add_f32(&sum, &round, &sum, 1);
+	sum = front + right + round;
 	if (sum > 8000.0f)
 	{
 		for (uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
 		{
-			// chas_motor[i]->pid->speed.set = chas_motor[i]->pid->speed.set / sum * chas_info.limit_speed;
-			chas_motor[i]->pid->speed.set /= sum;
-      arm_mult_f32(&chas_motor[i]->pid->speed.set, &chas_conf.limit_speed, &chas_motor[i]->pid->speed.set, 1);			
+			chas_motor[i]->pid->speed.set = chas_motor[i]->pid->speed.set / sum * chas_conf.limit_speed;
 		}
 	}
 }

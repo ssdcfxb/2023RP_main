@@ -103,8 +103,7 @@ void Shoot_GetRcState(void)
 					if (launcher.info->last_s2 != rc_sensor.info->s2)
 					{
 						launcher.work_info->dial_status = Reload_Dial;
-						//launcher.info->target_dial_angle = 45.0f + launcher.info->measure_dial_angle
-						arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+						launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle;
 					}
 				}
 			}
@@ -124,8 +123,7 @@ void Shoot_GetRcState(void)
 					if (launcher.info->last_s2 != rc_sensor.info->s2)
 					{
 						launcher.work_info->dial_status = Reload_Dial;
-						//launcher.info->target_dial_angle = 45.0f + launcher.info->measure_dial_angle
-						arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+						launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle;
 					}
 				}
 			}
@@ -181,8 +179,7 @@ void Dial_StatusCheck(void)
 		{
 			if (launcher.work_info->launcher_commond == Keep_Shoot)
 			{
-				//launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle
-				arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+				launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle;
 			}
 			else if (launcher.work_info->launcher_commond == Single_Shoot)
 			{
@@ -197,8 +194,7 @@ void Dial_StatusCheck(void)
 				if (launcher.work_info->lock_cnt > launcher.conf->lock_cnt)
 				{
 					launcher.work_info->dial_status = F_Lock_Dial;
-					//launcher.info->target_dial_angle = launcher.conf->F_Lock_Angle + launcher.info->measure_dial_angle
-					arm_add_f32(&launcher.info->measure_dial_angle, &launcher.conf->F_Lock_Angle, &launcher.info->target_dial_angle, 1);
+					launcher.info->target_dial_angle = launcher.conf->F_Lock_Angle + launcher.info->measure_dial_angle;
 					launcher.work_info->lock_cnt = 0;
 				}
 			}
@@ -212,8 +208,7 @@ void Dial_StatusCheck(void)
 	{
 		if (launcher.info->measure_dial_angle > launcher.info->target_dial_angle - launcher.conf->lock_angle_check)
 		{
-			//launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle
-			arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+			launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle;
 			launcher.work_info->dial_status = Reload_Dial;
 		}
 		else 
@@ -224,8 +219,7 @@ void Dial_StatusCheck(void)
 				if (launcher.work_info->lock_cnt > launcher.conf->lock_cnt)
 				{
 					launcher.work_info->dial_status = Reload_Dial;
-					//launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle
-					arm_offset_f32(&launcher.info->measure_dial_angle, -45.0f, &launcher.info->target_dial_angle, 1);
+					launcher.info->target_dial_angle = -45.0f + launcher.info->measure_dial_angle;
 					launcher.work_info->lock_cnt = 0;
 				}
 			}

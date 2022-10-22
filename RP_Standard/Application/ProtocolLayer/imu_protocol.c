@@ -59,8 +59,7 @@ void imu_sensor_update(imu_sensor_t *imu_sen)
 	{
 		imu_info->rate_pitch -= one(imu_info->rate_pitch) * 360.0f;
 	}
-	// imu_info->rate_pitch *= 1000.0f
-	arm_scale_f32(&imu_info->rate_pitch, 1000.0f, &imu_info->rate_pitch, 1);
+	imu_info->rate_pitch *= 1000.0f;
 	imu_info->ave_rate_pitch = ave_fil_update(&imu_pitch_dif_speed_ave_filter, imu_info->rate_pitch, 3);
 	
 	//roll
@@ -69,8 +68,7 @@ void imu_sensor_update(imu_sensor_t *imu_sen)
 	{
 		imu_info->rate_roll -= one(imu_info->rate_roll) * 360.0f;
 	}
-	// imu_info->rate_roll *= 1000.0f
-	arm_scale_f32(&imu_info->rate_roll, 1000.0f, &imu_info->rate_roll, 1);
+	imu_info->rate_roll *= 1000.0f;
 	imu_info->ave_rate_roll = ave_fil_update(&imu_roll_dif_speed_ave_filter, imu_info->rate_roll, 3);
 	
 	//yaw
@@ -79,8 +77,7 @@ void imu_sensor_update(imu_sensor_t *imu_sen)
 	{
 		imu_info->rate_yaw -= one(imu_info->rate_yaw) * 360.0f;
 	}
-	// imu_info->rate_yaw *= 1000.0f
-	arm_scale_f32(&imu_info->rate_yaw, 1000.0f, &imu_info->rate_yaw, 1);
+	imu_info->rate_yaw *= 1000.0f;
 	imu_info->ave_rate_yaw = ave_fil_update(&imu_yaw_dif_speed_ave_filter, imu_info->rate_yaw, 3);
 	
 	
