@@ -6,8 +6,8 @@ motor_6020_t			*gim_motor[2];
 motor_6020_info_t	*gim_motor_info[2];
 int16_t            gim_out[2];
 
-float yaw_PID[6] = {11.0f, 1.2f, 0.f, 8.f, 0.f, 0.f};
-float pitch_PID[6] = {20.0f, 1.3f, 0.0f, 8.0f, 0.0f, 0.0f};
+float yaw_PID[6] = {500.0f, 2.f, 0.f, 10.f, 0.f, 0.f};
+float pitch_PID[6] = {500.0f, 2.f, 0.0f, 10.f, 0.0f, 0.0f};
 
 void Gimbal_Init(void);
 void Gimbal_Ctrl(void);
@@ -81,42 +81,42 @@ void PID_ParamsInit(motor_6020_t *motor)
 	{
 		if (gimbal.info->yaw_mode == G_Y_machine)
 		{
-			motor->pid->speed.Kp = yaw_PID[0];//YAW_MACHINE_SP_KP;
-			motor->pid->speed.Ki = yaw_PID[1];//YAW_MACHINE_SP_KI;
-			motor->pid->speed.Kd = yaw_PID[2];//YAW_MACHINE_SP_KD;
-			motor->pid->angle.Kp = yaw_PID[3];//YAW_MACHINE_AG_KP;
-			motor->pid->angle.Ki = yaw_PID[4];//YAW_MACHINE_AG_KI;
-			motor->pid->angle.Kd = yaw_PID[5];//YAW_MACHINE_AG_KD;
+			motor->pid->speed.Kp = YAW_MACHINE_SP_KP;
+			motor->pid->speed.Ki = YAW_MACHINE_SP_KI;
+			motor->pid->speed.Kd = YAW_MACHINE_SP_KD;
+			motor->pid->angle.Kp = YAW_MACHINE_AG_KP;
+			motor->pid->angle.Ki = YAW_MACHINE_AG_KI;
+			motor->pid->angle.Kd = YAW_MACHINE_AG_KD;
 		}
 		else if (gimbal.info->yaw_mode == G_Y_gyro)
 		{
-			motor->pid->speed.Kp = YAW_GYRO_SP_KP;
-			motor->pid->speed.Ki = YAW_GYRO_SP_KI;
-			motor->pid->speed.Kd = YAW_GYRO_SP_KD;
-			motor->pid->angle.Kp = YAW_GYRO_AG_KP;
-			motor->pid->angle.Ki = YAW_GYRO_AG_KI;
-			motor->pid->angle.Kd = YAW_GYRO_AG_KD;
+			motor->pid->speed.Kp = yaw_PID[0];//YAW_GYRO_SP_KP;
+			motor->pid->speed.Ki = yaw_PID[1];//YAW_GYRO_SP_KI;
+			motor->pid->speed.Kd = yaw_PID[2];//YAW_GYRO_SP_KD;
+			motor->pid->angle.Kp = yaw_PID[3];//YAW_GYRO_AG_KP;
+			motor->pid->angle.Ki = yaw_PID[4];//YAW_GYRO_AG_KI;
+			motor->pid->angle.Kd = yaw_PID[5];//YAW_GYRO_AG_KD;
 		}
 	}
 	else if (motor->id == DEV_ID_GIMBAL_PITCH)
 	{
 		if (gimbal.info->pitch_mode == G_P_machine)
 		{
-			motor->pid->speed.Kp = pitch_PID[0];//PITCH_MACHINE_SP_KP;
-			motor->pid->speed.Ki = pitch_PID[1];//PITCH_MACHINE_SP_KI;
-			motor->pid->speed.Kd = pitch_PID[2];//PITCH_MACHINE_SP_KD;
-			motor->pid->angle.Kp = pitch_PID[3];//PITCH_MACHINE_AG_KP;
-			motor->pid->angle.Ki = pitch_PID[4];//PITCH_MACHINE_AG_KI;
-			motor->pid->angle.Kd = pitch_PID[5];//PITCH_MACHINE_AG_KD;
+			motor->pid->speed.Kp = PITCH_MACHINE_SP_KP;
+			motor->pid->speed.Ki = PITCH_MACHINE_SP_KI;
+			motor->pid->speed.Kd = PITCH_MACHINE_SP_KD;
+			motor->pid->angle.Kp = PITCH_MACHINE_AG_KP;
+			motor->pid->angle.Ki = PITCH_MACHINE_AG_KI;
+			motor->pid->angle.Kd = PITCH_MACHINE_AG_KD;
 		}
 		else if (gimbal.info->pitch_mode == G_P_gyro)
 		{
-			motor->pid->speed.Kp = PITCH_GYRO_SP_KP;
-			motor->pid->speed.Ki = PITCH_GYRO_SP_KI;
-			motor->pid->speed.Kd = PITCH_GYRO_SP_KD;
-			motor->pid->angle.Kp = PITCH_GYRO_AG_KP;
-			motor->pid->angle.Ki = PITCH_GYRO_AG_KI;
-			motor->pid->angle.Kd = PITCH_GYRO_AG_KD;
+			motor->pid->speed.Kp = pitch_PID[0];//PITCH_GYRO_SP_KP;
+			motor->pid->speed.Ki = pitch_PID[1];//PITCH_GYRO_SP_KI;
+			motor->pid->speed.Kd = pitch_PID[2];//PITCH_GYRO_SP_KD;
+			motor->pid->angle.Kp = pitch_PID[3];//PITCH_GYRO_AG_KP;
+			motor->pid->angle.Ki = pitch_PID[4];//PITCH_GYRO_AG_KI;
+			motor->pid->angle.Kd = pitch_PID[5];//PITCH_GYRO_AG_KD;
 		}
 	}
 }

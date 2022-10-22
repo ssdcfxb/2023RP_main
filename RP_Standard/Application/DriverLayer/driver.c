@@ -23,6 +23,7 @@ void DRIVER_Init(void)
 //    DAC_Init();
   USART1_Init();
 	USART2_Init();
+	USART3_Init();
 	USART4_Init();
 	USART5_Init();
 	CAN_Filter_Init();
