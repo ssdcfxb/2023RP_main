@@ -34,8 +34,8 @@ typedef enum
 
 typedef struct 
 {
-	motor_6020_t    *yaw_motor;
-	motor_6020_t    *pitch_motor;
+	motor_6020_t  *yaw_motor;
+	motor_6020_t  *pitch_motor;
 	imu_sensor_t	*imu_sensor;
 	rc_sensor_t		*rc_sensor;
 } gimbal_dev_t;

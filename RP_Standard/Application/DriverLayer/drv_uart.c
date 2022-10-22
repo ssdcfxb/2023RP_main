@@ -98,7 +98,7 @@ static void uart_rx_idle_callback(UART_HandleTypeDef* huart)
 		/* clear DMA transfer complete flag */
 		__HAL_DMA_DISABLE(huart->hdmarx);
 		/* handle dbus data dbus_buf from DMA */
-		USART4_rxDataHandler(usart1_dma_rxbuf);
+		USART1_rxDataHandler(usart1_dma_rxbuf);
 		memset(usart1_dma_rxbuf, 0, USART1_RX_BUF_LEN);
 		/* restart dma transmission */	  
 		__HAL_DMA_ENABLE(huart->hdmarx);		

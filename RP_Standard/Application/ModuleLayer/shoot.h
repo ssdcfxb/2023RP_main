@@ -48,7 +48,7 @@ typedef struct
 
 typedef struct
 {
-	remote_mode_t		    remote_mode;
+	remote_mode_t	 remote_mode;
 	int16_t  measure_left_speed;
 	int16_t  measure_right_speed;
 	int16_t  measure_dial_speed;
@@ -58,8 +58,6 @@ typedef struct
 	float  target_right_speed;
 	float  target_dial_speed;
 	float  target_dial_angle;
-	
-	
 	
 	uint8_t  init_s2;
 	uint8_t  last_s2;

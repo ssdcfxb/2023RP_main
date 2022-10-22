@@ -21,7 +21,7 @@ void DRIVER_Init(void)
 //	PWM_Init();
 //    ADC_Init();
 //    DAC_Init();
-    USART1_Init();
+  USART1_Init();
 	USART2_Init();
 	USART4_Init();
 	USART5_Init();

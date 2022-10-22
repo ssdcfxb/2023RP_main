@@ -33,7 +33,8 @@ typedef enum {
 	DEV_ID_TURNPLATE = 8,
 	DEV_ID_SHOOT_L = 9,
 	DEV_ID_SHOOT_R = 10,
-	DEV_ID_CNT = 11,
+	DEV_ID_VISION = 11,
+	DEV_ID_CNT = 12,
 } dev_id_t;
 
 /**
