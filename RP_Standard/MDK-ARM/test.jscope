@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<JScopeProject>
+    <FileVersion major="1" minor="1" />
+    <Project>
+        <Configuration>
+            <JLink>
+                <Options Connection="1" IsRTTSession="0" IsRTTWithTimeStamp="1" SamplingPeriod="100" SerialNo="0" JTAG_IRPre="-1" JTAG_DRPre="-1" IP="" TargetDevice="Cortex-M4" TargetInterface="SWD" InterfaceSpeed="4000" />
+            </JLink>
+            <ScriptFile Name="C:\Users\86183\Desktop\2023RP_main\RP_Standard\MDK-ARM\test.jscope\unspecified" />
+            <ElfFile Name="C:\Users\86183\Desktop\2023RP_main\RP_Standard\MDK-ARM\RP_Standard\RP_Standard.axf" />
+            <DataFile Name="..\time.csv" />
+            <RawFile Name="..\time_1.csv" />
+            <Scope>
+                <Options TimeResolutionUs="500000" />
+            </Scope>
+        </Configuration>
+        <Windows>
+            <Graph Show="1" />
+            <Watch Show="1" />
+        </Windows>
+        <SelectedSymbols>
+            <Symbol>
+                <Options Name="tick" Address="0x20000020" Type="ulong long" TypeID="9" Size="8" GraphColorRed="255" GraphColorGreen="215" GraphColorBlue="0" YMinSampled="12182610" YMaxSampled="22860350" YAvgSampled="17372577" Offset="4" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="1" YResolution="20000000" MaxValue="40000000" File="..\Application\Task\LED_task.c" Scope="0" DrawStyle="0" />
+            </Symbol>
+            <Symbol>
+                <Options Name="time3" Address="0x2000000C" Type="uint" TypeID="8" Size="4" GraphColorRed="0" GraphColorGreen="255" GraphColorBlue="0" YMinSampled="16844129" YMaxSampled="32044129" YAvgSampled="24232037" Offset="12" ShowInGraph="1" ACCoupling="0" YOffset="200" IsAutoConfig="1" YResolution="20000000" MaxValue="40000000" File="..\Application\Task\LED_task.c" Scope="0" DrawStyle="0" />
+            </Symbol>
+        </SelectedSymbols>
+    </Project>
+</JScopeProject>
