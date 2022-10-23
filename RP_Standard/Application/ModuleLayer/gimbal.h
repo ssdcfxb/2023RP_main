@@ -7,6 +7,7 @@
 #include "motor_6020.h"
 #include "imu_sensor.h"
 #include "rc_sensor.h"
+#include "vision_sensor.h"
 
 // 云台yaw轴模式枚举
 typedef enum

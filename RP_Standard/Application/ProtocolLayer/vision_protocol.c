@@ -21,23 +21,8 @@ bool vision_send_data(void)
 	return false;
 }
 
-bool vision_recieve_data(uint8_t *rxBuf)
+void USART3_rxDataHandler(uint8_t *rxBuf)
 {
-	if(rxBuf[0] == 0xA5)
-	{
-		if(Verify_CRC8_Check_Sum(rxBuf, 3) == true)
-		{
-			if(Verify_CRC16_Check_Sum(rxBuf, sizeof(vision_rx_info_t)) == true)
-			{
-				memcpy(&vision_rx_info, rxBuf, sizeof(vision_rx_info_t));
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
-void USART1_rxDataHandler(uint8_t *rxBuf)
-{
-	
+	vision_sensor.update(&vision_sensor, rxBuf);
+	vision_sensor.check(&vision_sensor);
 }

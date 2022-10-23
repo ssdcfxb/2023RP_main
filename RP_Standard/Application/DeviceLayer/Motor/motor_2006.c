@@ -39,7 +39,7 @@ motor_2006_t dial_motor = {
 	.check = CheckMotorData,
 	.heart_beat = M2006_Heart_Beat,
 	.work_state = DEV_OFFLINE,
-	.id = DEV_ID_TURNPLATE,
+	.id = DEV_ID_DIAL,
 };
 
 

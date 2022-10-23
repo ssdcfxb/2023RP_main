@@ -208,7 +208,7 @@ motor_3508_t fric_motor[] = {
 	  .check = Check_Motor_Data,
 	  .heart_beat = M3508_Heart_Beat,
 	  .work_state = DEV_OFFLINE,
-	  .id = DEV_ID_SHOOT_L,
+	  .id = DEV_ID_FRIC_L,
 	},
 	[FRIC_R] = {
     .info = &fric_motor_info[FRIC_R],
@@ -219,7 +219,7 @@ motor_3508_t fric_motor[] = {
 	  .check = Check_Motor_Data,
 	  .heart_beat = M3508_Heart_Beat,
 	  .work_state = DEV_OFFLINE,
-	  .id = DEV_ID_SHOOT_R,
+	  .id = DEV_ID_FRIC_R,
 	},
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////

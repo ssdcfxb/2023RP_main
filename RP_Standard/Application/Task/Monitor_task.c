@@ -20,6 +20,7 @@ void Start_Monitor_task(void const * argument)
 		dial_motor.heart_beat(&dial_motor);
 		yaw_motor.heart_beat(&yaw_motor);
 		pitch_motor.heart_beat(&pitch_motor);
+		vision_sensor.heart_beat(&vision_sensor);
 		osDelay(1);
 	}
 	
