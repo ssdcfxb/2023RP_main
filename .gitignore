@@ -52,11 +52,23 @@ Mkfile.old
 dkms.conf
 
 # Keil
-*.uvguix.*
+Listings/
+Objects/
+*.crf
+*.build_log.htm
 *.htm
 *.axf
-Objects/
-*.uvprojx
-*.scvd
-*.txt
+*.lnp
+*.dep
+*.map
+*.bin
+
+DebugConfig/
+*.uvguix.*
+*.uvgui.*
 *.uvoptx
+*.scvd
+*JLinkLog.txt
+*JLinkSettings.ini
+~s*
+*.TMP
