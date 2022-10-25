@@ -71,7 +71,7 @@
 #define YAW_GYRO_AG_KI 0.0f
 #define YAW_GYRO_AG_KD 0.0f
 
-#define PITCH_GYRO_SP_KP 500.0f//400.0f
+#define PITCH_GYRO_SP_KP 400.0f
 #define PITCH_GYRO_SP_KI 2.0f//20.0f
 #define PITCH_GYRO_SP_KD 0.0f
 #define PITCH_GYRO_AG_KP 10.0f//20.0f

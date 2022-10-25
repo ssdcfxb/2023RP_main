@@ -20,6 +20,7 @@ void Start_Ctrl_task(void const * argument)
 			launcher.self_protect();
 		}
 		
+		vision_send_data();
 		CAN_Send_All();
 		osDelay(1);
 	}

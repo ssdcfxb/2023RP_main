@@ -7,7 +7,7 @@ motor_6020_info_t	*gim_motor_info[2];
 int16_t            gim_out[2];
 
 float yaw_PID[6] = {500.0f, 2.f, 0.f, 10.f, 0.f, 0.f};
-float pitch_PID[6] = {500.0f, 2.f, 0.0f, 10.f, 0.0f, 0.0f};
+float pitch_PID[6] = {400.0f, 2.f, 0.0f, 10.f, 0.0f, 0.0f};
 
 void Gimbal_Init(void);
 void Gimbal_Ctrl(void);
@@ -135,31 +135,39 @@ void Gimbal_GetBaseInfo(void)
 	gimbal.info->measure_roll_imu_speed = imu_sensor.info->ave_rate_roll;
 	gimbal.info->measure_roll_imu_angle = imu_sensor.info->roll;
 	
-	gimbal.info->yaw_real_rate = gimbal.info->measure_yaw_imu_speed * arm_cos_f32(gimbal.info->measure_pitch_imu_angle * ANGLE_TO_RAD) \
-	                           + gimbal.info->measure_roll_imu_speed * arm_sin_f32(gimbal.info->measure_pitch_imu_angle * ANGLE_TO_RAD);
-	gimbal.info->pitch_real_rate = gimbal.info->measure_pitch_imu_speed * arm_cos_f32(gimbal.info->measure_roll_imu_angle * ANGLE_TO_RAD) \
-	                             + gimbal.info->measure_roll_imu_speed * arm_sin_f32(gimbal.info->measure_roll_imu_angle * ANGLE_TO_RAD);
+	vision_tx_info.pitch_angle = gimbal.info->measure_pitch_imu_angle / ECD_TO_ANGLE;
+	vision_tx_info.yaw_angle = gimbal.info->measure_yaw_imu_angle / ECD_TO_ANGLE;
+	
+//	gimbal.info->yaw_real_rate = gimbal.info->measure_yaw_imu_speed * arm_cos_f32(gimbal.info->measure_pitch_imu_angle * ANGLE_TO_RAD) \
+//	                           + gimbal.info->measure_roll_imu_speed * arm_sin_f32(gimbal.info->measure_pitch_imu_angle * ANGLE_TO_RAD);
+//	gimbal.info->pitch_real_rate = gimbal.info->measure_pitch_imu_speed * arm_cos_f32(gimbal.info->measure_roll_imu_angle * ANGLE_TO_RAD) \
+//	                             + gimbal.info->measure_roll_imu_speed * arm_sin_f32(gimbal.info->measure_roll_imu_angle * ANGLE_TO_RAD);
 	
 }
 
 void Gimbal_GetRcInfo(void)
 {
-	if (gimbal.info->pitch_mode == G_P_machine)
+	if (gimbal.info->gimbal_mode == gim_machine)
 	{
 		gimbal.info->target_pitch_motor_deltaangle = rc_sensor.info->ch1 / gim_conf.rc_pitch_motor_offset;
 		gimbal.info->target_pitch_imu_angle = gimbal.info->measure_pitch_imu_angle;
 		gimbal.info->target_yaw_imu_angle = gimbal.info->measure_yaw_imu_angle;
 	}
-	else if (gimbal.info->pitch_mode == G_P_gyro)
+	else if (gimbal.info->gimbal_mode == gim_gyro)
 	{
 		gimbal.info->target_pitch_motor_angle = gimbal.info->measure_pitch_motor_angle;
 		gimbal.info->target_pitch_imu_deltaangle = (float)rc_sensor.info->ch1 / gim_conf.rc_pitch_imu_offset;
 		gimbal.info->target_yaw_imu_deltaangle = -(float)rc_sensor.info->ch0 / gim_conf.rc_pitch_imu_offset;
 		
 	}
-	else
+	else if (gimbal.info->gimbal_mode == gim_vision)
 	{
 		gimbal.info->target_pitch_motor_angle = gimbal.info->measure_pitch_motor_angle;
+		gimbal.info->target_pitch_imu_angle = vision_sensor.info->rx_info->pitch_angle * ECD_TO_ANGLE - 180.0f;
+		gimbal.info->target_yaw_imu_angle = vision_sensor.info->rx_info->yaw_angle * ECD_TO_ANGLE;
+	}
+	else
+	{
 		gimbal.info->target_pitch_imu_angle = gimbal.info->measure_pitch_imu_angle;
 		gimbal.info->target_yaw_imu_angle = gimbal.info->measure_yaw_imu_angle;
 	}
@@ -250,7 +258,7 @@ void Gimbal_Reset(void)
 void Gimbal_RcCtrl(void)
 {
 	// 机械模式
-	if (gimbal.info->yaw_mode == G_Y_machine)
+	if (gimbal.info->gimbal_mode == gim_machine)
 	{
 			gimbal.info->target_pitch_motor_angle += gimbal.info->target_pitch_motor_deltaangle;
 			
@@ -293,7 +301,7 @@ void Gimbal_RcCtrl(void)
 			
 	}
 	// 陀螺仪模式
-	else if (gimbal.info->yaw_mode == G_Y_gyro)
+	else if (gimbal.info->gimbal_mode == gim_gyro)
 	{
 			gimbal.info->target_pitch_imu_angle += gimbal.info->target_pitch_imu_deltaangle;
 			gimbal.info->target_yaw_imu_angle += gimbal.info->target_yaw_imu_deltaangle;
@@ -360,8 +368,6 @@ void Gimbal_Yaw_Angle_PidCalc(motor_6020_t *motor)
 		}
 		motor->pid->angle_out = PID_Plc_Calc(&motor->pid->angle, gimbal.info->measure_yaw_imu_angle, gimbal.info->target_yaw_imu_angle);
 		motor->pid->speed_out = PID_Plc_Calc(&motor->pid->speed, gimbal.info->measure_yaw_imu_speed, motor->pid->angle_out);
-		speed_output = motor->pid->speed_out;
-		speed_target = motor->pid->angle_out;
 	}
 	
 	gim_out[motor->driver->rx_id - 0x205] = (int16_t)motor->pid->speed_out;

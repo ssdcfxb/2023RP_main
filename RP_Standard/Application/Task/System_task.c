@@ -40,6 +40,13 @@ void rc_update_info(void)
 				chassis.info->local_mode = CHASSIS_MODE_NORMAL;
 			}
 		}
+		else if (rc_sensor.info->s1 == 1 && rc_sensor.info->s2 == 2)
+		{
+			gimbal.info->yaw_mode = G_Y_gyro;
+			gimbal.info->pitch_mode = G_P_gyro;
+			gimbal.info->gimbal_mode = gim_vision;
+			chassis.info->local_mode = CHASSIS_MODE_NORMAL;
+		}
 		else 
 		{
 			gimbal.info->yaw_mode = G_Y_keep;

@@ -31,6 +31,7 @@ typedef enum
 	gim_gyro,      // 陀螺仪
 	gim_machine,   // 机械
 	gim_keep,      // 保持
+	gim_vision,    // 自瞄
 } gimbal_mode_e;
 
 typedef struct 

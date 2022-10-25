@@ -11,12 +11,12 @@
 typedef __packed struct 
 {
 	uint8_t  SOF;
-	uint8_t  datau8_1; // mode
+	uint8_t  mode;        // datau8_1
 	uint8_t  CRC8;
-	float    dataf_1;  // pitch_angle
-	float    dataf_2;  // yaw_angle
-	uint8_t  datau8_2; // shoot_speed
- 	uint8_t  datau8_3; // my_color
+	float    pitch_angle; // dataf_1
+	float    yaw_angle;   // dataf_2
+	uint8_t  shoot_speed; // datau8_2
+ 	uint8_t  my_color;    // datau8_3
 	uint16_t CRC16;
 }vision_tx_info_t;
 
@@ -24,19 +24,22 @@ typedef __packed struct
 typedef __packed struct 
 {
 	uint8_t  SOF;
-	uint8_t  datau8_1; // mode
+	uint8_t  mode;           // datau8_1
 	uint8_t  CRC8;
-	float    dataf_1;  // pitch_angle
-	float    dataf_2;  // yaw_angle
-	uint8_t  datau8_2; // is_find_target
-	uint8_t  datau8_3; // is_find_defund
-	uint8_t  datau8_4; // is_hit_enable
+	float    pitch_angle;    // dataf_1
+	float    yaw_angle;      // dataf_2
+	uint8_t  is_find_target; // datau8_2
+	uint8_t  is_find_defund; // datau8_3
+	uint8_t  is_hit_enable;  // datau8_4
 	uint16_t CRC16;
 }vision_rx_info_t;
 
 
 typedef struct
 {
+	vision_tx_info_t  *tx_info;
+	vision_rx_info_t  *rx_info;
+	
 	uint8_t  mode;
 	uint8_t  cmd_mode;
 	uint8_t  color;
@@ -50,11 +53,9 @@ typedef struct
 	uint8_t  is_find_defund;
 	uint8_t  is_hit_enable;
 	
-	vision_tx_info_t  *tx_info;
-	vision_rx_info_t  *rx_info;
-	uint8_t           rx_flag;
-	int16_t		        offline_cnt;
-	int16_t		        offline_max_cnt;
+	uint8_t  rx_flag;
+	int16_t	 offline_cnt;
+	int16_t	 offline_max_cnt;
 }vision_info_t;
 
 typedef struct vision_sensor_struct {
