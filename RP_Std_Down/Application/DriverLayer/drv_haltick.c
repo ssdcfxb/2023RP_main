@@ -47,13 +47,13 @@ void HAL_IncTick(void)
     // 更新Hal库全局时间变量(ms)
     uwTick += uwTickFreq;
     // 更新当前的Hal时间基准(us)
-    HalTick = uwTick*1000 + TIM2->CNT;
+    HalTick = uwTick*1000 + TIM4->CNT;
 }
 
 uint32_t micros(void)
 {
     // 更新当前的Hal时间基准(us)
-    HalTick = uwTick*1000 + TIM2->CNT;
+    HalTick = uwTick*1000 + TIM4->CNT;
 	return HalTick;
 }
 

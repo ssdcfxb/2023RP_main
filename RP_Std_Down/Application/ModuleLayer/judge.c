@@ -34,10 +34,10 @@ void judge_update(uint16_t id, uint8_t *rxBuf)
 			memcpy(&judge.info->game_robot_status, rxBuf, LEN_game_robot_state);
 			up_send_game_robot_state();
 			break;
-//		case ID_shoot_data:
-//			memcpy(&judge.info->shoot_data, rxBuf, LEN_shoot_data);
-//			up_send_shoot();
-//			break;
+		case ID_shoot_data:
+			memcpy(&judge.info->shoot_data, rxBuf, LEN_shoot_data);
+			up_send_shoot();
+			break;
 //		case ID_game_robot_pos:
 //			memcpy(&judge.info->game_robot_pos, rxBuf, LEN_game_robot_pos);
 //			up_send_robot_pos();

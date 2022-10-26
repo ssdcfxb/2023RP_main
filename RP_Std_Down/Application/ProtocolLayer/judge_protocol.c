@@ -9,7 +9,6 @@
   */
 	
 #include "judge_protocol.h"
-//#include "config_judge.h"
 #include "string.h"
 #include "crc.h"
 
@@ -48,4 +47,9 @@ void judge_recive(uint8_t *rxBuf)
 	{
 		judge_recive( &rxBuf[frame_length] );
 	}
+}
+
+void USART5_rxDataHandler(uint8_t *rxBuf)
+{	
+	judge_recive(rxBuf);
 }

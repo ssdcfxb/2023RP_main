@@ -26,7 +26,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "device.h"
+#include "driver.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,7 +100,15 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM4_Init();
   /* USER CODE BEGIN 2 */
-
+	HAL_CAN_Init(&hcan1);
+	HAL_CAN_Init(&hcan2);
+	HAL_TIM_Base_Init(&htim1);
+	HAL_TIM_Base_Init(&htim4);
+	HAL_TIM_Base_Start(&htim1);
+	HAL_TIM_Base_Start_IT(&htim4);
+	
+	DEV_Init();
+	DRIVER_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
