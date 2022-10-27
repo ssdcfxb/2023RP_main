@@ -9,6 +9,7 @@
 #include "imu_sensor.h"
 #include "rc_sensor.h"
 #include "gimbal.h"
+#include "power_limit.h"
 
 /* Exported macro ------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/

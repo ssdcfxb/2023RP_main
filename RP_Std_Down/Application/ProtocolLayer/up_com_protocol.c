@@ -24,8 +24,8 @@ uint8_t up_com_tx_buf_5[8]; //robot_hurt
 void up_send_power_heat(void)
 {
 	memcpy(up_com_tx_buf_1, (void*)&judge.info->power_heat_data.chassis_current, 2);
-	memcpy(&up_com_tx_buf_1[4], (void*)&judge.info->power_heat_data.chassis_volt, 2);
-	memcpy(&up_com_tx_buf_1[6], (void*)&judge.info->power_heat_data.chassis_power, 4);
+	memcpy(&up_com_tx_buf_1[2], (void*)&judge.info->power_heat_data.chassis_volt, 2);
+	memcpy(&up_com_tx_buf_1[4], (void*)&judge.info->power_heat_data.chassis_power, 4);
 	CAN_SendData(&hcan2, 0x100, up_com_tx_buf_1);
 }
 

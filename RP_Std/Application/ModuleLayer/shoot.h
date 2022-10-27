@@ -8,6 +8,7 @@
 #include "rc_sensor.h"
 #include "motor_3508.h"
 #include "motor_2006.h"
+#include "judge.h"
 
 // Ä¦²ÁÂÖ×´Ì¬Ã¶¾Ù
 typedef enum

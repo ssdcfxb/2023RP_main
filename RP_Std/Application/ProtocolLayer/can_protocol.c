@@ -94,16 +94,23 @@ void CAN2_Get_Data(uint32_t identifier, uint8_t *data)
 		}
 		case 0x100:
 		{
-			memcpy(&judge.info->chassis_current, data, 2);
-			memcpy(&judge.info->chassis_volt, &data[2], 2);
-			memcpy(&judge.info->chassis_power, (void*)&data[4], 4);
+			memcpy(&judge.info->power_heat_data.chassis_current, (void*)data, 2);
+			memcpy(&judge.info->power_heat_data.chassis_volt, (void*)&data[2], 2);
+			memcpy(&judge.info->power_heat_data.chassis_power, (void*)&data[4], 4);
+			break;
+		}
+		case 0x101:
+		{
+			memcpy(&judge.info->game_robot_status.shooter_id1_17mm_cooling_limit, (void*)data, 2);
+			memcpy(&judge.info->game_robot_status.chassis_power_limit, (void*)&data[2], 2);
+			memcpy(&judge.info->game_robot_status.shooter_id1_17mm_speed_limit, (void*)&data[4], 2);
 			break;
 		}
 		case 0x102:
 		{
-			memcpy(&judge.info->bullet_speed, (void*)data, 4);
-			memcpy(&judge.info->shooter_id1_17mm_cooling_heat, &data[4], 2);
-			memcpy(&judge.info->chassis_power_buffer, &data[6], 2);
+			memcpy(&judge.info->shoot_data.bullet_speed, (void*)data, 4);
+			memcpy(&judge.info->power_heat_data.shooter_id1_17mm_cooling_heat, (void*)&data[4], 2);
+			memcpy(&judge.info->power_heat_data.chassis_power_buffer, (void*)&data[6], 2);
 			break;
 		}
 		default :

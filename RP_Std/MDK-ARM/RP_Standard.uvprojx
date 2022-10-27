@@ -440,6 +440,11 @@
               <FilePath>..\Application\AlgorithmLayer\crc.c</FilePath>
             </File>
             <File>
+              <FileName>power_limit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Application\AlgorithmLayer\power_limit.c</FilePath>
+            </File>
+            <File>
               <FileName>rp_math.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Application\AlgorithmLayer\rp_math.c</FilePath>

@@ -271,6 +271,7 @@ static void Chassis_Speed_PidCalc(chassis_dev_t *chas_dev, chassis_motor_cnt_t M
 // 添加底盘电机输出至发送缓存
 static void Chassis_SendPidOut(chassis_dev_t *chas_dev)
 {
+	Chassis_Motor_Power_Limit(out);
 	for(uint8_t i = 0; i < CHAS_MOTOR_CNT; i++) 
 	{
 		if(chas_motor[i]->work_state == DEV_ONLINE) 
@@ -316,7 +317,7 @@ void Chassis_RcCtrl(void)
 	arm_abs_f32(&round, &round, 1);
 	
 	sum = front + right + round;
-	if (sum > 8000.0f)
+	if (sum > chas_conf.limit_speed)
 	{
 		for (uint8_t i = 0; i < CHAS_MOTOR_CNT; i++)
 		{
